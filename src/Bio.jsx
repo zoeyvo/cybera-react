@@ -1,6 +1,6 @@
 import React from "react";
 
-const Bio = () => (
+const Bio = ({ playSwap }) => (
   <div className="grid-cell cell1">
     <div
       style={{
@@ -11,7 +11,6 @@ const Bio = () => (
         minHeight: "60vh",
         textAlign: "center",
         fontSize: "1.25rem",
-        color: "#fff",
         fontFamily: "Typewriter, monospace",
         letterSpacing: "0.04em",
         lineHeight: 1.6,
@@ -25,6 +24,8 @@ const Bio = () => (
           fontSize: "1.5rem",
           marginBottom: "0.5em",
           letterSpacing: "0.08em",
+          color: "#fff",
+          textShadow: "0 0 6px #B6B8A0",
         }}
       >
         zoey vo · she/they
@@ -35,6 +36,8 @@ const Bio = () => (
           fontSize: "1.15rem",
           marginTop: "1.2em",
           lineHeight: 1.5,
+          color: "#fff",
+          textShadow: "0 0 4px #B6B8A0",
         }}
       >
         Developer weaving systems design and scalable web applications to build
@@ -42,6 +45,7 @@ const Bio = () => (
         Rooted in the belief that code, like connection, should dismantle
         barriers and amplify voices.
       </span>
+      {/* If you add any links here in the future, use onClick={playSwap} */}
     </div>
   </div>
 );

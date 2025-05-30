@@ -343,22 +343,20 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
 }
 
 .xp-window {
-  position: relative;
-  width: 540px; // Shrink frame width
-  height: 420px; // Shrink frame height
-  min-width: unset;
-  min-height: unset;
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 540px;
+  height: 420px;
   background-size: 100% 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  top: 44%; // Move frame up vertically
-  left: 50%;
-  transform: translate(-50%, -50%);
   box-shadow: none;
   border: none;
-  padding-top: 70px; /* Add space for header */
+  padding-top: 70px; /* Restore space for header if needed */
+  z-index: 1;
 }
 
 .xp-window-header {
@@ -383,23 +381,6 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   filter: drop-shadow(0 0 6px #222) drop-shadow(0 0 2px #fff8);
 }
 
-.xp-window::before {
-  content: '';
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  min-width: 0;
-  min-height: 0;
-  max-width: none;
-  max-height: none;
-  background: url('/assets/whiteboard-frame.png') top left no-repeat;
-  background-size: contain;
-  z-index: 0;
-  pointer-events: none;
-}
 .xp-titlebar, .xp-content {
   position: relative;
   z-index: 1;
