@@ -386,6 +386,10 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   min-width: 0;
   display: block;
 }
+.terminal-output-line .cmd-accent {
+  color: $accent;
+  font-weight: bold;
+}
 
 // ========== DESKTOP BG ========== //
 // Projects/desktop background
@@ -451,5 +455,10 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
     line-height: 1.35;
     max-width: 96vw;
     word-break: break-word;
+  }
+  .project-description {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

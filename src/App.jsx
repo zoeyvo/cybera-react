@@ -242,9 +242,20 @@ function App() {
                                 <span className="terminal-user" style={{visibility:'hidden'}}><span className="footer-email">zoey<span className="at-symbol">@</span>wired</span></span>
                                 <span className="terminal-prompt flicker" style={{visibility:'hidden'}}>&gt;</span>
                                 <span className={line.value === 'ls' ? 'ls-list' : line.value === 'help' ? 'help-list' : 'error'}>
+                                  {/* Highlight commands in output */}
                                   {Array.isArray(line.output)
-                                    ? line.output.map((l, i) => <div key={i}>{l}</div>)
-                                    : line.output}
+                                    ? line.output.map((l, i) =>
+                                        typeof l === 'string' && (l.includes('ls') || l.includes('help') || l.includes('clear') || l.includes('cat')) ? (
+                                          <div key={i} dangerouslySetInnerHTML={{__html: l.replace(/(ls|help|clear|cat \[?\w*\]?)/g, '<span class="cmd-accent">$1</span>')}} />
+                                        ) : (
+                                          <div key={i}>{l}</div>
+                                        )
+                                      )
+                                    : typeof line.output === 'string' && (line.output.includes('ls') || line.output.includes('help') || line.output.includes('clear') || line.output.includes('cat')) ? (
+                                        <span dangerouslySetInnerHTML={{__html: line.output.replace(/(ls|help|clear|cat \[?\w*\]?)/g, '<span class="cmd-accent">$1</span>')}} />
+                                      ) : (
+                                        line.output
+                                      )}
                                 </span>
                               </div>
                             )}
@@ -325,7 +336,9 @@ function PageLayout({ children, playSwap }) {
     <div className="cyberia-root">
       {/* Navi header bar with pixel-art icon */}
       <div className="header-navi">
-        <img src={import.meta.env.BASE_URL + 'assets/navi.png'} alt="Navi icon" />
+        <a href="/cyberia/" aria-label="Back to terminal" onClick={playSwap}>
+          <img src={import.meta.env.BASE_URL + 'assets/navi.png'} alt="Navi icon" />
+        </a>
       </div>
       {/* Mouse particle/cursor effect */}
       <CursorTrail />

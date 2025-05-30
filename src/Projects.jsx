@@ -16,33 +16,37 @@ const Projects = ({ playSwap }) => (
       fontFamily: 'Typewriter, monospace',
       fontWeight: 'bold',
       fontSize: '1.25rem',
-      color: '#fff', // White text
+      color: '#fff',
       marginBottom: '1.2rem',
       letterSpacing: '0.08em',
-      textAlign: 'left',
+      textAlign: 'center', // changed from left
       width: '100%',
       maxWidth: 480,
-      textShadow: '0 0 6px #B6B8A0', // #B6B8A0 glow
-      display: 'inline-block'
+      textShadow: '0 0 6px #B6B8A0',
+      display: 'inline-block',
+      marginLeft: 'auto',
+      marginRight: 'auto'
     }}>
       Expert Mapping Interface (E.M.I)
     </div>
-    <div style={{
+    <div className="project-description" style={{
       fontFamily: 'Typewriter, monospace',
-      color: '#fff', // White text
+      color: '#fff',
       fontSize: '1.05rem',
       marginBottom: '1.2rem',
-      textAlign: 'left',
+      textAlign: 'center', // changed from left
       maxWidth: 480,
       width: '100%',
       lineHeight: 1.6,
-      textShadow: '0 0 4px #B6B8A0', // #B6B8A0 glow
-      display: 'inline-block'
+      textShadow: '0 0 4px #B6B8A0',
+      display: 'inline-block',
+      marginLeft: 'auto',
+      marginRight: 'auto'
     }}>
       The Expert Mapping Interface (E.M.I) is a web application developed for the UC Davis Library to visualize global research output by UC Davis scholars.
     </div>
     <br />
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'flex-start', maxWidth: 480, width: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center', maxWidth: 480, width: '100%' }}>
       <a style={{ color: '#2a6ad7', textDecoration: 'underline', fontFamily: 'Typewriter, monospace' }} href="http://35.247.92.204:3001/" target="_blank" rel="noopener noreferrer" onClick={playSwap}>Live Project</a>
       <a style={{ color: '#2a6ad7', textDecoration: 'underline', fontFamily: 'Typewriter, monospace' }} href="https://github.com/zoeyvo/expert-mapping-interface" target="_blank" rel="noopener noreferrer" onClick={playSwap}>GitHub Repository</a>
     </div>
