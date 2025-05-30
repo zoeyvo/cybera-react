@@ -179,8 +179,8 @@ function App() {
 
   return (
     <>
-      <audio ref={phwipRef} src="/assets/swap.mp3" preload="auto" />
-      <audio ref={musicRef} src="/assets/within.mp3" preload="auto" loop style={{ display: 'none' }} />
+      <audio ref={phwipRef} src={import.meta.env.BASE_URL + 'assets/swap.mp3'} preload="auto" />
+      <audio ref={musicRef} src={import.meta.env.BASE_URL + 'assets/within.mp3'} preload="auto" loop style={{ display: 'none' }} />
       <Routes>
         <Route
           path="/"
@@ -193,7 +193,7 @@ function App() {
                 <div className="row1" />
                 {/* Row 2: Main content (Lain image/button or terminal) */}
                 <div className="row2">
-                  {!entered && <img src="/assets/lain.gif" alt="Lain" />}
+                  {!entered && <img src={import.meta.env.BASE_URL + 'assets/lain.gif'} alt="Lain" />}
                   {!entered && (
                     <button className="enter-btn gothic-text" onMouseDown={playSwap} onClick={() => setEntered(true)}>[enter]</button>
                   )}
@@ -325,7 +325,7 @@ function PageLayout({ children, playSwap }) {
     <div className="cyberia-root">
       {/* Navi header bar with pixel-art icon */}
       <div className="header-navi">
-        <img src="/assets/navi.png" alt="Navi icon" />
+        <img src={import.meta.env.BASE_URL + 'assets/navi.png'} alt="Navi icon" />
       </div>
       {/* Mouse particle/cursor effect */}
       <CursorTrail />
@@ -349,16 +349,16 @@ function PageLayout({ children, playSwap }) {
       </footer>
       {/* Preload all major assets for instant navigation and retro effects */}
       <div style={{ display: 'none' }}>
-        <img src="/assets/whiteboard-frame.png" alt="preload whiteboard frame" />
-        <img src="/assets/hands.gif" alt="preload hands" />
-        <img src="/assets/static.gif" alt="preload static" />
-        <img src="/assets/tv_static.gif" alt="preload tv static" />
-        <img src="/assets/navi.png" alt="preload navi" />
-        <img src="/assets/lain.gif" alt="preload lain" />
-        <link rel="preload" href="/assets/typewriter.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
-        <link rel="preload" href="/assets/OldEnglishGothicPixelRegular-gx1jp.woff" as="font" type="font/woff" crossOrigin="anonymous" />
-        <audio src="/assets/supernova.mp3" preload="auto" />
-        <link rel="preload" href="/assets/Zoey%20Vo%20Resume%202025.pdf" as="document" type="application/pdf" crossOrigin="anonymous" />
+        <img src={import.meta.env.BASE_URL + 'assets/whiteboard-frame.png'} alt="preload whiteboard frame" />
+        <img src={import.meta.env.BASE_URL + 'assets/hands.gif'} alt="preload hands" />
+        <img src={import.meta.env.BASE_URL + 'assets/static.gif'} alt="preload static" />
+        <img src={import.meta.env.BASE_URL + 'assets/tv_static.gif'} alt="preload tv static" />
+        <img src={import.meta.env.BASE_URL + 'assets/navi.png'} alt="preload navi" />
+        <img src={import.meta.env.BASE_URL + 'assets/lain.gif'} alt="preload lain" />
+        <link rel="preload" href={import.meta.env.BASE_URL + 'assets/typewriter.ttf'} as="font" type="font/ttf" crossOrigin="anonymous" />
+        <link rel="preload" href={import.meta.env.BASE_URL + 'assets/OldEnglishGothicPixelRegular-gx1jp.woff'} as="font" type="font/woff" crossOrigin="anonymous" />
+        <audio src={import.meta.env.BASE_URL + 'assets/supernova.mp3'} preload="auto" />
+        <link rel="preload" href={import.meta.env.BASE_URL + 'assets/Zoey%20Vo%20Resume%202025.pdf'} as="document" type="application/pdf" crossOrigin="anonymous" />
       </div>
     </div>
   );
