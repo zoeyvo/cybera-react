@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Allow docs/ to be committed for GitHub Pages deployment
+!docs/
