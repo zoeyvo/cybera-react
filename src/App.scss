@@ -37,13 +37,13 @@ $typewriter-font: 'Typewriter', monospace; // Main font
 // Custom font faces for retro look
 @font-face {
   font-family: 'Typewriter';
-  src: url('/assets/typewriter.ttf') format('truetype');
+  src: url('../docs/assets/typewriter.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'GothicPixel';
-  src: url('/assets/OldEnglishGothicPixelRegular-gx1jp.woff') format('woff');
+  src: url('../docs/assets/OldEnglishGothicPixelRegular-gx1jp.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -229,7 +229,7 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: url('/assets/static.gif') center center/cover no-repeat;
+  background: url('../docs/assets/static.gif') center center/cover no-repeat;
   animation: none;
   mask-image: none;
 }
