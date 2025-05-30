@@ -49,8 +49,8 @@ const Bio = ({ playSwap }) => (
           textShadow: "0 0 4px #B6B8A0",
         }}
       >
-        Developer weaving systems design and scalable web applications to build
-        quiet, resilient tools that empower communities and challenge injustice.
+        Developer exploring systems design and scalable web applications to build
+        meaningful tools that empower communities and challenge injustice.
         Rooted in the belief that code, like connection, should dismantle
         barriers and amplify voices.
       </span>

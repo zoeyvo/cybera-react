@@ -189,100 +189,107 @@ function App() {
               <CursorTrail />
               <header className="header"></header>
               <div className="grid-cell cell1">
-                {!entered && <img src="/assets/lain.gif" alt="Lain" />}
-                {!entered && (
-                  <button className="enter-btn gothic-text" onMouseDown={playSwap} onClick={() => setEntered(true)}>[enter]</button>
-                )}
-                {entered && (
-                  <div className="terminal-container">
-                    <div className="pixel-stream-bg"></div>
-                    <div className="terminal-inner" ref={terminalInnerRef}>
-                      {/* Make the input area cover the whole terminal-inner for easier clicking */}
-                      <div
-                        style={{
-                          position: 'absolute',
-                          inset: 0,
-                          zIndex: 2,
-                          cursor: 'text',
-                          background: 'transparent',
-                        }}
-                        onClick={() => {
-                          if (inputRef.current) {
-                            inputRef.current.focus();
-                            // Place caret at end
-                            const el = inputRef.current;
-                            const range = document.createRange();
-                            range.selectNodeContents(el);
-                            range.collapse(false);
-                            const sel = window.getSelection();
-                            sel.removeAllRanges();
-                            sel.addRange(range);
-                          }
-                        }}
-                      />
-                      {/* Output history, each command and its output (if any) */}
-                      {output.map((line, idx) => (
-                        <React.Fragment key={idx}>
-                          <div className="terminal-row">
-                            <span className="terminal-user">
-                              zoey<span className="at-symbol">@</span>wired
-                            </span>
-                            <span className="terminal-prompt flicker">&gt;</span>
-                            <span className="terminal-output-line">
-                              <span className="cmd">{line.value}</span>
-                            </span>
-                          </div>
-                          {/* Only render output line for ls, help, and error commands */}
-                          {line.output && (line.value === 'ls' || line.value === 'help' || line.value.startsWith('command not found:') || line.output.toString().includes('is not a command')) && (
+                {/* Row 1: (empty or for future use) */}
+                <div className="row1" />
+                {/* Row 2: Main content (Lain image/button or terminal) */}
+                <div className="row2">
+                  {!entered && <img src="/assets/lain.gif" alt="Lain" />}
+                  {!entered && (
+                    <button className="enter-btn gothic-text" onMouseDown={playSwap} onClick={() => setEntered(true)}>[enter]</button>
+                  )}
+                  {entered && (
+                    <div className="terminal-container">
+                      <div className="pixel-stream-bg"></div>
+                      <div className="terminal-inner" ref={terminalInnerRef}>
+                        {/* Make the input area cover the whole terminal-inner for easier clicking */}
+                        <div
+                          style={{
+                            position: 'absolute',
+                            inset: 0,
+                            zIndex: 2,
+                            cursor: 'text',
+                            background: 'transparent',
+                          }}
+                          onClick={() => {
+                            if (inputRef.current) {
+                              inputRef.current.focus();
+                              // Place caret at end
+                              const el = inputRef.current;
+                              const range = document.createRange();
+                              range.selectNodeContents(el);
+                              range.collapse(false);
+                              const sel = window.getSelection();
+                              sel.removeAllRanges();
+                              sel.addRange(range);
+                            }
+                          }}
+                        />
+                        {/* Output history, each command and its output (if any) */}
+                        {output.map((line, idx) => (
+                          <React.Fragment key={idx}>
                             <div className="terminal-row">
-                              <span className="terminal-user" style={{visibility:'hidden'}}><span className="footer-email">zoey<span className="at-symbol">@</span>wired</span></span>
-                              <span className="terminal-prompt flicker" style={{visibility:'hidden'}}>&gt;</span>
-                              <span className={line.value === 'ls' ? 'ls-list' : line.value === 'help' ? 'help-list' : 'error'}>
-                                {Array.isArray(line.output)
-                                  ? line.output.map((l, i) => <div key={i}>{l}</div>)
-                                  : line.output}
+                              <span className="terminal-user">
+                                zoey<span className="at-symbol">@</span>wired
+                              </span>
+                              <span className="terminal-prompt flicker">&gt;</span>
+                              <span className="terminal-output-line">
+                                <span className="cmd">{line.value}</span>
                               </span>
                             </div>
-                          )}
-                        </React.Fragment>
-                      ))}
-                      {/* Input row */}
-                      <div className="terminal-row">
-                        <span className="terminal-user">
-                          zoey<span className="at-symbol">@</span>wired
-                        </span>
-                        <span className="terminal-prompt flicker">&gt;</span>
-                        <span
-                          className="terminal-input"
-                          contentEditable
-                          suppressContentEditableWarning
-                          ref={inputRef}
-                          spellCheck={false}
-                          onInput={handleTerminalInput}
-                          onKeyDown={handleTerminalKeyDown}
-                          tabIndex={0}
-                          aria-label="Type a command"
-                          onClick={e => {
-                            // Place caret at end on click
-                            const el = e.currentTarget;
-                            const range = new Range();
-                            range.selectNodeContents(el);
-                            range.collapse(false);
-                            const sel = window.getSelection();
-                            sel.removeAllRanges();
-                            sel.addRange(range);
-                          }}
-                          style={{flex: 1, minWidth: 0, display: 'inline-block'}}
-                        />
-                        {terminalValue.length > 0 && (
-                          <span className="terminal-cursor blink" style={{ left: 'auto', color: '#b57edc', background: 'rgba(255,255,255,0.08)', borderRadius: '2px', fontWeight: 'bold', padding: '0 1px', marginLeft: '-2px', position: 'relative' }}>
-                            {terminalValue[caretPos] || ' '}
+                            {/* Only render output line for ls, help, and error commands */}
+                            {line.output && (line.value === 'ls' || line.value === 'help' || line.value.startsWith('command not found:') || line.output.toString().includes('is not a command')) && (
+                              <div className="terminal-row">
+                                <span className="terminal-user" style={{visibility:'hidden'}}><span className="footer-email">zoey<span className="at-symbol">@</span>wired</span></span>
+                                <span className="terminal-prompt flicker" style={{visibility:'hidden'}}>&gt;</span>
+                                <span className={line.value === 'ls' ? 'ls-list' : line.value === 'help' ? 'help-list' : 'error'}>
+                                  {Array.isArray(line.output)
+                                    ? line.output.map((l, i) => <div key={i}>{l}</div>)
+                                    : line.output}
+                                </span>
+                              </div>
+                            )}
+                          </React.Fragment>
+                        ))}
+                        {/* Input row */}
+                        <div className="terminal-row">
+                          <span className="terminal-user">
+                            zoey<span className="at-symbol">@</span>wired
                           </span>
-                        )}
+                          <span className="terminal-prompt flicker">&gt;</span>
+                          <span
+                            className="terminal-input"
+                            contentEditable
+                            suppressContentEditableWarning
+                            ref={inputRef}
+                            spellCheck={false}
+                            onInput={handleTerminalInput}
+                            onKeyDown={handleTerminalKeyDown}
+                            tabIndex={0}
+                            aria-label="Type a command"
+                            onClick={e => {
+                              // Place caret at end on click
+                              const el = e.currentTarget;
+                              const range = new Range();
+                              range.selectNodeContents(el);
+                              range.collapse(false);
+                              const sel = window.getSelection();
+                              sel.removeAllRanges();
+                              sel.addRange(range);
+                            }}
+                            style={{flex: 1, minWidth: 0, display: 'inline-block'}}
+                          />
+                          {terminalValue.length > 0 && (
+                            <span className="terminal-cursor blink" style={{ left: 'auto', color: '#b57edc', background: 'rgba(255,255,255,0.08)', borderRadius: '2px', fontWeight: 'bold', padding: '0 1px', marginLeft: '-2px', position: 'relative' }}>
+                              {terminalValue[caretPos] || ' '}
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
+                {/* Row 3: (empty or for future use) */}
+                <div className="row3" />
               </div>
               <footer className="footer">
                 <span>
@@ -309,7 +316,7 @@ function PageLayout({ children, playSwap }) {
   return (
     <div className="cyberia-root">
       <div className="header-navi">
-        <img src="/assets/navi.png" alt="Navi icon" style={{ maxWidth: '120px', minWidth: '40px', width: '10vw', height: 'auto' }} />
+        <img src="/assets/navi.png" alt="Navi icon" />
       </div>
       <CursorTrail />
       <header className="header"></header>
