@@ -5,13 +5,26 @@ $text-color: #B6B8A0;
 $typewriter-font: 'Typewriter', monospace;
 
 .cyberia-root {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr auto;
+  width: 100vw;
   background: $bg-1;
   color: $text-color;
   font-family: $typewriter-font;
+}
+
+.cyberia-root.landing {
+  justify-content: center;
+  align-items: center;
+}
+
+// Vertically center main/landing and terminal pages
+.cyberia-root.landing,
+.cyberia-root.terminal {
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
 
 @font-face {
@@ -34,56 +47,66 @@ body{
     box-sizing: border-box;
 }
 
-.grid-cell {
+.grid-cell, .page-cell {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100px;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100px;
   background: $bg-1;
   padding: 15px;
   position: relative;
-  img {
-    max-width: 30%;
-    min-width: 400px;
-    height: auto;
-    display: block;
-    margin: 0 auto 8px auto;
-    border-radius: 8px;
-    box-shadow: 0 0 10px $bg-1;
-    background: none;
-  }
-  p {
-    margin-top: 10px;
-    text-align: center;
-    background: $accent;
-    color: $text-color;
-    padding: 5px 15px;
-    border-radius: 6px;
-    font-weight: bold;
-    letter-spacing: 0.1em;
-    box-shadow: 0 2px 8px $bg-2;
-  }
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
-.cell1 {
-  grid-column: 1;
-  grid-row: 2;
+.landing .grid-cell,
+.landing .page-cell,
+.terminal .grid-cell,
+.terminal .page-cell {
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  margin: 0 auto;
+}
+
+// For all other pages, keep content column centered horizontally only
+.grid-cell:not(.landing),
+.page-cell:not(.landing) {
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0 auto;
+}
+
+.header-navi {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  z-index: 10;
+  pointer-events: none;
 }
 
 .footer {
-  grid-column: 1;
-  grid-row: 3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   font-size: 0.85rem;
   padding: 0.7rem 0.5rem;
   min-height: 2.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: $bg-2;
   color: $text-color;
   border-top: 2px solid $text-color;
+  margin-top: auto;
   a, .footer-email {
     color: $text-color;
     text-decoration: none;
@@ -342,148 +365,11 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   overflow: auto;
 }
 
-.xp-window {
-  position: absolute;
-  top: 44%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 540px;
-  height: 420px;
-  background-size: 100% 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: none;
-  border: none;
-  padding-top: 70px; /* Restore space for header if needed */
-  z-index: 1;
-}
-
-.xp-window-header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 70px;
-  z-index: 3;
-  pointer-events: none;
-}
-.xp-window-header img {
-  height: 54px;
-  width: 54px;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
-  pointer-events: none;
-  filter: drop-shadow(0 0 6px #222) drop-shadow(0 0 2px #fff8);
-}
-
-.xp-titlebar, .xp-content {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: -1.5rem;
-}
-.xp-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding-top: 0;
-  padding-bottom: 0.5rem;
-  padding-left: 15px;
-  padding-right:15px;
-  background: transparent;
-  box-shadow: none;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-.xp-content .desktop-icons {
-  display: none;
-}
-
-.xp-content .project-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: 100%;
-  margin-bottom: 1rem;
-  font-family: 'Typewriter', monospace !important;
-  position: absolute;
-  top: 2.2rem; // Move content higher up in the frame
-  left: 3rem;
-  right: 3rem;
-  z-index: 1;
-}
-
-.xp-content .project-title {
-  position: absolute;
-  top: -5.125rem;
-  margin: 0;
-  color: $text-color;
-  background: transparent;
-  z-index: 2;
-  text-align: left;
-  font-family: 'Typewriter', monospace !important;
-}
-
-.xp-content .project-desc {
-  margin-bottom: 1.2rem;
-  font-family: 'Typewriter', monospace !important;
-  text-align: left;
-  max-width: 420px;
-  word-break: break-word;
-}
-
-.xp-content .project-link {
-  color: #2a6ad7;
-  text-decoration: underline;
-  margin-bottom: 0.5rem;
-  word-break: break-all;
-  transition: color 0.15s;
-  font-family: 'Typewriter', monospace !important;
-  text-align: left;
-}
-.xp-content .project-link:hover,
-.xp-content .project-link:focus {
-  color: #1a3a7a;
-}
-
-.xp-content, .xp-content * {
-  position: relative;
-  z-index: 2;
-}
-
-.header-navi {
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-  z-index: 10;
-  pointer-events: none;
-  grid-row: 1;
-  grid-column: 1;
-}
-.header-navi img {
-  width: 10vw;
-  max-width: 120px;
-  min-width: 40px;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
-  pointer-events: none;
-  filter: drop-shadow(0 0 6px #222) drop-shadow(0 0 2px #fff8);
+@media (max-width: 600px) {
+  .footer > span {
+    flex-direction: column;
+    gap: 0.5em;
+    align-items: center;
+    justify-content: center;
+  }
 }

@@ -1,3 +1,11 @@
+/**
+ * CursorTrail.jsx
+ * Renders the custom mouse particle/cursor effect.
+ * - Uses react-mouse-particles for trailing effect.
+ * - Enforces custom angel wings cursor globally.
+ * - No unused code or styles.
+ */
+
 import React, { useEffect, useState } from "react";
 
 const chars = ['0', '1'];

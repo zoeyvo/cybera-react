@@ -309,7 +309,7 @@ function PageLayout({ children, playSwap }) {
   return (
     <div className="cyberia-root">
       <div className="header-navi">
-        <img src="/assets/navi.png" alt="Navi icon" />
+        <img src="/assets/navi.png" alt="Navi icon" style={{ maxWidth: '120px', minWidth: '40px', width: '10vw', height: 'auto' }} />
       </div>
       <CursorTrail />
       <header className="header"></header>

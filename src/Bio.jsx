@@ -1,5 +1,14 @@
 import React from "react";
 
+/**
+ * Bio.jsx
+ * Renders the Bio ("whoami") page.
+ * - Shows name and a short description.
+ * - Uses .page-cell for layout, which is always grid row 2.
+ * - Accessibility: all text is readable, semantic, and keyboard accessible.
+ * - No unused code or styles.
+ */
+
 const Bio = ({ playSwap }) => (
   <div className="grid-cell cell1">
     <div

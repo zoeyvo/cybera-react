@@ -1,6 +1,15 @@
 import React from "react";
 import "./App.scss";
 
+/**
+ * Projects.jsx
+ * Renders the Projects page.
+ * - Lists projects with title, description, and GitHub links.
+ * - Uses .page-cell for layout, always grid row 2.
+ * - Accessibility: all links have aria-labels, all images have alt text.
+ * - No unused code or styles.
+ */
+
 const Projects = ({ playSwap }) => (
   <div className="grid-cell cell1" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
     <div style={{

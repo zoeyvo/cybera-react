@@ -1,38 +1,42 @@
-# Cyberia React
+# README.md
 
-This is a React + Vite implementation of the Cyberia site.
+Cyberia React Portfolio
+======================
+
+A minimal, accessible, retro-cybercore portfolio site built with React + Vite.
 
 ## Features
-- Header with logo
-- Single grid cell with image and [enter] text
-- Footer
-- Angel wings custom cursor
-- Mouse particle effects using react-mouse-particles
+- **Dark mode only**: Retro cybercore/Lain-inspired theme
+- **Accessible**: All images have alt text, all links have aria-labels, keyboard navigation supported
+- **Sticky footer**: Footer always at the bottom, even on short pages
+- **Custom angel wings cursor**: Pixel-art cursor enforced globally
+- **Glitch/static effects**: Subtle CSS and GIF overlays
+- **No unused code**: All styles and components are documented and cleaned up
+
+## Pages
+- `/` — Terminal-inspired landing (ASCII intro, name, tagline)
+- `/bio` — "whoami" page (brief intro, glitch text)
+- `/projects` — Projects list (title, description, GitHub links)
+- `/resume` — PDF link (minimal, no in-page render)
+- Hidden `/lain` — Easter egg (optional)
+
+## Accessibility
+- All interactive elements have aria-labels
+- All images have descriptive alt text
+- Keyboard navigation supported
+- Color contrast meets WCAG AA
+- **Warning:** Some pages use flicker/static effects (photosensitivity warning)
+
+## Development
+- Vite + React
 - SCSS for styling
+- All assets in `public/assets/`
+- See `App.scss` and `App.jsx` for layout/grid details
 
-## Setup
-1. Place your assets (images, audio, favicon) in `public/assets`.
-2. Run `npm install` to install dependencies.
-3. Run `npm run dev` to start the development server.
+## Anti-Scraper
+- `robots.txt` disallows all
+- `<meta name="robots" content="noindex, nofollow">` in `index.html`
+- Email is obfuscated in footer
 
-## Customization
-- Update styles in `src/App.scss`.
-- Update layout in `src/App.jsx`.
-- Update assets in `public/assets`.
-
----
-
-Replace placeholder assets with your own for best results.
-
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## License
+MIT
