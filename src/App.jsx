@@ -1,6 +1,10 @@
 // App.js
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate, Routes, Route } from "react-router-dom";
 import CursorTrail from "./CursorTrail";
+import Bio from "./Bio";
+import Projects from "./Projects";
+import Resume from "./Resume";
 import "./App.scss";
 
 const TERMINAL_OPTIONS = [
@@ -14,13 +18,32 @@ function App() {
   const [terminalValue, setTerminalValue] = useState("");
   const [selected, setSelected] = useState(null);
   const [caretPos, setCaretPos] = useState(0);
+  const [output, setOutput] = useState([]); // Store terminal output lines
   const inputRef = useRef(null);
+  const terminalInnerRef = useRef(null); // Add ref for terminal-inner
+  const navigate = useNavigate();
 
+  // Ensure input is always focusable and editable
   useEffect(() => {
     if (entered && inputRef.current) {
       inputRef.current.focus();
+      // Place caret at end
+      const el = inputRef.current;
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      range.collapse(false);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
     }
-  }, [entered]);
+  }, [entered, output]);
+
+  // Scroll to bottom when output changes (after Enter)
+  useEffect(() => {
+    if (entered && terminalInnerRef.current) {
+      terminalInnerRef.current.scrollTop = terminalInnerRef.current.scrollHeight;
+    }
+  }, [output, entered]);
 
   const handleTerminalInput = (e) => {
     setTerminalValue(e.target.innerText);
@@ -36,8 +59,70 @@ function App() {
   const handleTerminalKeyDown = (e) => {
     if (e.key === "Enter") {
       const val = terminalValue.trim().toLowerCase();
-      if (TERMINAL_OPTIONS.some(opt => opt.label === val)) {
+      if (val === "ls") {
+        setOutput((prev) => [...prev, { type: 'cmd', value: 'ls', output: TERMINAL_OPTIONS.map(opt => opt.label).join('    ') }]);
+        setTerminalValue("");
+        setSelected(null);
+        setTimeout(() => {
+          if (inputRef.current) inputRef.current.innerText = "";
+        }, 0);
+      } else if (val === "clear") {
+        setOutput([]);
+        setTerminalValue("");
+        setSelected(null);
+        setTimeout(() => {
+          if (inputRef.current) inputRef.current.innerText = "";
+        }, 0);
+      } else if (val === "help") {
+        setOutput((prev) => [
+          ...prev,
+          {
+            type: 'cmd',
+            value: 'help',
+            output: [
+              'Available commands:',
+              'ls - list available sections',
+              'cat [section] - view a section (bio, projects, resume)',
+              'help - show this help message',
+              'clear - clear the terminal'
+            ]
+          }
+        ]);
+        setTerminalValue("");
+        setSelected(null);
+        setTimeout(() => {
+          if (inputRef.current) inputRef.current.innerText = "";
+        }, 0);
+      } else if (["cat bio", "cat projects", "cat resume"].includes(val)) {
+        const route = val.replace("cat ", "");
+        setOutput((prev) => [...prev, { type: 'cmd', value: val }]);
+        setTerminalValue("");
+        setSelected(null);
+        setTimeout(() => {
+          if (inputRef.current) inputRef.current.innerText = "";
+          navigate(`/${route}`);
+        }, 0);
+      } else if (TERMINAL_OPTIONS.some(opt => opt.label === val)) {
+        setOutput((prev) => [...prev, { type: 'cmd', value: val }]);
         setSelected(val);
+        setTerminalValue("");
+        setTimeout(() => {
+          if (inputRef.current) inputRef.current.innerText = "";
+        }, 0);
+      } else if (val.length > 0) {
+        setOutput((prev) => [
+          ...prev,
+          {
+            type: 'cmd',
+            value: val,
+            output: `"${val}" is not a command. Use 'help' for a list of commands.`
+          }
+        ]);
+        setTerminalValue("");
+        setSelected(null);
+        setTimeout(() => {
+          if (inputRef.current) inputRef.current.innerText = "";
+        }, 0);
       }
       e.preventDefault();
     } else {
@@ -56,84 +141,125 @@ function App() {
     }
   };
 
-  const handleOptionClick = (label) => {
-    setSelected(label);
-    setTerminalValue(label);
-    setTimeout(() => {
-      if (inputRef.current) {
-        inputRef.current.focus();
-        // Move caret to end
-        const range = document.createRange();
-        range.selectNodeContents(inputRef.current);
-        range.collapse(false);
-        const sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-        setCaretPos(label.length);
-      }
-    }, 0);
-  };
-
   return (
-    <div className="cyberia-root">
-      <CursorTrail />
-      <audio id="bg-audio" src="/assets/supernova.mp3" autoPlay loop hidden />
-      <header className="header"></header>
-      <div className="grid-cell cell1">
-        {!entered && <img src="/assets/lain.gif" alt="Lain" />}
-        {!entered && (
-          <button className="enter-btn gothic-text" onClick={() => setEntered(true)}>[enter]</button>
-        )}
-        {entered && (
-          <div className="terminal-container">
-            <div className="pixel-stream-bg"></div>
-            <div className="terminal-inner">
-              <div className="terminal-row">
-                <span className="terminal-prompt flicker">&gt;</span>
-                <span
-                  className="terminal-input"
-                  contentEditable
-                  suppressContentEditableWarning
-                  ref={inputRef}
-                  spellCheck={false}
-                  onInput={handleTerminalInput}
-                  onKeyDown={handleTerminalKeyDown}
-                  tabIndex={0}
-                  aria-label="Type a command"
-                />
-                {terminalValue.length > 0 && (
-                  <span className="terminal-cursor blink" style={{ left: 'auto', color: '#b57edc', background: 'rgba(255,255,255,0.08)', borderRadius: '2px', fontWeight: 'bold', padding: '0 1px', marginLeft: '-2px', position: 'relative' }}>
-                    {terminalValue[caretPos] || ' '}
-                  </span>
-                )}
-              </div>
-              <div className="terminal-options">
-                {TERMINAL_OPTIONS.map(opt => (
-                  <span
-                    key={opt.label}
-                    className={`terminal-btn${selected === opt.label ? " selected" : ""}`}
-                    onClick={() => handleOptionClick(opt.label)}
-                  >{opt.display}</span>
-                ))}
-              </div>
-              {selected === "bio" && <div className="terminal-output">[bio content here]</div>}
-              {selected === "projects" && <div className="terminal-output">[projects content here]</div>}
-              {selected === "resume" && (
-                <div className="terminal-output">
-                  <a href="/assets/Zoey Vo Resume 2025.pdf" target="_blank" rel="noopener noreferrer">Download Resume (PDF)</a>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <div className="cyberia-root">
+            <CursorTrail />
+            <audio id="bg-audio" src="/assets/supernova.mp3" autoPlay loop hidden />
+            <header className="header"></header>
+            <div className="grid-cell cell1">
+              {!entered && <img src="/assets/lain.gif" alt="Lain" />}
+              {!entered && (
+                <button className="enter-btn gothic-text" onClick={() => setEntered(true)}>[enter]</button>
+              )}
+              {entered && (
+                <div className="terminal-container">
+                  <div className="pixel-stream-bg"></div>
+                  <div className="terminal-inner" ref={terminalInnerRef}>
+                    {/* Output history, each command and its output (if any) */}
+                    {output.map((line, idx) => (
+                      <React.Fragment key={idx}>
+                        <div className="terminal-row">
+                          <span className="terminal-user">
+                            zoey<span className="at-symbol">@</span>wired
+                          </span>
+                          <span className="terminal-prompt flicker">&gt;</span>
+                          <span className="terminal-output-line">
+                            <span className="cmd">{line.value}</span>
+                          </span>
+                        </div>
+                        {/* Only render output line for ls, help, and error commands */}
+                        {line.output && (line.value === 'ls' || line.value === 'help' || line.value.startsWith('command not found:') || line.output.toString().includes('is not a command')) && (
+                          <div className="terminal-row">
+                            <span className="terminal-user" style={{visibility:'hidden'}}><span className="footer-email">zoey<span className="at-symbol">@</span>wired</span></span>
+                            <span className="terminal-prompt flicker" style={{visibility:'hidden'}}>&gt;</span>
+                            <span className={line.value === 'ls' ? 'ls-list' : line.value === 'help' ? 'help-list' : 'error'}>
+                              {Array.isArray(line.output)
+                                ? line.output.map((l, i) => <div key={i}>{l}</div>)
+                                : line.output}
+                            </span>
+                          </div>
+                        )}
+                      </React.Fragment>
+                    ))}
+                    {/* Input row */}
+                    <div className="terminal-row">
+                      <span className="terminal-user">
+                        zoey<span className="at-symbol">@</span>wired
+                      </span>
+                      <span className="terminal-prompt flicker">&gt;</span>
+                      <span
+                        className="terminal-input"
+                        contentEditable
+                        suppressContentEditableWarning
+                        ref={inputRef}
+                        spellCheck={false}
+                        onInput={handleTerminalInput}
+                        onKeyDown={handleTerminalKeyDown}
+                        tabIndex={0}
+                        aria-label="Type a command"
+                        onClick={e => {
+                          // Place caret at end on click
+                          const el = e.currentTarget;
+                          const range = document.createRange();
+                          range.selectNodeContents(el);
+                          range.collapse(false);
+                          const sel = window.getSelection();
+                          sel.removeAllRanges();
+                          sel.addRange(range);
+                        }}
+                        style={{flex: 1, minWidth: 0, display: 'inline-block'}}
+                      />
+                      {terminalValue.length > 0 && (
+                        <span className="terminal-cursor blink" style={{ left: 'auto', color: '#b57edc', background: 'rgba(255,255,255,0.08)', borderRadius: '2px', fontWeight: 'bold', padding: '0 1px', marginLeft: '-2px', position: 'relative' }}>
+                          {terminalValue[caretPos] || ' '}
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
+            <footer className="footer">
+              <span>
+                <a href="https://github.com/zoeyvo" target="_blank" rel="noopener noreferrer">github.com/zoeyvo</a>
+                {" | "}
+                <a href="https://www.linkedin.com/in/zoeyvo" target="_blank" rel="noopener noreferrer">linkedin.com/in/zoeyvo</a>
+                {" | "}
+                <span className="footer-email" title="Email (obfuscated)">zoeyvo256<span className="at-symbol">@</span>gmail.com</span>
+              </span>
+            </footer>
           </div>
-        )}
+        }
+      />
+      <Route path="/bio" element={<PageLayout><Bio /></PageLayout>} />
+      <Route path="/projects" element={<PageLayout><Projects /></PageLayout>} />
+      <Route path="/resume" element={<PageLayout><Resume /></PageLayout>} />
+    </Routes>
+  );
+}
+
+// Minimal layout for blank pages
+function PageLayout({ children }) {
+  return (
+    <div className="cyberia-root">
+      <div className="header-navi">
+        <img src="/assets/navi.png" alt="Navi icon" />
       </div>
+      <CursorTrail />
+      <audio id="bg-audio" src="/assets/supernova.mp3" autoPlay loop hidden />
+      <header className="header"></header>
+      {children}
       <footer className="footer">
         <span>
           <a href="https://github.com/zoeyvo" target="_blank" rel="noopener noreferrer">github.com/zoeyvo</a>
-          {" | "}
+          {"  |  "}
           <a href="https://www.linkedin.com/in/zoeyvo" target="_blank" rel="noopener noreferrer">linkedin.com/in/zoeyvo</a>
-          {" | "}
-          <span className="footer-email" title="Email (obfuscated)">zoeyvo256 [at] gmail.com</span>
+          {"  |  "}
+          <span className="footer-email" title="Email (obfuscated)">zoeyvo256<span className="at-symbol">@</span>gmail.com</span>
         </span>
       </footer>
     </div>
