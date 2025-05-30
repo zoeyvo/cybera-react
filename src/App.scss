@@ -1,9 +1,16 @@
-$bg-1: #0f0f0f;
-$bg-2: #656865;
-$accent: #d2738a;
-$text-color: #B6B8A0;
-$typewriter-font: 'Typewriter', monospace;
+// =========================
+// CYBERIA SITE GLOBAL STYLES
+// =========================
 
+// Color palette and font variables
+$bg-1: #0f0f0f; // Main background
+$bg-2: #656865; // Footer/header background
+$accent: #d2738a; // Accent color
+$text-color: #B6B8A0; // Main text color
+$typewriter-font: 'Typewriter', monospace; // Main font
+
+// ========== ROOT LAYOUT ========== //
+// Main app container, sets up flex column and theme
 .cyberia-root {
   display: flex;
   flex-direction: column;
@@ -14,12 +21,11 @@ $typewriter-font: 'Typewriter', monospace;
   font-family: $typewriter-font;
 }
 
+// Center landing and terminal pages vertically
 .cyberia-root.landing {
   justify-content: center;
   align-items: center;
 }
-
-// Vertically center main/landing and terminal pages
 .cyberia-root.landing,
 .cyberia-root.terminal {
   min-height: 100vh;
@@ -27,13 +33,14 @@ $typewriter-font: 'Typewriter', monospace;
   align-items: center;
 }
 
+// ========== FONTS ========== //
+// Custom font faces for retro look
 @font-face {
   font-family: 'Typewriter';
   src: url('/assets/typewriter.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'GothicPixel';
   src: url('/assets/OldEnglishGothicPixelRegular-gx1jp.woff') format('woff');
@@ -41,12 +48,15 @@ $typewriter-font: 'Typewriter', monospace;
   font-style: normal;
 }
 
+// ========== BASE ELEMENTS ========== //
 body{
     height: 100vh;
     margin: 0;
     box-sizing: border-box;
 }
 
+// ========== GRID & PAGE CELLS ========== //
+// Main content containers for all pages
 .grid-cell, .page-cell {
   display: flex;
   flex-direction: column;
@@ -62,7 +72,7 @@ body{
   margin: 0 auto;
   box-sizing: border-box;
 }
-
+// Center content for landing/terminal
 .landing .grid-cell,
 .landing .page-cell,
 .terminal .grid-cell,
@@ -72,8 +82,7 @@ body{
   min-height: 60vh;
   margin: 0 auto;
 }
-
-// For all other pages, keep content column centered horizontally only
+// Center horizontally for other pages
 .grid-cell:not(.landing),
 .page-cell:not(.landing) {
   align-items: center;
@@ -81,6 +90,8 @@ body{
   margin: 0 auto;
 }
 
+// ========== HEADER NAVI ========== //
+// Navi icon header bar
 .header-navi {
   width: 100vw;
   display: flex;
@@ -93,14 +104,15 @@ body{
   z-index: 10;
   pointer-events: none;
 }
-
 .header-navi img {
-  width: 20vw;
+  width: 20vw; // Responsive width
   min-width: 40px;
   max-width: 120px;
   height: auto;
 }
 
+// ========== FOOTER ========== //
+// Footer bar with links and email
 .footer {
   display: flex;
   flex-direction: row;
@@ -118,7 +130,6 @@ body{
     color: $text-color;
     text-decoration: none;
     transition: color 0.15s;
-    
     // Use fallback font for @ symbol
     .at-symbol {
       font-family: 'IBM Plex Mono', 'Courier New', 'monospace', $typewriter-font;
@@ -141,16 +152,18 @@ body{
   }
 }
 
+// ========== TYPOGRAPHY ========== //
+// Gothic pixel font for headings
 .gothic-text {
   font-family: 'GothicPixel', 'Typewriter', monospace;
   font-size: 2rem;
   letter-spacing: 0.05em;
   color: #ffffff;
-  text-shadow: 0 0 4px $accent, 0 0 8px #222; // highlight with accent color instead of green
+  text-shadow: 0 0 4px $accent, 0 0 8px #222;
   position: relative;
   display: inline-block;
 }
-
+// Enter button style
 .enter-btn.gothic-text {
   color: #fff;
   background: none;
@@ -167,7 +180,7 @@ body{
   outline: none;
   position: relative;
   z-index: 2;
-  filter: none; // Not needed, but left for clarity
+  filter: none;
 }
 .enter-btn.gothic-text:hover, .enter-btn.gothic-text:focus {
   background: none;
@@ -176,24 +189,29 @@ body{
   box-shadow: none;
 }
 
+// ========== CURSOR ========== //
+// Custom angel wings cursor globally
 * {
   cursor: url('https://ani.cursors-4u.net/nature/nat-11/nat1047.cur'), auto !important;
 }
-
 html, body, .cyberia-root, .xp-content, .xp-content * {
   cursor: url('https://ani.cursors-4u.net/nature/nat-11/nat1047.cur'), auto !important;
 }
 
+// ========== FONT ENFORCEMENT ========== //
+// Ensure all main elements use typewriter font
 .cyberia-root, .header, .footer, .grid-cell, .gothic-text, .enter-btn {
   font-family: 'Typewriter', monospace !important;
 }
 
+// ========== TERMINAL STYLES ========== //
+// Terminal container and inner layout
 .terminal-container {
   position: relative;
   width: 100%;
-  max-width: 720px; // Limit max width for better readability
-  height: 320px; // Or adjust as needed for your design
-  max-height: 320px; // Set a max height for scrollable area
+  max-width: 720px;
+  height: 320px;
+  max-height: 320px;
   background: rgba(10,10,10,0.98);
   border: 2px solid #b57edc;
   box-shadow: 0 0 0 2px #222, 0 0 16px #b57edc44;
@@ -205,20 +223,21 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   min-width: 340px;
   box-sizing: border-box;
 }
+// Static noise overlay for terminal
 .pixel-stream-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  /* Replace animated lines with static.gif background */
   background: url('/assets/static.gif') center center/cover no-repeat;
   animation: none;
   mask-image: none;
 }
+// Terminal content area
 .terminal-inner {
   position: relative;
   z-index: 1;
-  padding: 1.2rem 1.2rem 1rem 1.2rem; // less vertical whitespace
+  padding: 1.2rem 1.2rem 1rem 1.2rem;
   min-height: 140px;
   display: flex;
   flex-direction: column;
@@ -227,11 +246,12 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   color: #fff;
   font-size: 1.1rem;
   flex: 1 1 auto;
-  height: 100%; // Fill parent height for scrolling
+  height: 100%;
   overflow-y: auto;
   max-height: 100%;
   width: 100%;
 }
+// Terminal row (prompt + input)
 .terminal-row {
   display: flex;
   align-items: flex-start;
@@ -241,12 +261,14 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   width: 100%;
   cursor: text;
 }
+// Terminal prompt
 .terminal-prompt {
   color: #b57edc;
   margin-right: 0.5em;
   font-weight: bold;
   font-size: 1.1rem;
 }
+// Terminal input area
 .terminal-input {
   outline: none;
   min-width: 3ch;
@@ -268,12 +290,14 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   width: 100%;
   display: inline-block;
 }
+// Terminal blinking cursor
 .terminal-cursor {
   color: #b57edc;
   margin-left: 2px;
   font-size: 1.1rem;
   font-family: 'Typewriter', monospace;
 }
+// Blinking and flicker animations
 .blink {
   animation: blink 1s steps(1) infinite;
 }
@@ -292,6 +316,7 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   40% { opacity: 1; }
   100% { opacity: 0.95; }
 }
+// Terminal options/buttons
 .terminal-options {
   margin-bottom: 1.2rem;
   display: flex;
@@ -322,6 +347,7 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   border-color: #fff;
   box-shadow: 0 0 8px #b57edc99;
 }
+// Terminal output area
 .terminal-output {
   margin-top: 1.2rem;
   color: #fff;
@@ -336,6 +362,7 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   letter-spacing: 0.08em;
   word-break: break-word;
 }
+// Terminal user prompt
 .terminal-user {
   margin-right: 0.4em;
   font-family: 'Typewriter', monospace !important;
@@ -351,15 +378,17 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
     letter-spacing: 0;
   }
 }
+// Output lines and lists
 .terminal-output-line, .ls-list, .help-list, .error {
   word-break: break-word;
   white-space: pre-wrap;
   flex: 1 1 0%;
   min-width: 0;
-  /* Ensure output doesn't overflow and wraps under the prompt */
   display: block;
 }
 
+// ========== DESKTOP BG ========== //
+// Projects/desktop background
 .desktop-bg {
   min-height: 60vh;
   width: 100%;
@@ -374,6 +403,8 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   overflow: auto;
 }
 
+// ========== GRID 1x3 LAYOUT ========== //
+// Used for landing/terminal page
 .grid-cell.cell1 {
   display: flex;
   flex-direction: column;
@@ -394,13 +425,16 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   flex: 1 0 0;
 }
 
+// ========== RESPONSIVE: MOBILE ========== //
 @media (max-width: 600px) {
+  // Footer links stack vertically
   .footer > span {
     flex-direction: column;
     gap: 0.5em;
     align-items: center;
     justify-content: center;
   }
+  // Terminal container and inner shrink to viewport
   .terminal-container {
     min-width: 0;
     max-width: 98vw;
@@ -411,6 +445,7 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
     max-width: 96vw;
     box-sizing: border-box;
   }
+  // Bio and project description text smaller and wrapped
   .bio-content, .project-description {
     font-size: 0.75rem;
     line-height: 1.35;

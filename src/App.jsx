@@ -311,20 +311,33 @@ function App() {
   );
 }
 
-// Minimal layout for blank pages
+// =============================
+// CYBERIA SITE PAGE LAYOUT COMPONENT
+// =============================
+//
+// PageLayout is a minimal wrapper for all non-landing pages.
+// - Renders the Navi header, cursor trail, header, children, and footer.
+// - Preloads all major assets (images, fonts, audio, PDF) for instant navigation.
+// - Passes playSwap to children for consistent sound effects.
+// - All layout and sizing is handled by SCSS for consistency.
 function PageLayout({ children, playSwap }) {
   return (
     <div className="cyberia-root">
+      {/* Navi header bar with pixel-art icon */}
       <div className="header-navi">
         <img src="/assets/navi.png" alt="Navi icon" />
       </div>
+      {/* Mouse particle/cursor effect */}
       <CursorTrail />
+      {/* (Optional) header for future nav or title */}
       <header className="header"></header>
+      {/* Render page content, passing playSwap to children for sound on links */}
       {React.Children.map(children, child =>
         React.isValidElement(child)
           ? React.cloneElement(child, { playSwap })
           : child
       )}
+      {/* Footer with social/email links, styled for retro look */}
       <footer className="footer">
         <span>
           <a href="https://github.com/zoeyvo" target="_blank" rel="noopener noreferrer" onClick={playSwap}>github.com/zoeyvo</a>
@@ -334,7 +347,7 @@ function PageLayout({ children, playSwap }) {
           <span className="footer-email" title="Email (obfuscated)">zoeyvo256<span className="at-symbol">@</span>gmail.com</span>
         </span>
       </footer>
-      {/* Preload assets for desktop/project frame and icons on all non-landing pages */}
+      {/* Preload all major assets for instant navigation and retro effects */}
       <div style={{ display: 'none' }}>
         <img src="/assets/whiteboard-frame.png" alt="preload whiteboard frame" />
         <img src="/assets/hands.gif" alt="preload hands" />

@@ -3,6 +3,9 @@
  * Renders the custom mouse particle/cursor effect.
  * - Uses react-mouse-particles for trailing effect.
  * - Enforces custom angel wings cursor globally.
+ * - Particle frequency is controlled by minDistance and minInterval.
+ *   Lower values = more frequent 1/0 particles.
+ *   Current: minDistance = 24px, minInterval = 24ms (high frequency)
  * - No unused code or styles.
  */
 
@@ -16,9 +19,9 @@ function CursorTrail({ count = 10 }) {
   useEffect(() => {
     let lastX = null;
     let lastY = null;
-    const minDistance = 72; // Much fewer 1s/0s: further increase distance between spawns
+    const minDistance = 24; // More frequent 1s/0s: lower distance between spawns
     let lastTime = 0;
-    const minInterval = 120; // Much fewer 1s/0s: further increase ms between spawns
+    const minInterval = 24; // More frequent 1s/0s: lower ms between spawns
     const handleMove = (e) => {
       const now = Date.now();
       if (now - lastTime < minInterval) return;
