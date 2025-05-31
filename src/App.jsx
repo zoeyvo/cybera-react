@@ -336,43 +336,40 @@ function PageLayout({ children, playSwap }) {
     <div className="cyberia-root">
       {/* Navi header bar with pixel-art icon */}
       <div className="header-navi">
-        <a href="/cyberia/" aria-label="Back to terminal" onClick={playSwap}>
-          <img src={import.meta.env.BASE_URL + 'assets/navi.png'} alt="Navi icon" />
-        </a>
+        <div
+          style={{
+            display: 'inline-block',
+            filter: 'drop-shadow(0 0 1px #00FF0088) drop-shadow(0 0 2px #00FF0044)',
+            borderRadius: '12px',
+            transition: 'filter 0.2s',
+          }}
+        >
+          <img
+            src={import.meta.env.BASE_URL + 'assets/navi.png'}
+            alt="Navi icon"
+            style={{
+              width: '100%',
+              height: 'auto',
+              display: 'block',
+              filter: 'drop-shadow(0 0 1px #00FF0088) drop-shadow(0 0 2px #00FF0044)',
+              borderRadius: '12px',
+              transition: 'filter 0.2s',
+            }}
+          />
+        </div>
       </div>
-      {/* Mouse particle/cursor effect */}
       <CursorTrail />
-      {/* (Optional) header for future nav or title */}
       <header className="header"></header>
-      {/* Render page content, passing playSwap to children for sound on links */}
-      {React.Children.map(children, child =>
-        React.isValidElement(child)
-          ? React.cloneElement(child, { playSwap })
-          : child
-      )}
-      {/* Footer with social/email links, styled for retro look */}
+      {children}
       <footer className="footer">
         <span>
           <a href="https://github.com/zoeyvo" target="_blank" rel="noopener noreferrer" onClick={playSwap}>github.com/zoeyvo</a>
-          {"  |  "}
+          {" | "}
           <a href="https://www.linkedin.com/in/zoeyvo" target="_blank" rel="noopener noreferrer" onClick={playSwap}>linkedin.com/in/zoeyvo</a>
-          {"  |  "}
+          {" | "}
           <span className="footer-email" title="Email (obfuscated)">zoeyvo256<span className="at-symbol">@</span>gmail.com</span>
         </span>
       </footer>
-      {/* Preload all major assets for instant navigation and retro effects */}
-      <div style={{ display: 'none' }}>
-        <img src={import.meta.env.BASE_URL + 'assets/whiteboard-frame.png'} alt="preload whiteboard frame" />
-        <img src={import.meta.env.BASE_URL + 'assets/hands.gif'} alt="preload hands" />
-        <img src={import.meta.env.BASE_URL + 'assets/static.gif'} alt="preload static" />
-        <img src={import.meta.env.BASE_URL + 'assets/tv_static.gif'} alt="preload tv static" />
-        <img src={import.meta.env.BASE_URL + 'assets/navi.png'} alt="preload navi" />
-        <img src={import.meta.env.BASE_URL + 'assets/lain.gif'} alt="preload lain" />
-        <link rel="preload" href={import.meta.env.BASE_URL + 'assets/typewriter.ttf'} as="font" type="font/ttf" crossOrigin="anonymous" />
-        <link rel="preload" href={import.meta.env.BASE_URL + 'assets/OldEnglishGothicPixelRegular-gx1jp.woff'} as="font" type="font/woff" crossOrigin="anonymous" />
-        <audio src={import.meta.env.BASE_URL + 'assets/supernova.mp3'} preload="auto" />
-        <link rel="preload" href={import.meta.env.BASE_URL + 'assets/Zoey%20Vo%20Resume%202025.pdf'} as="document" type="application/pdf" crossOrigin="anonymous" />
-      </div>
     </div>
   );
 }

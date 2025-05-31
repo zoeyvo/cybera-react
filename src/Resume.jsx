@@ -10,7 +10,7 @@ import React from "react";
  */
 
 const Resume = ({ playSwap }) => (
-  <div className="grid-cell cell1" style={{ width: '100%', maxWidth: '100vw', padding: 0, margin: 0, marginBottom: '1rem' }}>
+  <div className="grid-cell cell1" style={{ width: '100%', maxWidth: '100vw', padding: 0, margin: 0, marginBottom: '1.5rem' }}>
     <img
       src={import.meta.env.BASE_URL + 'assets/Zoey-Vo-Resume-2025.png'}
       alt="Resume screenshot"
