@@ -7,14 +7,30 @@ $bg-1: #0f0f0f; // Main background
 $bg-2: #656865; // Footer/header background
 $accent: #458945; // Accent color (was navi-green)
 $text-color: #B6B8A0; // Main text color
-$link-accent: #9ebf96; // Main text color
+$link-accent: #9ebf96; // Link accent color
 $white: #ebebeb; // White color variable
+$black: #000; // Black
 
-// ========== COLOR & GLOW VARIABLES ========== //
+// Glow and shadow variables
 $navi-glow: #00FF0088; // Navi image main glow
 $navi-glow2: #00FF0044; // Navi image secondary glow
+$shadow-strong: 0 0 16px rgba($black, 0.65);
+$shadow-soft: 0 0 4px $text-color, 0 0 6px $text-color, 0 0 8px $text-color, 0 0 12px $text-color;
 
+// Font variables
 $typewriter-font: 'Typewriter', monospace; // Main font
+$gothic-font: 'GothicPixel', $typewriter-font;
+
+// Utility mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin box-shadow($shadow) {
+  box-shadow: $shadow;
+}
 
 // ========== ROOT LAYOUT ========== //
 // Main app container, sets up flex column and theme
@@ -36,8 +52,7 @@ $typewriter-font: 'Typewriter', monospace; // Main font
 .cyberia-root.landing,
 .cyberia-root.terminal {
   min-height: 100vh;
-  justify-content: center;
-  align-items: center;
+  @include flex-center;
 }
 
 // ========== FONTS ========== //
@@ -78,8 +93,7 @@ body{
 .landing .page-cell,
 .terminal .grid-cell,
 .terminal .page-cell {
-  justify-content: center;
-  align-items: center;
+  @include flex-center;
   min-height: 60vh;
   margin: 0 auto;
 }
@@ -155,7 +169,7 @@ body{
     }
   }
   a:hover, a:focus {
-    color: $accent;
+    color: $link-accent;
     text-decoration: underline;
   }
   > span {
@@ -170,7 +184,7 @@ body{
 // ========== TYPOGRAPHY ========== //
 // Gothic pixel font for headings
 .gothic-text {
-  font-family: 'GothicPixel', 'Typewriter', monospace;
+  font-family: $gothic-font;
   font-size: 2rem;
   letter-spacing: 0.05em;
   color: $white;
@@ -261,7 +275,7 @@ $terminal-btn-bg-active: $accent;
   max-height: 320px;
   background: $terminal-bg;
   border: 2px solid $terminal-border;
-  box-shadow: $terminal-shadow;
+  @include box-shadow($terminal-shadow);
   border-radius: 8px;
   overflow: hidden;
   margin: 0 auto;
@@ -311,6 +325,7 @@ $terminal-btn-bg-active: $accent;
   background: url('./assets/static.gif') center center/cover no-repeat;
   animation: none;
   mask-image: none;
+  opacity: 50%;
 }
 
 // Terminal row (prompt + input)
@@ -465,7 +480,7 @@ $terminal-btn-bg-active: $accent;
 .desktop-bg {
   min-height: 60vh;
   width: 100%;
-  background: linear-gradient(135deg, #181818 80%, #232323 100%);
+  background: $bg-1;
   position: relative;
   display: flex;
   align-items: flex-start;
@@ -577,14 +592,14 @@ $terminal-btn-bg-active: $accent;
   margin-bottom: 0.5em;
   letter-spacing: 0.08em;
   color: $white;
-  text-shadow: 0 0 6px #B6B8A0;
+  text-shadow: 0 0 6px $text-color;
 }
 .bio-desc {
   font-size: 1.15rem;
   margin-top: 1.2em;
   line-height: 1.5;
   color: $white;
-  text-shadow: 0 0 4px #B6B8A0;
+  text-shadow: 0 0 4px $text-color;
 }
 
 // ========== PROJECTS SECTION ========== //
@@ -605,7 +620,7 @@ $terminal-btn-bg-active: $accent;
   text-align: center;
   width: 100%;
   max-width: 480px;
-  text-shadow: 0 0 6px #B6B8A0;
+  text-shadow: 0 0 6px $text-color;
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
@@ -619,7 +634,7 @@ $terminal-btn-bg-active: $accent;
   max-width: 480px;
   width: 100%;
   line-height: 1.6;
-  text-shadow: 0 0 4px #B6B8A0;
+  text-shadow: 0 0 4px $text-color;
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
@@ -653,9 +668,9 @@ $terminal-btn-bg-active: $accent;
   height: auto;
   display: block;
   margin: 0 auto;
-  background: #181818;
+  background: $bg-1;
   border-radius: 8px;
-  box-shadow: 0 0 16px #000a;
+  @include box-shadow($shadow-strong);
   margin-bottom: 1.5em;
 }
 
@@ -663,7 +678,7 @@ $terminal-btn-bg-active: $accent;
 .terminal-user::selection,
 .terminal-input::selection {
   background: $accent;
-  color: #fff;
+  color: $white;
 }
 
 // Uniform styles for all terminal text elements
@@ -693,5 +708,5 @@ $terminal-btn-bg-active: $accent;
   color: $white;
 }
 .lain-img {
-  opacity: 40%;
+  opacity: 75%;
 }

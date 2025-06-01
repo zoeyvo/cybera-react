@@ -39,8 +39,19 @@ function App() {
   const location = useLocation();
   const phwipRef = useRef(null);
   const musicRef = useRef(null);
+  const audioRef = useRef(null);
 
   useCursorEnlargeOnClick();
+
+  useEffect(() => {
+    if (!entered && audioRef.current) {
+      audioRef.current.volume = 0.15; // Set wind audio to 25% volume
+      audioRef.current.play();
+    } else if (entered && audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  }, [entered]);
 
   // Ensure input is always focusable and editable
   useEffect(() => {
@@ -67,7 +78,7 @@ function App() {
   // Play swap.mp3 on page swap (route change)
   useEffect(() => {
     if (phwipRef.current) {
-      phwipRef.current.volume = 0.08; // Much quieter swap sound
+      phwipRef.current.volume = 0.05; // Much quieter swap sound
       phwipRef.current.currentTime = 0;
       phwipRef.current.play();
     }
@@ -76,7 +87,7 @@ function App() {
   // Add background music (within.mp3) looped, play/pause based on user interaction
   useEffect(() => {
     if (musicRef.current) {
-      musicRef.current.volume = 0.18; // Subtle volume
+      musicRef.current.volume = 0.15; // Subtle volume
       musicRef.current.loop = true;
       // Only play after user has entered (interacted)
       if (entered) {
@@ -198,6 +209,7 @@ function App() {
       <CustomCursor />
       <audio ref={phwipRef} src={import.meta.env.BASE_URL + 'assets/swap.mp3'} preload="auto" />
       <audio ref={musicRef} src={import.meta.env.BASE_URL + 'assets/within.mp3'} preload="auto" loop style={{ display: 'none' }} />
+      <audio ref={audioRef} src="/assets/wind.mp3" loop autoPlay={!entered} style={{ display: 'none' }} />
       <Routes>
         <Route
           path="/"
