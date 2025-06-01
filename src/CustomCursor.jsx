@@ -13,7 +13,41 @@ const CustomCursor = () => {
       setCoords({ x: e.clientX, y: e.clientY });
     };
     window.addEventListener('mousemove', moveCursor);
-    return () => window.removeEventListener('mousemove', moveCursor);
+
+    // Only hide cursor for touch-only devices (not hybrid)
+    const isTouchOnly = () => {
+      return (
+        ('ontouchstart' in window || navigator.maxTouchPoints > 0) &&
+        !window.matchMedia('(pointer: fine)').matches
+      );
+    };
+    if (isTouchOnly() && cursorRef.current) {
+      cursorRef.current.style.display = 'none';
+    }
+    const hideCursor = () => {
+      if (isTouchOnly() && cursorRef.current) {
+        cursorRef.current.style.display = 'none';
+      }
+    };
+    const showCursor = () => {
+      if (!isTouchOnly() && cursorRef.current) {
+        cursorRef.current.style.display = '';
+      }
+    };
+    window.addEventListener('touchstart', hideCursor, { passive: true });
+    window.addEventListener('touchmove', hideCursor, { passive: true });
+    window.addEventListener('touchend', hideCursor, { passive: true });
+    window.addEventListener('touchcancel', hideCursor, { passive: true });
+    window.addEventListener('mousemove', showCursor);
+
+    return () => {
+      window.removeEventListener('mousemove', moveCursor);
+      window.removeEventListener('touchstart', hideCursor);
+      window.removeEventListener('touchmove', hideCursor);
+      window.removeEventListener('touchend', hideCursor);
+      window.removeEventListener('touchcancel', hideCursor);
+      window.removeEventListener('mousemove', showCursor);
+    };
   }, []);
 
   // Click plump up animation
