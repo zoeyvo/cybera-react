@@ -207,9 +207,9 @@ function App() {
   return (
     <>
       <CustomCursor />
-      <audio ref={phwipRef} src={import.meta.env.BASE_URL + 'assets/swap.mp3'} preload="auto" />
-      <audio ref={musicRef} src={import.meta.env.BASE_URL + 'assets/within.mp3'} preload="auto" loop style={{ display: 'none' }} />
-      <audio ref={audioRef} src="/assets/wind.mp3" loop autoPlay={!entered} style={{ display: 'none' }} />
+      <audio ref={phwipRef} src={import.meta.env.BASE_URL + 'docs/assets/swap.mp3'} preload="auto" />
+      <audio ref={musicRef} src={import.meta.env.BASE_URL + 'docs/assets/within.mp3'} preload="auto" loop style={{ display: 'none' }} />
+      <audio ref={audioRef} src={import.meta.env.BASE_URL + 'docs/assets/wind.mp3'} loop autoPlay={!entered} style={{ display: 'none' }} />
       <Routes>
         <Route
           path="/"
@@ -222,7 +222,7 @@ function App() {
                 <div className="row1" />
                 {/* Row 2: Main content (Lain image/button or terminal) */}
                 <div className="row2">
-                  {!entered && <img className="lain-img" src={import.meta.env.BASE_URL + 'assets/lain.gif'} alt="Lain" />}
+                  {!entered && <img className="lain-img" src={import.meta.env.BASE_URL + 'docs/assets/lain.gif'} alt="Lain" />}
                   {!entered && (
                     <button className="enter-btn gothic-text" onMouseDown={playSwap} onClick={() => setEntered(true)}>[enter]</button>
                   )}
