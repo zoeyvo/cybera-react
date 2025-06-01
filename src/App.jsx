@@ -132,11 +132,11 @@ function App() {
             type: 'cmd',
             value: 'help',
             output: [
-              'Available commands:',
-              'ls - list available sections',
-              'cat [section] - view a section (bio, projects, resume)',
-              'help - show this help message',
-              'clear - clear the terminal'
+              'Commands:',
+              '- ls',
+              '- cat [section]',
+              '- help',
+              '- clear'
             ]
           }
         ]);
@@ -240,6 +240,8 @@ function App() {
                               sel.addRange(range);
                             }
                           }}
+                          tabIndex={0}
+                          aria-label="Focus terminal input"
                         />
                         {/* Output history, each command and its output (if any) */}
                         {output.map((line, idx) => (
@@ -349,6 +351,47 @@ function App() {
 // - Passes playSwap to children for consistent sound effects.
 // - All layout and sizing is handled by SCSS for consistency.
 function PageLayout({ children, playSwap }) {
+  // Preload all major assets for instant navigation
+  useEffect(() => {
+    const assets = [
+      'assets/navi.png',
+      'assets/lain.gif',
+      'assets/lain-org.gif',
+      'assets/static.gif',
+      'assets/tv_static.gif',
+      'assets/hands.gif',
+      'assets/whiteboard-frame.png',
+      'assets/typewriter.ttf',
+      'assets/swap.mp3',
+      'assets/within.mp3',
+      'assets/Zoey-Vo-Resume-2025.png',
+      'assets/Zoey-Vo-Resume-2025-w.png',
+      'assets/cursor.cur',
+      'assets/favicon.png'
+    ];
+    assets.forEach(asset => {
+      const ext = asset.split('.').pop();
+      if (["png", "gif", "jpg", "jpeg", "cur"].includes(ext)) {
+        const img = new window.Image();
+        img.src = import.meta.env.BASE_URL + asset;
+      } else if (["mp3", "wav", "ogg"].includes(ext)) {
+        const audio = new window.Audio();
+        audio.src = import.meta.env.BASE_URL + asset;
+      } else if (["ttf", "woff", "woff2", "otf"].includes(ext)) {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'font';
+        link.href = import.meta.env.BASE_URL + asset;
+        link.crossOrigin = 'anonymous';
+        document.head.appendChild(link);
+      }
+    });
+  }, []);
+  // Preload Navi image for instant display
+  useEffect(() => {
+    const naviImg = new window.Image();
+    naviImg.src = import.meta.env.BASE_URL + 'assets/navi.png';
+  }, []);
   return (
     <div className="cyberia-root">
       {/* Navi header bar with pixel-art icon */}

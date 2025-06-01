@@ -5,9 +5,15 @@
 // Color palette and font variables
 $bg-1: #0f0f0f; // Main background
 $bg-2: #656865; // Footer/header background
-$navi-green: #009a00;
-$accent: $navi-green; // Accent color now matches navi green
+$accent: #458945; // Accent color (was navi-green)
 $text-color: #B6B8A0; // Main text color
+$link-accent: #9ebf96; // Main text color
+$white: #ebebeb; // White color variable
+
+// ========== COLOR & GLOW VARIABLES ========== //
+$navi-glow: #00FF0088; // Navi image main glow
+$navi-glow2: #00FF0044; // Navi image secondary glow
+
 $typewriter-font: 'Typewriter', monospace; // Main font
 
 // ========== ROOT LAYOUT ========== //
@@ -38,13 +44,7 @@ $typewriter-font: 'Typewriter', monospace; // Main font
 // Custom font faces for retro look
 @font-face {
   font-family: 'Typewriter';
-  src: url('./assets/typewriter.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'GothicPixel';
-  src: url('./assets/OldEnglishGothicPixelRegular-gx1jp.woff') format('woff');
+  src: url('../docs/assets/typewriter.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -108,13 +108,13 @@ body{
     width: 100%;
     height: auto;
     display: block;
-    filter: drop-shadow(0 0 1px #00FF0088) drop-shadow(0 0 2px #00FF0044);
+    filter: drop-shadow(0 0 1px #{$navi-glow}) drop-shadow(0 0 2px #{$navi-glow2});
     border-radius: 12px;
     transition: filter 0.2s;
   }
   .navi-img-wrapper {
     display: inline-block;
-    filter: drop-shadow(0 0 1px #00FF0088) drop-shadow(0 0 2px #00FF0044);
+    filter: drop-shadow(0 0 1px #{$navi-glow}) drop-shadow(0 0 2px #{$navi-glow2});
     border-radius: 12px;
     transition: filter 0.2s;
   }
@@ -173,19 +173,19 @@ body{
   font-family: 'GothicPixel', 'Typewriter', monospace;
   font-size: 2rem;
   letter-spacing: 0.05em;
-  color: #ffffff;
+  color: $white;
   text-shadow: 0 0 4px $accent, 0 0 8px #222;
   position: relative;
   display: inline-block;
 }
 // Enter button style
 .enter-btn.gothic-text {
-  color: #fff;
+  color: $white;
   background: none;
   border: none;
   padding: 2px 10px;
   border-radius: 6px;
-  font-size: 1.1rem;
+  font-size: 1rem; // Desktop default
   font-family: inherit;
   cursor: pointer;
   margin-top: 10px;
@@ -199,11 +199,25 @@ body{
 }
 .enter-btn.gothic-text:hover, .enter-btn.gothic-text:focus {
   background: none;
-  color: #000;
+  color: $white;
   border: none;
   box-shadow: none;
+  text-shadow: 0 0 12px $accent, 0 0 24px $accent;
   transform: scale(1.12);
   transition: transform 0.18s cubic-bezier(0.4, 1.4, 0.6, 1);
+}
+
+// Link styles
+a, .project-link {
+  font-size: 0.85rem; // Desktop default
+  color: $text-color;
+  text-decoration: underline;
+  font-family: 'Typewriter', monospace;
+  transition: color 0.15s;
+}
+a:hover, a:focus, .project-link:hover, .project-link:focus {
+  color: $link-accent;
+  text-decoration: underline;
 }
 
 // ========== CURSOR ========== //
@@ -223,14 +237,10 @@ html:focus, body:focus, .cyberia-root:focus, .xp-content:focus, .xp-content *:fo
   font-family: 'Typewriter', monospace !important;
 }
 
-// ========== NAVI HEADER COLOR SCHEME ========== //
-$navi-glow: #00FF0033; // Reduced intensity for subtler glow
-$navi-glow2: #00FF0011; // Further reduced for secondary shadow
-
 // ========== TERMINAL STYLES ========== //
 $terminal-bg: #0f0f0f;
 $terminal-border: 1px solid $accent; // Thinner border
-$terminal-shadow: 0 0 4px $accent, 0 0 6px $accent, 0 0 8px $accent, 0 0 12px $navi-glow2; // Increased glow
+$terminal-shadow: 0 0 4px $text-color, 0 0 6px $text-color, 0 0 8px $text-color, 0 0 12px $text-color; // Use $text-color for shadow
 $terminal-btn-bg: #181818;
 $terminal-btn-color-active: #0f0f0f;
 $terminal-btn-border-active: #fff;
@@ -259,6 +269,28 @@ $terminal-btn-bg-active: $accent;
   flex-direction: column;
   min-width: 340px;
   box-sizing: border-box;
+
+  // Terminal content area
+  .terminal-inner {
+    position: relative;
+    z-index: 1;
+    padding: 1.2rem 1.2rem 1rem 1.2rem;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: 'Typewriter', monospace;
+    color: $accent;
+    font-size: 1.1rem;
+    flex: 1 1 auto;
+    height: 100%;
+    overflow-y: auto;
+    max-height: 100%;
+    width: 100%;
+    cursor: text;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 }
 // Ensure the terminal glow matches the border radius
 .terminal-container::before {
@@ -280,24 +312,7 @@ $terminal-btn-bg-active: $accent;
   animation: none;
   mask-image: none;
 }
-// Terminal content area
-.terminal-inner {
-  position: relative;
-  z-index: 1;
-  padding: 1.2rem 1.2rem 1rem 1.2rem;
-  min-height: 140px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  font-family: 'Typewriter', monospace;
-  color: $accent;
-  font-size: 1.1rem;
-  flex: 1 1 auto;
-  height: 100%;
-  overflow-y: auto;
-  max-height: 100%;
-  width: 100%;
-}
+
 // Terminal row (prompt + input)
 .terminal-row {
   display: flex;
@@ -309,48 +324,52 @@ $terminal-btn-bg-active: $accent;
   cursor: text;
   text-shadow: 0 0 1px $accent, 0 0 2px $accent, 0 0 1px $navi-glow2;
   color: $accent;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 // Terminal prompt
 .terminal-prompt {
-  color: $accent;
+  color: $text-color;
   margin-right: 0.5em;
   font-weight: bold;
-  font-size: 1.1rem;
-  text-shadow: 0 0 1.5px $accent, 0 0 3px $accent, 0 0 1px $navi-glow2;
+  font-size: 1rem;
+  text-shadow: 0 0 1.5px $text-color, 0 0 3px $text-color, 0 0 1px $text-color;
 }
 // Terminal input area
 .terminal-input {
   outline: none;
   min-width: 3ch;
-  max-width: 100%;
+  max-width: 80%;
   overflow-x: auto;
   white-space: pre;
   word-break: break-all;
   background: none;
   border: none;
-  color: #fff !important;
+  color: $white;
   font-family: 'Typewriter', monospace;
   font-size: 1.1rem;
   letter-spacing: 0.1em;
-  caret-color: $terminal-cursor;
+  caret-color: $white;
   padding: 0;
   margin: 0;
   flex: 1;
   min-width: 0;
   width: 100%;
   display: inline-block;
+  max-width: 100%;
+  box-sizing: border-box;
   &::selection {
     background: $accent;
-    color: #fff;
+    color: $white;
   }
 }
 // Terminal blinking cursor
 .terminal-cursor {
-  color: $accent;
+  color: $text-color;
   margin-left: 2px;
   font-size: 1.1rem;
   font-family: 'Typewriter', monospace;
-  text-shadow: 0 0 3px $accent, 0 0 6px $accent, 0 0 1px $navi-glow2;
+  text-shadow: 0 0 3px $text-color, 0 0 6px $text-color, 0 0 1px $text-color;
 }
 // Blinking and flicker animations
 .blink {
@@ -362,6 +381,7 @@ $terminal-btn-bg-active: $accent;
 }
 .flicker {
   animation: flicker 1.2s infinite alternate;
+  color: $text-color !important;
 }
 @keyframes flicker {
   0% { opacity: 1; }
@@ -385,7 +405,7 @@ $terminal-btn-bg-active: $accent;
   border: 1.5px solid $terminal-border;
   border-radius: 4px;
   font-family: 'Typewriter', monospace;
-  font-size: 1.1rem;
+  font-size: 1rem;
   padding: 0.2em 1.2em;
   margin-right: 0.5em;
   cursor: pointer;
@@ -420,15 +440,14 @@ $terminal-btn-bg-active: $accent;
 // Terminal user prompt
 .terminal-user {
   margin-right: 0.4em;
-  font-family: 'Typewriter', monospace !important;
-  color: #fff;
+  font-family: $typewriter-font !important;
+  color: $text-color;
   font-weight: bold;
   font-size: 1.1rem;
   letter-spacing: 0.01em;
-  // Match .terminal-input selection style
   &::selection {
     background: $accent;
-    color: #fff;
+    color: $white;
   }
 }
 // Output lines and lists
@@ -438,10 +457,7 @@ $terminal-btn-bg-active: $accent;
   flex: 1 1 0%;
   min-width: 0;
   display: block;
-}
-.terminal-output-line .cmd-accent {
-  color: $accent;
-  font-weight: bold;
+  color: $white;
 }
 
 // ========== DESKTOP BG ========== //
@@ -497,7 +513,7 @@ $terminal-btn-bg-active: $accent;
     max-width: 98vw;
   }
   .terminal-inner {
-    font-size: 1rem;
+    font-size: 0.85rem;
     padding: 0.7rem 0.5rem 0.7rem 0.5rem;
     max-width: 96vw;
     box-sizing: border-box;
@@ -516,6 +532,27 @@ $terminal-btn-bg-active: $accent;
   }
   .lain-img {
     width: 70%;
+  }
+  // Enter button and link text size
+  .enter-btn.gothic-text {
+    font-size: 0.85rem;
+  }
+  a, .project-link {
+    font-size: 0.75rem;
+  }
+  // Terminal text size
+  .terminal-inner,
+  .terminal-row,
+  .terminal-prompt,
+  .terminal-input,
+  .terminal-cursor,
+  .terminal-output,
+  .terminal-user,
+  .terminal-output-line,
+  .ls-list,
+  .help-list,
+  .error {
+    font-size: 0.85rem !important;
   }
 }
 
@@ -539,14 +576,14 @@ $terminal-btn-bg-active: $accent;
   font-size: 1.5rem;
   margin-bottom: 0.5em;
   letter-spacing: 0.08em;
-  color: #fff;
+  color: $white;
   text-shadow: 0 0 6px #B6B8A0;
 }
 .bio-desc {
   font-size: 1.15rem;
   margin-top: 1.2em;
   line-height: 1.5;
-  color: #fff;
+  color: $white;
   text-shadow: 0 0 4px #B6B8A0;
 }
 
@@ -562,7 +599,7 @@ $terminal-btn-bg-active: $accent;
   font-family: 'Typewriter', monospace;
   font-weight: bold;
   font-size: 1.25rem;
-  color: #fff;
+  color: $white;
   margin-bottom: 1.2rem;
   letter-spacing: 0.08em;
   text-align: center;
@@ -575,7 +612,7 @@ $terminal-btn-bg-active: $accent;
 }
 .project-description {
   font-family: 'Typewriter', monospace;
-  color: #fff;
+  color: $white;
   font-size: 1.05rem;
   margin-bottom: 1.2rem;
   text-align: center;
@@ -595,7 +632,7 @@ $terminal-btn-bg-active: $accent;
   margin-top: 1.2rem;
 }
 .project-link {
-  color: #2a6ad7;
+  color: $text-color;
   text-decoration: underline;
   font-family: 'Typewriter', monospace;
   font-size: 1.05rem;
@@ -641,25 +678,20 @@ $terminal-btn-bg-active: $accent;
 .ls-list,
 .help-list,
 .error {
-  color: #fff !important;
-  font-family: 'Typewriter', monospace !important;
-  font-size: 1.1rem !important;
-  letter-spacing: 0.08em !important;
+  color: $white;
+  font-family: $typewriter-font;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
   text-shadow: 0 0 2px $accent, 0 0 4px #222;
 }
-.terminal-prompt {
-  color: $accent !important;
-  text-shadow: 0 0 1.5px $accent, 0 0 3px $accent, 0 0 1px $navi-glow2;
-}
-.terminal-cursor {
-  color: $accent !important;
-  text-shadow: 0 0 3px $accent, 0 0 6px $accent, 0 0 1px $navi-glow2;
-}
-.terminal-btn {
-  font-family: 'Typewriter', monospace !important;
-  font-size: 1.1rem !important;
-  letter-spacing: 0.08em !important;
+.terminal-output-line, .ls-list, .help-list, .error {
+  word-break: break-word;
+  white-space: pre-wrap;
+  flex: 1 1 0%;
+  min-width: 0;
+  display: block;
+  color: $white;
 }
 .lain-img {
-  opacity: 0.75;
+  opacity: 40%;
 }

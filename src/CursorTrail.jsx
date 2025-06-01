@@ -85,9 +85,9 @@ function CursorTrail({ count = 10 }) {
             pointerEvents: "none",
             transform: `translate(-50%, -50%) scale(${1.0}) rotate(${(item.vx > 0 ? 1 : -1) * item.t * 2}deg)`,
             opacity: 1 - item.t * 0.02,
-            color: '#fff', // bright white text
-            WebkitTextStroke: 'none', // remove outline for pure white
-            textShadow: '0 0 2px #fff', // subtle white glow for brightness
+            color: '#fff', // white text
+            WebkitTextStroke: 'none',
+            textShadow: '0 0 6px #00FF00, 0 0 12px #00FF00', // strong green glow
             background: 'none',
             border: 'none',
             letterSpacing: '0.1em',
