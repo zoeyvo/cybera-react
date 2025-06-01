@@ -654,24 +654,26 @@ $terminal-btn-bg-active: $accent;
 }
 
 // ========== RESUME STYLES ========== //
-// Resume now uses bio-content, bio-title, bio-desc for unified look
+// Resume uses its own container for full-width display
 .resume-root {
   width: 100%;
-  max-width: 100vw;
+  max-width: 100%;
   padding: 0;
   margin: 0;
   margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .resume-img {
-  width: 100vw;
-  max-width: 900px;
+  width: 100%;
+  max-width: 1200px; // Match grid-cell max-width
   height: auto;
   display: block;
   margin: 0 auto;
   background: $bg-1;
   border-radius: 8px;
   @include box-shadow($shadow-strong);
-  margin-bottom: 1.5em;
 }
 
 // Custom selection styles for terminal user and input

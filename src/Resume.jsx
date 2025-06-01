@@ -11,14 +11,12 @@ import React from "react";
 
 const Resume = ({ playSwap }) => (
   <div className="grid-cell cell1">
-    <div className="bio-content">
-      <span className="gothic-text bio-desc" style={{marginBottom: '1.5em'}}>
-        <img
-          className="resume-img"
-          src={import.meta.env.BASE_URL + 'assets/Zoey-Vo-Resume-2025.png'}
-          alt="Resume screenshot"
-        />
-      </span>
+    <div className="resume-root">
+      <img
+        className="resume-img"
+        src={import.meta.env.BASE_URL + 'assets/Zoey-Vo-Resume-2025.png'}
+        alt="Resume screenshot"
+      />
       {/* If you add any links here in the future, use onClick={playSwap} */}
     </div>
   </div>
