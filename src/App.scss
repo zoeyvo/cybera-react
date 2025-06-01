@@ -205,16 +205,31 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
 }
 
 // ========== TERMINAL STYLES ========== //
-// Terminal container and inner layout
+// Terminal color variables (unique only)
+$terminal-bg: rgba(10,10,10,0.98);
+$terminal-border: #b57edc;
+$terminal-shadow: #b57edc44;
+$terminal-btn-bg: #181818;
+$terminal-btn-color-active: #181818;
+$terminal-btn-border-active: #fff;
+$terminal-output-bg: #181818cc;
+$terminal-output-shadow: #000a;
+
+// Aliases for clarity
+$terminal-prompt: $terminal-border;
+$terminal-cursor: $terminal-border;
+$terminal-btn-color: $terminal-border;
+$terminal-btn-bg-active: $terminal-border;
+
 .terminal-container {
   position: relative;
   width: 100%;
   max-width: 720px;
   height: 320px;
   max-height: 320px;
-  background: rgba(10,10,10,0.98);
-  border: 2px solid #b57edc;
-  box-shadow: 0 0 0 2px #222, 0 0 16px #b57edc44;
+  background: $terminal-bg;
+  border: 2px solid $terminal-border;
+  box-shadow: 0 0 0 2px #222, 0 0 16px $terminal-shadow;
   border-radius: 8px;
   overflow: hidden;
   margin: 0 auto;
@@ -263,7 +278,7 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
 }
 // Terminal prompt
 .terminal-prompt {
-  color: #b57edc;
+  color: $terminal-prompt;
   margin-right: 0.5em;
   font-weight: bold;
   font-size: 1.1rem;
@@ -282,7 +297,7 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   font-family: 'Typewriter', monospace;
   font-size: 1.1rem;
   letter-spacing: 0.1em;
-  caret-color: #b57edc;
+  caret-color: $terminal-cursor;
   padding: 0;
   margin: 0;
   flex: 1;
@@ -292,7 +307,7 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
 }
 // Terminal blinking cursor
 .terminal-cursor {
-  color: #b57edc;
+  color: $terminal-cursor;
   margin-left: 2px;
   font-size: 1.1rem;
   font-family: 'Typewriter', monospace;
@@ -325,16 +340,16 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   width: 100%;
 }
 .terminal-btn {
-  background: #181818;
-  color: #b57edc;
-  border: 1.5px solid #b57edc;
+  background: $terminal-btn-bg;
+  color: $terminal-btn-color;
+  border: 1.5px solid $terminal-border;
   border-radius: 4px;
   font-family: 'Typewriter', monospace;
   font-size: 1.1rem;
   padding: 0.2em 1.2em;
   margin-right: 0.5em;
   cursor: pointer;
-  box-shadow: 0 0 4px #b57edc44;
+  box-shadow: 0 0 4px $terminal-shadow;
   transition: background 0.15s, color 0.15s, border 0.15s;
   letter-spacing: 0.1em;
   user-select: none;
@@ -342,10 +357,10 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   position: relative;
 }
 .terminal-btn.selected, .terminal-btn:hover, .terminal-btn:focus {
-  background: #b57edc;
-  color: #181818;
-  border-color: #fff;
-  box-shadow: 0 0 8px #b57edc99;
+  background: $terminal-btn-bg-active;
+  color: $terminal-btn-color-active;
+  border-color: $terminal-btn-border-active;
+  box-shadow: 0 0 8px $terminal-shadow;
 }
 // Terminal output area
 .terminal-output {
@@ -353,12 +368,12 @@ html, body, .cyberia-root, .xp-content, .xp-content * {
   color: #fff;
   font-family: 'Typewriter', monospace;
   font-size: 1.1rem;
-  background: #181818cc;
+  background: $terminal-output-bg;
   border-radius: 4px;
   padding: 1.2em 1.5em;
   min-width: 220px;
   min-height: 2.5em;
-  box-shadow: 0 0 8px #000a;
+  box-shadow: 0 0 8px $terminal-output-shadow;
   letter-spacing: 0.08em;
   word-break: break-word;
 }
