@@ -5,7 +5,7 @@
 // Color palette and font variables
 $bg-1: #0f0f0f; // Main background
 $bg-2: #656865; // Footer/header background
-$navi-green: #00FF00;
+$navi-green: #009a00;
 $accent: $navi-green; // Accent color now matches navi green
 $text-color: #B6B8A0; // Main text color
 $typewriter-font: 'Typewriter', monospace; // Main font
@@ -230,7 +230,7 @@ $navi-glow2: #00FF0011; // Further reduced for secondary shadow
 // ========== TERMINAL STYLES ========== //
 $terminal-bg: #0f0f0f;
 $terminal-border: 1px solid $accent; // Thinner border
-$terminal-shadow: 0 0 2px $accent, 0 0 4px $accent, 0 0 1px $navi-glow2; // Much less glow
+$terminal-shadow: 0 0 4px $accent, 0 0 6px $accent, 0 0 8px $accent, 0 0 12px $navi-glow2; // Increased glow
 $terminal-btn-bg: #181818;
 $terminal-btn-color-active: #0f0f0f;
 $terminal-btn-border-active: #fff;
@@ -659,4 +659,7 @@ $terminal-btn-bg-active: $accent;
   font-family: 'Typewriter', monospace !important;
   font-size: 1.1rem !important;
   letter-spacing: 0.08em !important;
+}
+.lain-img {
+  opacity: 0.75;
 }
