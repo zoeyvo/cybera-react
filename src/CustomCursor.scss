@@ -1,0 +1,30 @@
+.custom-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.18s cubic-bezier(0.4, 1.4, 0.6, 1), filter 0.18s;
+  filter: drop-shadow(0 0 2px #00FF00) drop-shadow(0 0 4px #00FF0033);
+  mix-blend-mode: lighten;
+}
+.custom-cursor img {
+  width: 32px;
+  height: 32px;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+.custom-cursor.plump {
+  transform: translate(-50%, -50%) scale(1.35);
+  filter: drop-shadow(0 0 6px #00FF00) drop-shadow(0 0 12px #00FF0033);
+}
+@media (max-width: 600px) {
+  .custom-cursor, .custom-cursor img {
+    width: 24px;
+    height: 24px;
+  }
+}

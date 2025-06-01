@@ -10,23 +10,17 @@ import React from "react";
  */
 
 const Resume = ({ playSwap }) => (
-  <div className="grid-cell cell1" style={{ width: '100%', maxWidth: '100vw', padding: 0, margin: 0, marginBottom: '1.5rem' }}>
-    <img
-      src={import.meta.env.BASE_URL + 'assets/Zoey-Vo-Resume-2025.png'}
-      alt="Resume screenshot"
-      style={{
-        width: '100vw',
-        maxWidth: '900px',
-        height: 'auto',
-        display: 'block',
-        margin: '0 auto',
-        background: '#181818',
-        borderRadius: '8px',
-        boxShadow: '0 0 16px #000a',
-      }}
-      loading="lazy"
-    />
-    {/* If you add any links here in the future, use onClick={playSwap} */}
+  <div className="grid-cell cell1">
+    <div className="bio-content">
+      <span className="gothic-text bio-desc" style={{marginBottom: '1.5em'}}>
+        <img
+          className="resume-img"
+          src={import.meta.env.BASE_URL + 'assets/Zoey-Vo-Resume-2025.png'}
+          alt="Resume screenshot"
+        />
+      </span>
+      {/* If you add any links here in the future, use onClick={playSwap} */}
+    </div>
   </div>
 );
 

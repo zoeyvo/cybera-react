@@ -5,6 +5,7 @@ import CursorTrail from "./CursorTrail";
 import Bio from "./Bio";
 import Projects from "./Projects";
 import Resume from "./Resume";
+import CustomCursor from './CustomCursor';
 import "./App.scss";
 
 const TERMINAL_OPTIONS = [
@@ -12,6 +13,19 @@ const TERMINAL_OPTIONS = [
   { label: "projects", display: "projects" },
   { label: "resume", display: "resume" },
 ];
+
+function useCursorEnlargeOnClick() {
+  useEffect(() => {
+    const handleClick = () => {
+      document.body.classList.add('cursor-enlarge');
+      setTimeout(() => {
+        document.body.classList.remove('cursor-enlarge');
+      }, 180); // Match animation duration in SCSS
+    };
+    window.addEventListener('mousedown', handleClick);
+    return () => window.removeEventListener('mousedown', handleClick);
+  }, []);
+}
 
 function App() {
   const [entered, setEntered] = useState(false);
@@ -25,6 +39,8 @@ function App() {
   const location = useLocation();
   const phwipRef = useRef(null);
   const musicRef = useRef(null);
+
+  useCursorEnlargeOnClick();
 
   // Ensure input is always focusable and editable
   useEffect(() => {
@@ -179,6 +195,7 @@ function App() {
 
   return (
     <>
+      <CustomCursor />
       <audio ref={phwipRef} src={import.meta.env.BASE_URL + 'assets/swap.mp3'} preload="auto" />
       <audio ref={musicRef} src={import.meta.env.BASE_URL + 'assets/within.mp3'} preload="auto" loop style={{ display: 'none' }} />
       <Routes>
@@ -193,7 +210,7 @@ function App() {
                 <div className="row1" />
                 {/* Row 2: Main content (Lain image/button or terminal) */}
                 <div className="row2">
-                  {!entered && <img src={import.meta.env.BASE_URL + 'assets/lain.gif'} alt="Lain" />}
+                  {!entered && <img className="lain-img" src={import.meta.env.BASE_URL + 'assets/lain.gif'} alt="Lain" />}
                   {!entered && (
                     <button className="enter-btn gothic-text" onMouseDown={playSwap} onClick={() => setEntered(true)}>[enter]</button>
                   )}
@@ -322,9 +339,9 @@ function App() {
   );
 }
 
-// =============================
+// ==================================
 // CYBERIA SITE PAGE LAYOUT COMPONENT
-// =============================
+// ==================================
 //
 // PageLayout is a minimal wrapper for all non-landing pages.
 // - Renders the Navi header, cursor trail, header, children, and footer.
@@ -336,25 +353,11 @@ function PageLayout({ children, playSwap }) {
     <div className="cyberia-root">
       {/* Navi header bar with pixel-art icon */}
       <div className="header-navi">
-        <div
-          style={{
-            display: 'inline-block',
-            filter: 'drop-shadow(0 0 1px #00FF0088) drop-shadow(0 0 2px #00FF0044)',
-            borderRadius: '12px',
-            transition: 'filter 0.2s',
-          }}
-        >
+        <div className="navi-img-wrapper">
           <img
+            className="navi-img"
             src={import.meta.env.BASE_URL + 'assets/navi.png'}
             alt="Navi icon"
-            style={{
-              width: '100%',
-              height: 'auto',
-              display: 'block',
-              filter: 'drop-shadow(0 0 1px #00FF0088) drop-shadow(0 0 2px #00FF0044)',
-              borderRadius: '12px',
-              transition: 'filter 0.2s',
-            }}
           />
         </div>
       </div>
