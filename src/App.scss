@@ -59,7 +59,7 @@ $gothic-font: 'GothicPixel', $typewriter-font;
 // Custom font faces for retro look
 @font-face {
   font-family: 'Typewriter';
-  src: url('../docs/assets/typewriter.ttf') format('truetype');
+  src: url('assets/typewriter.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
