@@ -16,17 +16,6 @@ const Resume = ({ playSwap }) => (
         src={getAssetUrl('assets/Zoey-Vo-Resume-2025.png')}
         alt="Resume screenshot"
       />
-      <a
-        href={getAssetUrl('assets/Zoey-Vo-Resume-2025.pdf')}
-        className="project-link"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Open PDF resume in new tab"
-        onClick={playSwap}
-        style={{ marginTop: '1.2em' }}
-      >
-        Download PDF
-      </a>
     </div>
   </div>
 );
