@@ -32,7 +32,7 @@ $font-size-xl: 1.5rem;       // Page titles (bio, resume, archive)
 $font-size-lg: 1.25rem;      // Section headings (projects, bio content)
 $font-size-base: 1rem;       // Bio description, Base text, terminal text, project descriptions and links
 $font-size-xs: 0.75rem;      // Mobile bio/project text, Footer, mobile buttons, links, tags, note dates
-$font-size-mobile: 0.8rem;   // Mobile terminal text
+$font-size-mobile: 0.7rem;   // Mobile terminal text
 
 // =========================
 // UTILITY MIXINS
@@ -233,6 +233,8 @@ body{
   line-height: 1;
   z-index: 1000;
   opacity: 0.7;
+  min-width: 24px;
+  min-height: 24px;
   
   &:hover, &:focus {
     color: $link-accent;
@@ -242,6 +244,21 @@ body{
   
   &:active {
     transform: scale(0.9);
+  }
+  
+  // Mobile-specific improvements
+  @media (max-width: 600px) {
+    font-size: $font-size-lg;
+    padding: 0.5rem;
+    min-width: 32px;
+    min-height: 32px;
+    touch-action: manipulation;
+    cursor: pointer !important;
+    
+    &:active {
+      background: rgba($text-color, 0.1);
+      border-radius: 4px;
+    }
   }
 }
 
@@ -304,14 +321,26 @@ a:hover, a:focus, .project-link:hover, .project-link:focus {
 // CURSOR
 // =========================
 
-// Hide native cursor globally for custom React cursor overlay
-*, *:hover, *:active, *:focus {
-  cursor: none !important;
+// Hide native cursor globally for custom React cursor overlay on desktop only
+@media (min-width: 601px) {
+  *, *:hover, *:active, *:focus {
+    cursor: none !important;
+  }
+  html, body, .cyberia-root, .xp-content, .xp-content *,
+  html:active, body:active, .cyberia-root:active, .xp-content:active, .xp-content *:active,
+  html:focus, body:focus, .cyberia-root:focus, .xp-content:focus, .xp-content *:focus {
+    cursor: none !important;
+  }
 }
-html, body, .cyberia-root, .xp-content, .xp-content *,
-html:active, body:active, .cyberia-root:active, .xp-content:active, .xp-content *:active,
-html:focus, body:focus, .cyberia-root:focus, .xp-content:focus, .xp-content *:focus {
-  cursor: none !important;
+
+// On mobile, allow normal cursor for interactive elements
+@media (max-width: 600px) {
+  button, a, input, [contenteditable], .terminal-input {
+    cursor: pointer !important;
+  }
+  input, [contenteditable], .terminal-input {
+    cursor: text !important;
+  }
 }
 
 // =========================

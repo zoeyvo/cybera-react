@@ -118,9 +118,13 @@ function App() {  const [entered, setEntered] = useState(false);
       phwipRef.current.play();
     }
   };
-
   // Toggle mute function
-  const toggleMute = () => {
+  const toggleMute = (e) => {
+    // Prevent default touch behavior and event bubbling
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setIsMuted(!isMuted);
   };
 
@@ -253,12 +257,15 @@ function App() {  const [entered, setEntered] = useState(false);
     }
   };
   return (
-    <>
-      <CustomCursor />
+    <>      <CustomCursor />
       {/* Mute button positioned at top right */}
       <button 
         className="mute-btn-fixed" 
         onClick={toggleMute}
+        onTouchEnd={(e) => {
+          e.preventDefault();
+          toggleMute(e);
+        }}
         title={isMuted ? "Unmute audio" : "Mute audio"}
         aria-label={isMuted ? "Unmute audio" : "Mute audio"}
       >
