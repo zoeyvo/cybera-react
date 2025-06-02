@@ -22,8 +22,8 @@ function App() {  const [entered, setEntered] = useState(false);
   const [caretPos, setCaretPos] = useState(0);
   const [output, setOutput] = useState([]); // Store terminal output lines
   const [selected, setSelected] = useState(null); // Track selected terminal option
-  const [isMuted, setIsMuted] = useState(true); // Start muted for iOS compatibility
-  const [hasInteracted, setHasInteracted] = useState(false); // Track user interaction for iOS
+  const [isMuted, setIsMuted] = useState(false); // Start with audio enabled by default
+  const [hasInteracted, setHasInteracted] = useState(true); // Allow audio to play immediately
   const [touchUsed, setTouchUsed] = useState(false); // Prevent double-firing of touch/click events
   const inputRef = useRef(null);
   const terminalInnerRef = useRef(null); // Add ref for terminal-inner
@@ -305,9 +305,9 @@ function App() {  const [entered, setEntered] = useState(false);
         aria-label={isMuted ? "Unmute audio" : "Mute audio"}
       >
         {isMuted ? "🔇" : "🔊"}
-      </button><audio ref={phwipRef} src={getAssetUrl('assets/swap.mp3')} preload="auto" />
-      <audio ref={musicRef} src={getAssetUrl('assets/within.mp3')} preload="auto" loop muted style={{ display: 'none' }} />
-      <audio ref={audioRef} src={getAssetUrl('assets/wind.mp3')} loop muted autoPlay style={{ display: 'none' }} />
+      </button>      <audio ref={phwipRef} src={getAssetUrl('assets/swap.mp3')} preload="auto" />
+      <audio ref={musicRef} src={getAssetUrl('assets/within.mp3')} preload="auto" loop style={{ display: 'none' }} />
+      <audio ref={audioRef} src={getAssetUrl('assets/wind.mp3')} loop autoPlay style={{ display: 'none' }} />
       <Routes>
         <Route
           path="/"
