@@ -218,7 +218,7 @@ body{
   }
 }
 
-// Fixed positioned mute button for top right corner
+// Fixed positioned mute button for top right corner - clean icon only
 .mute-btn-fixed {
   position: fixed;
   top: 1rem;
@@ -226,52 +226,40 @@ body{
   background: none;
   border: none;
   color: $text-color;
-  font-size: $font-size-base;
+  font-size: 1.5rem;
   cursor: pointer;
-  padding: 0.25rem;
-  transition: all 0.15s ease;
-  line-height: 1;
+  padding: 0;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 1000;
-  opacity: 0.7;
-  min-width: 24px;
-  min-height: 24px;
-  touch-action: manipulation;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  transition: color 0.3s, transform 0.2s;
+  
+  // Remove tap highlights and ensure proper touch behavior
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   user-select: none;
   -webkit-user-select: none;
   
-  &:hover, &:focus {
+  &:hover {
     color: $link-accent;
-    opacity: 1;
-    outline: none;
+    transform: scale(1.1);
   }
   
   &:active {
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
   
-  // Ensure emoji renders properly on all devices
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
-  
-  // Mobile-specific improvements
   @media (max-width: 600px) {
     font-size: $font-size-lg;
-    padding: 0.5rem;
-    min-width: 32px;
-    min-height: 32px;
-    touch-action: manipulation;
-    cursor: pointer !important;
+    top: 0.75rem;
+    right: 0.75rem;
     
-    &:active, &:focus {
-      background: rgba($text-color, 0.1);
-      border-radius: 4px;
-      transform: scale(0.95);
-    }
-    
-    // Enhanced touch feedback
-    &:hover {
-      background: rgba($text-color, 0.05);
-      border-radius: 4px;
+    &:active {
+      transform: scale(0.9);
     }
   }
 }

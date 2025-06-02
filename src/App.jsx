@@ -17,7 +17,8 @@ import { useCursorEnlargeOnClick } from './hooks';
 import { TERMINAL_OPTIONS, ARCHIVE_SECTIONS, getAssetUrl } from './utils';
 import "./styles/App.scss";
 
-function App() {  const [entered, setEntered] = useState(false);
+function App() {  
+  const [entered, setEntered] = useState(false);
   const [terminalValue, setTerminalValue] = useState("");
   const [caretPos, setCaretPos] = useState(0);
   const [output, setOutput] = useState([]); // Store terminal output lines
@@ -117,12 +118,9 @@ function App() {  const [entered, setEntered] = useState(false);
       phwipRef.current.currentTime = 0;
       phwipRef.current.play();
     }
-  };  // Toggle mute function
-  const toggleMute = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log('Mute button clicked, current state:', isMuted);
-    setIsMuted(!isMuted);
+  };  // Simple mute toggle function - works on both desktop and mobile
+  const handleMuteToggle = () => {
+    setIsMuted(prev => !prev);
   };
 
   const handleTerminalKeyDown = (e) => {
@@ -257,8 +255,7 @@ function App() {  const [entered, setEntered] = useState(false);
     <>      <CustomCursor />      {/* Mute button positioned at top right */}
       <button 
         className="mute-btn-fixed" 
-        onClick={toggleMute}
-        onTouchEnd={toggleMute}
+        onClick={handleMuteToggle}
         title={isMuted ? "Unmute audio" : "Mute audio"}
         aria-label={isMuted ? "Unmute audio" : "Mute audio"}
         role="button"
