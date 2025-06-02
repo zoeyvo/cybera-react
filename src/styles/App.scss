@@ -9,14 +9,16 @@
 // COLOR PALETTE AND FONT VARIABLES
 // =========================
 
-$bg-1: #0f0f0f; // Main background
+$bg-1: #101010; // Main background
 $bg-2: #656865; // Footer/header background
-$accent: #a6e0a6; // Accent color
-$text-color: #cbdbc1; // Main text color
+$accent: #AEC8A4; // Accent color
+$accent2: #E7EFC7; // Accent color
+$link-accent: #90c87a;
+$text-color: #e9ecd9; // Main text color
 $white: #ebebeb; // White color variable
 
 // Shared glow color variables (used for cursor, navi, and other glowing elements)
-$glow-green: #00FF00; // Base green color for all glows
+$glow-green: rgb(0, 159, 32); // Base green color for all glows
 $glow-light: rgba($glow-green, 0.27); // Light glow (27% opacity)
 $glow-medium: rgba($glow-green, 0.53); // Medium glow (53% opacity) 
 $glow-strong: rgba($glow-green, 0.8); // Strong glow (80% opacity)
@@ -330,7 +332,7 @@ body{
     }
   }
   a:hover, a:focus {
-    color: $accent;
+    color: $link-accent;
     text-decoration: underline;
   }
   > span {
@@ -424,7 +426,7 @@ a, .project-link {
   transition: color 0.15s;
 }
 a:hover, a:focus, .project-link:hover, .project-link:focus {
-  color: $accent;
+  color: $link-accent;
   text-decoration: underline;
 }
 
@@ -703,7 +705,7 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   flex: 1 1 0%;
   min-width: 0;
   display: block;
-  color: $accent;
+  color: $link-accent;
   text-align: left;
   letter-spacing: 0.08em; // Updated for consistency
   text-shadow: 0 0 1px $accent;
@@ -712,7 +714,7 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
 // Error messages get special red highlighting
 .error {
   color: $error-color !important;
-  text-shadow: 0 0 2px $error-color !important;
+  text-shadow: 0 0 1px $error-color !important;
 }
 
 // Terminal ls command output styling
@@ -728,7 +730,7 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
 }
 
 .ls-item {
-  color: $accent;
+  color: $link-accent;
   font-family: 'Typewriter', monospace;
   font-size: $font-size-base;
   letter-spacing: 0.08em;
@@ -883,6 +885,7 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   margin-bottom: 0.5em;
   letter-spacing: 0.08em;
   color: $white;
+  // Removed text-shadow for no glow
   text-shadow: 0 0 6px $text-color;
 }
 .bio-desc {
@@ -890,7 +893,8 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   margin-top: 1.2em;
   line-height: 1.5;
   color: $white;
-  text-shadow: 0 0 4px $text-color;
+  // Removed text-shadow for no glow
+  text-shadow: none;
 }
 
 // =========================
@@ -1007,7 +1011,7 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   font-size: $font-size-base; // Updated for consistency
   font-weight: normal;
   letter-spacing: 0.08em;
-  text-shadow: 0 0 2px $accent, 0 0 4px #222;
+  text-shadow: 0 0 1px $accent, 0 0 4px #222;
 }
 
 .archive-section-item {
@@ -1050,7 +1054,7 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
     width: 100%;
     height: 315px;
     border: none;
-    border-radius: $radius-md; // Slightly smaller radius than container
+    border-radius: $radius-xl; // Slightly smaller radius than container
     display: block;
   }
   

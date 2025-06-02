@@ -1,5 +1,5 @@
-// Import shared color variables
-@import '../styles/App.scss';
+// Modernized import for shared variables and mixins
+@use '../styles/App.scss' as App;
 
 // Size variables
 $cursor-size: 32px;
@@ -15,7 +15,7 @@ $cursor-size-mobile: 24px;
   z-index: 9999;
   transform: translate(-50%, -50%) scale(1);
   transition: transform 0.18s cubic-bezier(0.4, 1.4, 0.6, 1), filter 0.18s;
-  filter: drop-shadow(0 0 2px $glow-green) drop-shadow(0 0 4px $glow-medium);
+  filter: drop-shadow(0 0 2px App.$glow-green) drop-shadow(0 0 4px App.$glow-medium);
   mix-blend-mode: lighten;
 }
 
@@ -29,7 +29,7 @@ $cursor-size-mobile: 24px;
 
 .custom-cursor.plump {
   transform: translate(-50%, -50%) scale(1.35);
-  filter: drop-shadow(0 0 6px $glow-green) drop-shadow(0 0 12px $glow-strong);
+  filter: drop-shadow(0 0 6px App.$glow-green) drop-shadow(0 0 12px App.$glow-strong);
 }
 
 @media (max-width: 600px) {
