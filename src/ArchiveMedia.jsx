@@ -28,15 +28,14 @@ function ArchiveMedia() {
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
-                    loading="lazy"
                   ></iframe>
                 </div>
               ) : (
                 <div className="media-image terminal-glow-border">
-                  <img src={item.src} alt={item.caption} loading="lazy" style={{ maxWidth: '100%' }} />
+                  <img src={item.src} alt={item.caption} style={{ maxWidth: '100%' }} />
                 </div>
               )}
-              <div className="media-caption mono" style={{ color: '#00FF00', marginTop: '0.5rem' }}>{item.caption}</div>
+              <div className="media-caption mono">{item.caption}</div>
             </div>
           ))}
         </div>

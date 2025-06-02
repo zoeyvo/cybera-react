@@ -20,12 +20,9 @@ function Archive({ playSwap }) {
 
   return (
     <div className="grid-cell cell1">
-      <div className="bio-content">
-        <span className="bio-title">~/archive</span>
-        <span className="gothic-text bio-desc">
-          Personal collection of knowledge, memories, and discoveries
-        </span>
-        
+      <div className="archive-content">
+        <span className="archive-title">~/archive</span>
+
         <div className="archive-grid">
           {archiveItems.map((item, index) => (
             <div 
@@ -35,11 +32,7 @@ function Archive({ playSwap }) {
               onMouseDown={playSwap}
             >
               <div className="archive-item-header">
-                <span className="terminal-prompt">&gt;</span>
                 <span className="cmd">{item.name}</span>
-              </div>
-              <div className="archive-item-desc">
-                {item.description}
               </div>
             </div>
           ))}

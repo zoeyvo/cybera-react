@@ -6,10 +6,9 @@ import React from "react";
  * - Shows name and a short description.
  * - Uses .page-cell for layout, which is always grid row 2.
  * - Accessibility: all text is readable, semantic, and keyboard accessible.
- * - No unused code or styles.
  */
 
-const Bio = ({ playSwap }) => (
+const Bio = () => (
   <div className="grid-cell cell1">
     <div className="bio-content">
       <span className="bio-title">zoey vo · she/they</span>
@@ -19,7 +18,6 @@ const Bio = ({ playSwap }) => (
         Rooted in the belief that code, like connection, should dismantle
         barriers and amplify voices.
       </span>
-      {/* If you add any links here in the future, use onClick={playSwap} */}
     </div>
   </div>
 );

@@ -78,14 +78,14 @@ function ArchiveCardGames() {
                   <ol style={{ paddingLeft: '1.2em' }}>
                     <li>Arrange cards in a pyramid: 1 card at the top, then 2, 3, 4, etc.</li>
                     <li>Reveal cards row by row (bottom to top).</li>
-                    <li>If a pyramid card matches any of your 4 cards → drink!</li>
-                    <li>Drinking amounts double with each row:
+                    <li>If a pyramid card matches any of your 4 cards → drink!</li>                    <li>Drinking amounts by row:
                       <ol style={{ paddingLeft: '1.2em' }}>
                         <li>Row 1 (bottom): 1 sip per match</li>
                         <li>Row 2: 2 sips per match</li>
-                        <li>Row 3: 4 sips per match</li>
-                        <li>Row 4: 8 sips per match</li>
+                        <li>Row 3: 3 sips per match</li>
+                        <li>Row 4: 4 sips per match</li>
                       </ol>
+                      <span className="mono">Special: If the pyramid dealer (elected player) turns a card, the drinking amount for that card is doubled!</span>
                     </li>
                   </ol>
                   <span className="mono">The player with the most matches at the end → becomes the Busfahrer (Bus Driver).</span>

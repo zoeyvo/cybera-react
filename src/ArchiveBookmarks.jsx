@@ -5,7 +5,9 @@ function ArchiveBookmarks() {
   const bookmarks = [
     "https://learngitbranching.js.org/",
     "https://www.cs.usfca.edu/~galles/visualization/Algorithms.html",
-    "https://huggingface.co/learn/agents-course/unit0/introduction"
+    "https://huggingface.co/learn/agents-course/unit0/introduction",
+    "https://acousticgender.space/",
+    "https://mydoctor.kaiserpermanente.org/ncal/structured-content/hormone-therapy-with-estrogen-and-androgen-blockers-1123088"
   ];
 
   return (
