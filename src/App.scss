@@ -298,6 +298,7 @@ $terminal-btn-color-active: #0f0f0f;
 $terminal-btn-border-active: #fff;
 $terminal-output-bg: #181818cc;
 $terminal-output-shadow: #000a;
+$error-color: #fc7676; // Error color for terminal and error messages
 
 // Aliases for clarity
 $terminal-prompt: $accent;
@@ -330,7 +331,7 @@ $terminal-btn-bg-active: $accent;
     flex-direction: column;
     align-items: flex-start;
     font-family: 'Typewriter', monospace;
-    font-size: 1.1rem;
+    font-size: 1rem; // Updated for consistency
     flex: 1 1 auto;
     height: 100%;
     overflow-y: auto;
@@ -368,7 +369,7 @@ $terminal-btn-bg-active: $accent;
 .terminal-row {
   display: flex;
   align-items: flex-start;
-  font-size: 1.1rem;
+  font-size: 1rem; // Updated for consistency
   font-family: 'Typewriter', monospace;
   margin-bottom: 0.6rem;
   width: 100%;
@@ -382,8 +383,8 @@ $terminal-btn-bg-active: $accent;
   display: inline-block;
   padding-right: 1.2rem;
   color: $text-color;
-  font-weight: normal;
-  font-size: 1.1rem; // Match other terminal elements
+  font-size: 1rem; // Updated for consistency
+  letter-spacing: 0.08em;
   text-shadow: 0 0 1.5px $text-color, 0 0 3px $text-color, 0 0 1px $text-color;
   &.flicker {
     padding-right: 0.5rem; // Tighter spacing for flicker prompt
@@ -401,8 +402,8 @@ $terminal-btn-bg-active: $accent;
   border: none;
   color: $white;
   font-family: 'Typewriter', monospace;
-  font-size: 1.1rem;
-  letter-spacing: 0.1em;
+  font-size: 1rem; // Updated for consistency
+  letter-spacing: 0.08em;
   caret-color: $white;
   padding: 0;
   margin: 0;
@@ -421,8 +422,9 @@ $terminal-btn-bg-active: $accent;
 .terminal-cursor {
   color: $text-color;
   margin-left: 2px;
-  font-size: 1.1rem;
+  font-size: 1rem; // Updated for consistency
   font-family: 'Typewriter', monospace;
+  letter-spacing: 0.08em;
   text-shadow: 0 0 3px $text-color, 0 0 6px $text-color, 0 0 1px $text-color;
 }
 // Blinking and flicker animations
@@ -465,7 +467,7 @@ $terminal-btn-bg-active: $accent;
   cursor: pointer;
   box-shadow: 0 0 2px $terminal-shadow; // reduced glow
   transition: background 0.15s, color 0.15s, border 0.15s;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em; // Updated for consistency
   user-select: none;
   outline: none;
   position: relative;
@@ -481,7 +483,7 @@ $terminal-btn-bg-active: $accent;
   margin-top: 0.6rem;
   color: $accent;
   font-family: 'Typewriter', monospace;
-  font-size: 1.1rem;
+  font-size: 1rem; // Updated for consistency
   background: $terminal-output-bg;
   border-radius: 4px;
   padding: 1.2em 1.5em;
@@ -499,14 +501,14 @@ $terminal-btn-bg-active: $accent;
   margin-right: 0.4em;
   font-family: $typewriter-font !important;
   color: $text-color;
-  font-weight: normal;
-  font-size: 1.1rem;
-  letter-spacing: 0.01em;
+  font-size: 1rem; // Updated for consistency
+  letter-spacing: 0.08em;
   &::selection {
     background: $accent;
     color: $white;
   }
 }
+
 // Output lines and lists
 .terminal-output-line, .ls-list, .help-list, .error {
   word-break: break-word;
@@ -516,15 +518,14 @@ $terminal-btn-bg-active: $accent;
   display: block;
   color: $accent;
   text-align: left;
+  letter-spacing: 0.08em; // Updated for consistency
   text-shadow: 0 0 1px $accent;
-  font-weight: 500;
 }
 
 // Error messages get special red highlighting
 .error {
-  color: #ff6b6b !important;
-  text-shadow: 0 0 2px #ff6b6b !important;
-  font-weight: 600;
+  color: $error-color !important;
+  text-shadow: 0 0 2px $error-color !important;
 }
 
 // Terminal ls command output styling
@@ -548,7 +549,6 @@ $terminal-btn-bg-active: $accent;
   flex: 0 0 auto;
   min-width: fit-content;
   text-shadow: 0 0 1px $accent;
-  font-weight: 500;
 }
 
 // =========================
@@ -654,28 +654,23 @@ $terminal-btn-bg-active: $accent;
   .ls-item,
   .terminal-input-history {
     font-size: 0.9rem !important;
-    font-weight: normal !important;
   }
   
   // Additional specific sizing for terminal elements
   .terminal-prompt {
     font-size: 0.9rem !important;
-    font-weight: normal !important;
   }
   
   .terminal-input {
     font-size: 0.9rem !important;
-    font-weight: normal !important;
   }
   
   .terminal-user {
     font-size: 0.9rem !important;
-    font-weight: normal !important;
   }
   
   .terminal-cursor {
     font-size: 0.9rem !important;
-    font-weight: normal !important;
   }
   
   // Terminal buttons
@@ -831,7 +826,7 @@ $terminal-btn-bg-active: $accent;
 .terminal-input-history {
   color: $white;
   font-family: $typewriter-font;
-  font-size: 1.1rem;
+  font-size: 1rem; // Updated for consistency
   font-weight: normal;
   letter-spacing: 0.08em;
   text-shadow: 0 0 2px $accent, 0 0 4px #222;

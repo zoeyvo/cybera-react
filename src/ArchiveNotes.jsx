@@ -13,10 +13,10 @@ function ArchiveNotes() {
     <div className="grid-cell cell1">
       <div className="archive-content">
         <span className="archive-title">~/archive/notes</span>
-        <div className="archive-item">
-          <div className="note-header">
-            <span className="note-content mono">{note.content}</span>
-            <span className="note-date" style={{ marginLeft: '1em', color: '#999', fontSize: '0.95em' }}>[{note.date}]</span>
+        <div className="archive-item" style={{ textAlign: 'center' }}>
+          <div className="note-header" style={{ justifyContent: 'center', textAlign: 'center' }}>
+            <span className="note-content">{note.content}</span>
+            <span className="note-date">[{note.date}]</span>
           </div>
           {/* No tags for this note */}
         </div>

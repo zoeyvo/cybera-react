@@ -19,7 +19,7 @@ function ArchiveCardGames() {
               <strong>Objective:</strong> Be the first player to play all your cards.
             </div>
             <hr className="cardgame-divider" />
-            <div className="game-rules">
+            <div className="game-rules" style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}>
               <strong>Rules:</strong>
               <ol className="rules-list" style={{ textAlign: 'left', paddingLeft: '1.2em' }}>
                 <li><b>Deck:</b> Standard 52-card deck (no jokers)</li>
@@ -53,7 +53,7 @@ function ArchiveCardGames() {
               <strong>Goal:</strong> Survive the pyramid, avoid being the Busfahrer, and escape the desert with as little drinking as possible!
             </div>
             <hr className="cardgame-divider" />
-            <div className="game-rules">
+            <div className="game-rules" style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}>
               <strong>What You Need:</strong>
               <ol className="rules-list" style={{ textAlign: 'left', paddingLeft: '1.2em' }}>
                 <li>A standard deck of cards (32 or 52 cards)</li>
@@ -62,7 +62,7 @@ function ArchiveCardGames() {
               </ol>
             </div>
             <hr className="cardgame-divider" />
-            <div className="game-rules">
+            <div className="game-rules" style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}>
               <strong>How to Play:</strong>
               <ol className="rules-list" style={{ textAlign: 'left', paddingLeft: '1.2em' }}>
                 <li><b>Round 1 – Guessing Round:</b> Each player gets 4 face-down cards. For each card, guess:
