@@ -5,6 +5,12 @@ import CursorTrail from "./CursorTrail";
 import Bio from "./Bio";
 import Projects from "./Projects";
 import Resume from "./Resume";
+import Archive from "./Archive";
+import ArchiveCardGames from "./ArchiveCardGames";
+import ArchiveRecipes from "./ArchiveRecipes";
+import ArchivePhotos from "./ArchivePhotos";
+import ArchiveNotes from "./ArchiveNotes";
+import ArchiveBookmarks from "./ArchiveBookmarks";
 import CustomCursor from './CustomCursor';
 import "./App.scss";
 
@@ -12,6 +18,15 @@ const TERMINAL_OPTIONS = [
   { label: "bio", display: "bio" },
   { label: "projects", display: "projects" },
   { label: "resume", display: "resume" },
+  { label: "archive", display: "archive" },
+];
+
+const ARCHIVE_SECTIONS = [
+  "cardgames",
+  "recipes", 
+  "photos",
+  "notes",
+  "bookmarks"
 ];
 
 function useCursorEnlargeOnClick() {
@@ -121,9 +136,15 @@ function App() {
 
   const handleTerminalKeyDown = (e) => {
     if (e.key === "Enter") {
-      const val = terminalValue.trim().toLowerCase();
-      if (val === "ls") {
-        setOutput((prev) => [...prev, { type: 'cmd', value: 'ls', output: TERMINAL_OPTIONS.map(opt => opt.label).join('    ') }]);
+      const val = terminalValue.trim().toLowerCase();      if (val === "ls") {
+        setOutput((prev) => [...prev, { type: 'cmd', value: 'ls', output: TERMINAL_OPTIONS.map(opt => opt.label) }]);
+        setTerminalValue("");
+        setSelected(null);
+        setTimeout(() => {
+          if (inputRef.current) inputRef.current.innerText = "";
+        }, 0);
+      } else if (val === "ls archive") {
+        setOutput((prev) => [...prev, { type: 'cmd', value: 'ls archive', output: ARCHIVE_SECTIONS }]);
         setTerminalValue("");
         setSelected(null);
         setTimeout(() => {
@@ -135,19 +156,19 @@ function App() {
         setSelected(null);
         setTimeout(() => {
           if (inputRef.current) inputRef.current.innerText = "";
-        }, 0);
-      } else if (val === "help") {
+        }, 0);      } else if (val === "help") {
         setOutput((prev) => [
           ...prev,
           {
             type: 'cmd',
             value: 'help',
             output: [
-              'Commands:',
-              '- ls',
-              '- cat [section]',
-              '- help',
-              '- clear'
+              'ls',
+              'ls archive',
+              'cat [section]',
+              'cat archive/[section]',
+              'help',
+              'clear'
             ]
           }
         ]);
@@ -155,8 +176,7 @@ function App() {
         setSelected(null);
         setTimeout(() => {
           if (inputRef.current) inputRef.current.innerText = "";
-        }, 0);
-      } else if (["cat bio", "cat projects", "cat resume"].includes(val)) {
+        }, 0);      } else if (["cat bio", "cat projects", "cat resume", "cat archive"].includes(val)) {
         const route = val.replace("cat ", "");
         setOutput((prev) => [...prev, { type: 'cmd', value: val }]);
         setTerminalValue("");
@@ -164,6 +184,45 @@ function App() {
         setTimeout(() => {
           if (inputRef.current) inputRef.current.innerText = "";
           navigate(`/${route}`);
+        }, 0);
+      } else if (val.startsWith("cat archive/")) {
+        const section = val.replace("cat archive/", "");
+        if (ARCHIVE_SECTIONS.includes(section)) {
+          setOutput((prev) => [...prev, { type: 'cmd', value: val }]);
+          setTerminalValue("");
+          setSelected(null);
+          setTimeout(() => {
+            if (inputRef.current) inputRef.current.innerText = "";
+            navigate(`/archive/${section}`);
+          }, 0);
+        } else {
+          setOutput((prev) => [
+            ...prev,
+            {
+              type: 'cmd',
+              value: val,
+              output: `archive section "${section}" not found. Use 'ls archive' to see available sections.`
+            }
+          ]);
+          setTerminalValue("");
+          setSelected(null);
+          setTimeout(() => {
+            if (inputRef.current) inputRef.current.innerText = "";
+          }, 0);
+        }
+      } else if (val === "cat") {
+        setOutput((prev) => [
+          ...prev,
+          {
+            type: 'cmd',
+            value: val,
+            output: "Usage: cat [section] or cat archive/[section]"
+          }
+        ]);
+        setTerminalValue("");
+        setSelected(null);
+        setTimeout(() => {
+          if (inputRef.current) inputRef.current.innerText = "";
         }, 0);
       } else if (TERMINAL_OPTIONS.some(opt => opt.label === val)) {
         setOutput((prev) => [...prev, { type: 'cmd', value: val }]);
@@ -227,34 +286,21 @@ function App() {
                     <button className="enter-btn gothic-text" onMouseDown={playSwap} onClick={() => setEntered(true)}>[enter]</button>
                   )}
                   {entered && (
-                    <div className="terminal-container">
+                    <div className="terminal-container" onClick={() => {
+                      if (inputRef.current) {
+                        inputRef.current.focus();
+                        // Place caret at end
+                        const el = inputRef.current;
+                        const range = new Range();
+                        range.selectNodeContents(el);
+                        range.collapse(false);
+                        const sel = window.getSelection();
+                        sel.removeAllRanges();
+                        sel.addRange(range);
+                      }
+                    }}>
                       <div className="pixel-stream-bg"></div>
                       <div className="terminal-inner" ref={terminalInnerRef}>
-                        {/* Make the input area cover the whole terminal-inner for easier clicking */}
-                        <div
-                          style={{
-                            position: 'absolute',
-                            inset: 0,
-                            zIndex: 2,
-                            cursor: 'text',
-                            background: 'transparent',
-                          }}
-                          onClick={() => {
-                            if (inputRef.current) {
-                              inputRef.current.focus();
-                              // Place caret at end
-                              const el = inputRef.current;
-                              const range = document.createRange();
-                              range.selectNodeContents(el);
-                              range.collapse(false);
-                              const sel = window.getSelection();
-                              sel.removeAllRanges();
-                              sel.addRange(range);
-                            }
-                          }}
-                          tabIndex={0}
-                          aria-label="Focus terminal input"
-                        />
                         {/* Output history, each command and its output (if any) */}
                         {output.map((line, idx) => (
                           <React.Fragment key={idx}>
@@ -263,32 +309,48 @@ function App() {
                                 zoey<span className="at-symbol">@</span>wired
                               </span>
                               <span className="terminal-prompt flicker">&gt;</span>
-                              <span className="terminal-output-line">
+                              <span className="terminal-input-history">
                                 <span className="cmd">{line.value}</span>
                               </span>
                             </div>
-                            {/* Only render output line for ls, help, and error commands */}
-                            {line.output && (line.value === 'ls' || line.value === 'help' || line.value.startsWith('command not found:') || line.output.toString().includes('is not a command')) && (
-                              <div className="terminal-row">
-                                <span className="terminal-user" style={{visibility:'hidden'}}><span className="footer-email">zoey<span className="at-symbol">@</span>wired</span></span>
-                                <span className="terminal-prompt flicker" style={{visibility:'hidden'}}>&gt;</span>
-                                <span className={line.value === 'ls' ? 'ls-list' : line.value === 'help' ? 'help-list' : 'error'}>
-                                  {/* Highlight commands in output */}
-                                  {Array.isArray(line.output)
-                                    ? line.output.map((l, i) =>
-                                        typeof l === 'string' && (l.includes('ls') || l.includes('help') || l.includes('clear') || l.includes('cat')) ? (
-                                          <div key={i} dangerouslySetInnerHTML={{__html: l.replace(/(ls|help|clear|cat \[?\w*\]?)/g, '<span class="cmd-accent">$1</span>')}} />
+                            {/* Only render output line for ls, help, and error commands, or for cat usage error */}
+                            {line.output && (
+                              (line.value === 'ls' || line.value === 'ls archive' || line.value === 'help' || line.value.startsWith('command not found:') || line.output.toString().includes('is not a command') || line.output.toString().includes('not found')) ? (
+                                <div className="terminal-row">
+                                  <span className="terminal-user" style={{visibility:'hidden'}}><span className="footer-email">zoey<span className="at-symbol">@</span>wired</span></span>
+                                  <span className="terminal-prompt flicker" style={{visibility:'hidden'}}>&gt;</span>
+                                  <span className={line.value === 'ls' || line.value === 'ls archive' ? 'ls-list' : line.value === 'help' ? 'help-list' : 'error'}>
+                                    {/* Highlight commands in output */}
+                                    {Array.isArray(line.output)
+                                      ? (line.value === 'ls' || line.value === 'ls archive') ? (
+                                          <div className="ls-items">
+                                            {line.output.map((item, i) => (
+                                              <span key={i} className="ls-item">{item}</span>
+                                            ))}
+                                          </div>
                                         ) : (
-                                          <div key={i}>{l}</div>
+                                          line.output.map((l, i) =>
+                                            typeof l === 'string' && (l.includes('ls') || l.includes('help') || l.includes('clear') || l.includes('cat') || l.includes('archive')) ? (
+                                              <div key={i} dangerouslySetInnerHTML={{__html: l.replace(/(ls|help|clear|cat \[?\w*\/?\w*\]?|archive)/g, '<span class="cmd-accent">$1</span>')}} />
+                                            ) : (
+                                              <div key={i}>{l}</div>
+                                            )
+                                          )
                                         )
-                                      )
-                                    : typeof line.output === 'string' && (line.output.includes('ls') || line.output.includes('help') || line.output.includes('clear') || line.output.includes('cat')) ? (
-                                        <span dangerouslySetInnerHTML={{__html: line.output.replace(/(ls|help|clear|cat \[?\w*\]?)/g, '<span class="cmd-accent">$1</span>')}} />
-                                      ) : (
-                                        line.output
-                                      )}
-                                </span>
-                              </div>
+                                      : typeof line.output === 'string' && (line.output.includes('ls') || line.output.includes('help') || line.output.includes('clear') || line.output.includes('cat') || line.output.includes('archive')) ? (
+                                          <span dangerouslySetInnerHTML={{__html: line.output.replace(/(ls|help|clear|cat \[?\w*\/?\w*\]?|archive)/g, '<span class="cmd-accent">$1</span>')}} />
+                                        ) : (
+                                          line.output
+                                        )}
+                                  </span>
+                                </div>
+                              ) : line.value === 'cat' ? (
+                                <div className="terminal-row">
+                                  <span className="terminal-user" style={{visibility:'hidden'}}><span className="footer-email">zoey<span className="at-symbol">@</span>wired</span></span>
+                                  <span className="terminal-prompt flicker" style={{visibility:'hidden'}}>&gt;</span>
+                                  <span className="error">{line.output}</span>
+                                </div>
+                              ) : null
                             )}
                           </React.Fragment>
                         ))}
@@ -344,10 +406,15 @@ function App() {
               </footer>
             </div>
           }
-        />
-        <Route path="/bio" element={<PageLayout playSwap={playSwap}><Bio /></PageLayout>} />
+        />        <Route path="/bio" element={<PageLayout playSwap={playSwap}><Bio /></PageLayout>} />
         <Route path="/projects" element={<PageLayout playSwap={playSwap}><Projects /></PageLayout>} />
         <Route path="/resume" element={<PageLayout playSwap={playSwap}><Resume /></PageLayout>} />
+        <Route path="/archive" element={<PageLayout playSwap={playSwap}><Archive playSwap={playSwap} /></PageLayout>} />
+        <Route path="/archive/cardgames" element={<PageLayout playSwap={playSwap}><ArchiveCardGames /></PageLayout>} />
+        <Route path="/archive/recipes" element={<PageLayout playSwap={playSwap}><ArchiveRecipes /></PageLayout>} />
+        <Route path="/archive/photos" element={<PageLayout playSwap={playSwap}><ArchivePhotos /></PageLayout>} />
+        <Route path="/archive/notes" element={<PageLayout playSwap={playSwap}><ArchiveNotes /></PageLayout>} />
+        <Route path="/archive/bookmarks" element={<PageLayout playSwap={playSwap}><ArchiveBookmarks /></PageLayout>} />
       </Routes>
     </>
   );

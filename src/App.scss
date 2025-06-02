@@ -5,7 +5,7 @@
 // Color palette and font variables
 $bg-1: #0f0f0f; // Main background
 $bg-2: #656865; // Footer/header background
-$accent: #458945; // Accent color (was navi-green)
+$accent: #82bc82; // Accent color (was navi-green)
 $text-color: #B6B8A0; // Main text color
 $link-accent: #9ebf96; // Link accent color
 $white: #ebebeb; // White color variable
@@ -59,7 +59,7 @@ $gothic-font: 'GothicPixel', $typewriter-font;
 // Custom font faces for retro look
 @font-face {
   font-family: 'Typewriter';
-  src: url('typewriter.ttf') format('truetype');
+  src: url('/assets/typewriter.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -282,9 +282,7 @@ $terminal-btn-bg-active: $accent;
   display: flex;
   flex-direction: column;
   min-width: 340px;
-  box-sizing: border-box;
-
-  // Terminal content area
+  box-sizing: border-box;  // Terminal content area
   .terminal-inner {
     position: relative;
     z-index: 1;
@@ -294,7 +292,6 @@ $terminal-btn-bg-active: $accent;
     flex-direction: column;
     align-items: flex-start;
     font-family: 'Typewriter', monospace;
-    color: $accent;
     font-size: 1.1rem;
     flex: 1 1 auto;
     height: 100%;
@@ -304,6 +301,7 @@ $terminal-btn-bg-active: $accent;
     cursor: text;
     max-width: 100%;
     box-sizing: border-box;
+    text-align: left;
   }
 }
 // Ensure the terminal glow matches the border radius
@@ -334,11 +332,9 @@ $terminal-btn-bg-active: $accent;
   align-items: flex-start;
   font-size: 1.1rem;
   font-family: 'Typewriter', monospace;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.6rem;
   width: 100%;
   cursor: text;
-  text-shadow: 0 0 1px $accent, 0 0 2px $accent, 0 0 1px $navi-glow2;
-  color: $accent;
   max-width: 100%;
   box-sizing: border-box;
 }
@@ -408,7 +404,7 @@ $terminal-btn-bg-active: $accent;
 }
 // Terminal options/buttons
 .terminal-options {
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.6rem;
   display: flex;
   gap: 1.2rem;
   justify-content: space-between;
@@ -439,7 +435,7 @@ $terminal-btn-bg-active: $accent;
 }
 // Terminal output area
 .terminal-output {
-  margin-top: 1.2rem;
+  margin-top: 0.6rem;
   color: $accent;
   font-family: 'Typewriter', monospace;
   font-size: 1.1rem;
@@ -451,6 +447,9 @@ $terminal-btn-bg-active: $accent;
   box-shadow: 0 0 8px $terminal-output-shadow;
   letter-spacing: 0.08em;
   word-break: break-word;
+  text-align: left;
+  border: 1px solid rgba($accent, 0.3);
+  text-shadow: 0 0 2px $accent;
 }
 // Terminal user prompt
 .terminal-user {
@@ -472,7 +471,41 @@ $terminal-btn-bg-active: $accent;
   flex: 1 1 0%;
   min-width: 0;
   display: block;
-  color: $white;
+  color: $accent;
+  text-align: left;
+  text-shadow: 0 0 1px $accent;
+  font-weight: 500;
+}
+
+// Error messages get special red highlighting
+.error {
+  color: #ff6b6b !important;
+  text-shadow: 0 0 2px #ff6b6b !important;
+  font-weight: 600;
+}
+
+// Terminal ls command output styling
+.ls-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.ls-item {
+  color: $accent;
+  font-family: 'Typewriter', monospace;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  min-width: fit-content;
+  text-shadow: 0 0 1px $accent;
+  font-weight: 500;
 }
 
 // ========== DESKTOP BG ========== //
@@ -695,20 +728,52 @@ $terminal-btn-bg-active: $accent;
 .ls-list,
 .help-list,
 .error {
-  color: $white;
   font-family: $typewriter-font;
   font-size: 1rem;
   letter-spacing: 0.08em;
   text-shadow: 0 0 2px $accent, 0 0 4px #222;
 }
-.terminal-output-line, .ls-list, .help-list, .error {
-  word-break: break-word;
-  white-space: pre-wrap;
-  flex: 1 1 0%;
-  min-width: 0;
-  display: block;
+
+// Only output/result lines are green
+.terminal-output,
+.terminal-output-line,
+.ls-list,
+.help-list {
+  color: $accent;
+}
+
+// Error messages get special red highlighting
+.error {
+  color: #ff6b6b !important;
+  text-shadow: 0 0 2px #ff6b6b !important;
+  font-weight: 600;
+}
+
+// Ensure input and prompt are NOT green
+.terminal-row,
+.terminal-user,
+.terminal-prompt,
+.terminal-input {
   color: $white;
 }
-.lain-img {
-  opacity: 75%;
+
+// ========== TERMINAL PROMPT STYLES ========== //
+// Specific styles for the terminal prompt element
+.terminal-prompt {
+  position: relative;
+  display: inline-block;
+  padding-right: 1.2rem;
+  color: $text-color;
+  font-weight: bold;
+  font-size: 1rem;
+  text-shadow: 0 0 1.5px $text-color, 0 0 3px $text-color, 0 0 1px $text-color;
+}
+
+// ========== END ARCHIVE STYLES ========== //
+.terminal-input-history {
+  color: $white;
+  font-family: $typewriter-font;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 2px $accent, 0 0 4px #222;
 }
