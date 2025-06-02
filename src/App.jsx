@@ -24,6 +24,7 @@ function App() {  const [entered, setEntered] = useState(false);
   const [selected, setSelected] = useState(null); // Track selected terminal option
   const [isMuted, setIsMuted] = useState(true); // Start muted for iOS compatibility
   const [hasInteracted, setHasInteracted] = useState(false); // Track user interaction for iOS
+  const [touchUsed, setTouchUsed] = useState(false); // Prevent double-firing of touch/click events
   const inputRef = useRef(null);
   const terminalInnerRef = useRef(null); // Add ref for terminal-inner
   const navigate = useNavigate();
@@ -109,8 +110,7 @@ function App() {  const [entered, setEntered] = useState(false);
       phwipRef.current.currentTime = 0;
       phwipRef.current.play();
     }
-  };
-  // Simple mute toggle function - iOS compatible
+  };  // Simple mute toggle function - iOS compatible
   const handleMuteToggle = () => {
     // On first interaction, ensure all audio can play for iOS
     if (!hasInteracted) {
@@ -127,6 +127,33 @@ function App() {  const [entered, setEntered] = useState(false);
 
     // Toggle mute state
     setIsMuted(prev => !prev);
+  };
+  // Handle touch start - mark that touch was used
+  const handleTouchStart = (e) => {
+    e.preventDefault();
+    setTouchUsed(true);
+  };
+
+  // Handle touch end - only trigger if still over the button
+  const handleTouchEnd = (e) => {
+    e.preventDefault();
+    const touch = e.changedTouches[0];
+    const element = document.elementFromPoint(touch.clientX, touch.clientY);
+    
+    // Only trigger if the touch ended on the button or its children
+    if (element && (element.classList.contains('mute-btn-fixed') || element.closest('.mute-btn-fixed'))) {
+      handleMuteToggle();
+    }
+    
+    // Reset touch flag after a short delay
+    setTimeout(() => setTouchUsed(false), 300);
+  };
+
+  // Handle click - only if touch wasn't used
+  const handleClick = (e) => {
+    if (!touchUsed) {
+      handleMuteToggle();
+    }
   };
 
   const handleTerminalInput = (e) => {
@@ -272,8 +299,9 @@ function App() {  const [entered, setEntered] = useState(false);
     <>      <CustomCursor />      {/* Mute button positioned at top right */}
       <button 
         className="mute-btn-fixed" 
-        onClick={handleMuteToggle}
-        onTouchStart={handleMuteToggle}
+        onClick={handleClick}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         aria-label={isMuted ? "Unmute audio" : "Mute audio"}
       >
         {isMuted ? "🔇" : "🔊"}
