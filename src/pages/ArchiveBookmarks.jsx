@@ -18,10 +18,13 @@ function ArchiveBookmarks() {
     {
       url: "https://acousticgender.space/",
       title: "Voice Training Tool"
-    },
-    {
+    },    {
       url: "https://mydoctor.kaiserpermanente.org/ncal/structured-content/hormone-therapy-with-estrogen-and-androgen-blockers-1123088",
       title: "Hormone Therapy Guide"
+    },
+    {
+      url: "https://strudel.cc/",
+      title: "Strudel Polyrhythms Demo"
     }
   ];
 

@@ -420,9 +420,8 @@ function App() {  const [entered, setEntered] = useState(false);
                               sel.addRange(range);
                             }}
                             style={{flex: 1, minWidth: 0, display: 'inline-block'}}
-                          />
-                          {terminalValue.length > 0 && (
-                            <span className="terminal-cursor blink" style={{ left: 'auto', color: '#b57edc', background: 'rgba(255,255,255,0.08)', borderRadius: '2px', fontWeight: 'bold', padding: '0 1px', marginLeft: '-2px', position: 'relative' }}>
+                          />                          {terminalValue.length > 0 && (
+                            <span className="terminal-cursor blink input-cursor">
                               {terminalValue[caretPos] || ' '}
                             </span>
                           )}

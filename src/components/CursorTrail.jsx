@@ -69,7 +69,6 @@ function CursorTrail() {
     }, 16);
     return () => clearInterval(interval);
   }, [trail.length]);
-
   return (
     <>
       {trail.map((item) => (
@@ -77,24 +76,10 @@ function CursorTrail() {
           key={item.id}
           className="cursor-trail-char"
           style={{
-            position: "fixed",
             left: item.x,
             top: item.y,
-            fontSize: `1.1rem`, // match button text size
-            pointerEvents: "none",
             transform: `translate(-50%, -50%) scale(${1.0}) rotate(${(item.vx > 0 ? 1 : -1) * item.t * 2}deg)`,
             opacity: 1 - item.t * 0.02,
-            color: '#fff', // white text
-            WebkitTextStroke: 'none',
-            textShadow: '0 0 6px #00FF00, 0 0 12px #00FF00', // strong green glow
-            background: 'none',
-            border: 'none',
-            letterSpacing: '0.1em',
-            fontFamily: 'Typewriter, monospace',
-            fontWeight: 'bold',
-            zIndex: 2147483647,
-            boxShadow: 'none',
-            outline: 'none',
           }}
         >
           {item.char}
