@@ -8,7 +8,7 @@ import Resume from "./Resume";
 import Archive from "./Archive";
 import ArchiveCardGames from "./ArchiveCardGames";
 import ArchiveRecipes from "./ArchiveRecipes";
-import ArchivePhotos from "./ArchivePhotos";
+import ArchiveMedia from "./ArchiveMedia";
 import ArchiveNotes from "./ArchiveNotes";
 import ArchiveBookmarks from "./ArchiveBookmarks";
 import CustomCursor from './CustomCursor';
@@ -24,7 +24,7 @@ const TERMINAL_OPTIONS = [
 const ARCHIVE_SECTIONS = [
   "cardgames",
   "recipes", 
-  "photos",
+  "media",
   "notes",
   "bookmarks"
 ];
@@ -412,7 +412,7 @@ function App() {
         <Route path="/archive" element={<PageLayout playSwap={playSwap}><Archive playSwap={playSwap} /></PageLayout>} />
         <Route path="/archive/cardgames" element={<PageLayout playSwap={playSwap}><ArchiveCardGames /></PageLayout>} />
         <Route path="/archive/recipes" element={<PageLayout playSwap={playSwap}><ArchiveRecipes /></PageLayout>} />
-        <Route path="/archive/photos" element={<PageLayout playSwap={playSwap}><ArchivePhotos /></PageLayout>} />
+        <Route path="/archive/media" element={<PageLayout playSwap={playSwap}><ArchiveMedia /></PageLayout>} />
         <Route path="/archive/notes" element={<PageLayout playSwap={playSwap}><ArchiveNotes /></PageLayout>} />
         <Route path="/archive/bookmarks" element={<PageLayout playSwap={playSwap}><ArchiveBookmarks /></PageLayout>} />
       </Routes>

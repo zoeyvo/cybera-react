@@ -10,14 +10,24 @@ import React from "react";
  */
 
 const Resume = ({ playSwap }) => (
-  <div className="grid-cell cell1">
-    <div className="resume-root">
+  <div className="grid-cell cell1" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div className="resume-content">
       <img
         className="resume-img"
         src={import.meta.env.BASE_URL + 'assets/Zoey-Vo-Resume-2025.png'}
         alt="Resume screenshot"
       />
-      {/* If you add any links here in the future, use onClick={playSwap} */}
+      <a
+        href={import.meta.env.BASE_URL + 'assets/Zoey-Vo-Resume-2025.pdf'}
+        className="project-link"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Open PDF resume in new tab"
+        onClick={playSwap}
+        style={{ marginTop: '1.2em' }}
+      >
+        Download PDF
+      </a>
     </div>
   </div>
 );

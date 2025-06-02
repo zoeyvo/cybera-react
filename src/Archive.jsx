@@ -6,11 +6,11 @@ function Archive({ playSwap }) {
   const navigate = useNavigate();
 
   const archiveItems = [
+    { name: "bookmarks", description: "Interesting links and resources" },
     { name: "cardgames", description: "Card games I've learned to play" },
     { name: "recipes", description: "Cooking recipes and experiments" },
-    { name: "photos", description: "Photo collection and memories" },
-    { name: "notes", description: "Random thoughts and observations" },
-    { name: "bookmarks", description: "Interesting links and resources" }
+    { name: "media", description: "Photo collection and memories" },
+    { name: "notes", description: "Random thoughts and observations" }
   ];
 
   const handleItemClick = (item) => {
@@ -30,7 +30,7 @@ function Archive({ playSwap }) {
           {archiveItems.map((item, index) => (
             <div 
               key={item.name}
-              className="archive-item"
+              className="archive-item archive-section-item"
               onClick={() => handleItemClick(item.name)}
               onMouseDown={playSwap}
             >
@@ -43,14 +43,6 @@ function Archive({ playSwap }) {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="archive-terminal-hint">
-          <div className="terminal-row">
-            <span className="terminal-user">zoey<span className="at-symbol">@</span>wired</span>
-            <span className="terminal-prompt flicker">&gt;</span>
-            <span className="cmd-hint">cat archive/[section]</span>
-          </div>
         </div>
       </div>
     </div>
