@@ -25,9 +25,8 @@ function CursorTrail({ count = 10 }) {
     const handleMove = (e) => {
       const now = Date.now();
       if (now - lastTime < minInterval) return;
-      lastTime = now;
-      const x = e.pageX;
-      const y = e.pageY;
+      lastTime = now;      const x = e.clientX;
+      const y = e.clientY;
       if (lastX !== null && lastY !== null) {
         const dx = x - lastX;
         const dy = y - lastY;

@@ -76,9 +76,9 @@ function ArchiveCardGames() {
                 </li>
                 <li><b>Round 2 – The Pyramid:</b>
                   <ol style={{ paddingLeft: '1.2em' }}>
-                    <li>Arrange cards in a pyramid: 1 card at the top, then 2, 3, 4, etc.</li>
-                    <li>Reveal cards row by row (bottom to top).</li>
-                    <li>If a pyramid card matches any of your 4 cards → drink!</li>                    <li>Drinking amounts by row:
+                    <li>Arrange cards in a pyramid: 1 card at the top, then 2, 3, 4, etc.</li>                    <li>Reveal cards row by row (bottom to top).</li>
+                    <li>If a pyramid card matches any of your 4 cards → drink!</li>
+                    <li>Drinking amounts by row:
                       <ol style={{ paddingLeft: '1.2em' }}>
                         <li>Row 1 (bottom): 1 sip per match</li>
                         <li>Row 2: 2 sips per match</li>
