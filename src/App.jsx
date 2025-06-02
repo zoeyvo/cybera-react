@@ -17,13 +17,13 @@ import { useCursorEnlargeOnClick } from './hooks';
 import { TERMINAL_OPTIONS, ARCHIVE_SECTIONS, getAssetUrl } from './utils';
 import "./styles/App.scss";
 
-function App() {  
-  const [entered, setEntered] = useState(false);
+function App() {  const [entered, setEntered] = useState(false);
   const [terminalValue, setTerminalValue] = useState("");
   const [caretPos, setCaretPos] = useState(0);
   const [output, setOutput] = useState([]); // Store terminal output lines
   const [selected, setSelected] = useState(null); // Track selected terminal option
-  const [isMuted, setIsMuted] = useState(false); // Track mute state
+  const [isMuted, setIsMuted] = useState(true); // Start muted for iOS compatibility
+  const [hasInteracted, setHasInteracted] = useState(false); // Track user interaction for iOS
   const inputRef = useRef(null);
   const terminalInnerRef = useRef(null); // Add ref for terminal-inner
   const navigate = useNavigate();
@@ -33,15 +33,35 @@ function App() {
   const audioRef = useRef(null);
 
   useCursorEnlargeOnClick();
+  
+  // Set up audio volumes and mute state
   useEffect(() => {
+    if (phwipRef.current) {
+      phwipRef.current.volume = 0.05;
+      phwipRef.current.muted = isMuted;
+    }
+    if (musicRef.current) {
+      musicRef.current.volume = 0.15;
+      musicRef.current.muted = isMuted;
+    }
+    if (audioRef.current) {
+      audioRef.current.volume = 0.15;
+      audioRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
+  useEffect(() => {
+    // Audio will start muted due to HTML attributes, only unmute if user has interacted and not muted
     if (!entered && audioRef.current) {
-      audioRef.current.volume = isMuted ? 0 : 0.15; // Set wind audio to 15% volume, respect mute
-      audioRef.current.play();
+      // Wind audio plays when not entered
+      if (hasInteracted) {
+        audioRef.current.play().catch(e => console.log('Wind play error:', e));
+      }
     } else if (entered && audioRef.current) {
+      // Stop wind audio when entered
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     }
-  }, [entered, isMuted]);
+  }, [entered, hasInteracted]);
 
   // Ensure input is always focusable and editable
   useEffect(() => {
@@ -63,20 +83,17 @@ function App() {
     if (entered && terminalInnerRef.current) {
       terminalInnerRef.current.scrollTop = terminalInnerRef.current.scrollHeight;
     }
-  }, [output, entered]);
-  // Play swap.mp3 on page swap (route change)
+  }, [output, entered]);  // Play swap.mp3 on page swap (route change)
   useEffect(() => {
     if (phwipRef.current) {
-      phwipRef.current.volume = isMuted ? 0 : 0.05; // Much quieter swap sound, respect mute
       phwipRef.current.currentTime = 0;
       phwipRef.current.play();
     }
-  }, [location.pathname, isMuted]);
+  }, [location.pathname]);
 
   // Add background music (within.mp3) looped, play/pause based on user interaction
   useEffect(() => {
     if (musicRef.current) {
-      musicRef.current.volume = isMuted ? 0 : 0.15; // Respect mute state
       musicRef.current.loop = true;
       // Only play after user has entered (interacted)
       if (entered) {
@@ -86,20 +103,31 @@ function App() {
         musicRef.current.currentTime = 0;
       }
     }
-  }, [entered, location.pathname, isMuted]);
+  }, [entered, location.pathname]);  // Play swap.mp3 on link/button press (use only swap.mp3 everywhere)
+  const playSwap = () => {
+    if (phwipRef.current && !isMuted && hasInteracted) {
+      phwipRef.current.currentTime = 0;
+      phwipRef.current.play();
+    }
+  };
+  // Simple mute toggle function - iOS compatible
+  const handleMuteToggle = () => {
+    // On first interaction, ensure all audio can play for iOS
+    if (!hasInteracted) {
+      setHasInteracted(true);
+      
+      // Explicitly start playback for iOS compatibility
+      if (audioRef.current && !entered) {
+        audioRef.current.play().catch(e => console.log('Wind audio play error:', e));
+      }
+      if (musicRef.current && entered) {
+        musicRef.current.play().catch(e => console.log('Music play error:', e));
+      }
+    }
 
-  // Update all audio volumes when mute state changes
-  useEffect(() => {
-    if (phwipRef.current) {
-      phwipRef.current.volume = isMuted ? 0 : 0.05;
-    }
-    if (musicRef.current) {
-      musicRef.current.volume = isMuted ? 0 : 0.15;
-    }
-    if (audioRef.current) {
-      audioRef.current.volume = isMuted ? 0 : 0.15;
-    }
-  }, [isMuted]);
+    // Toggle mute state
+    setIsMuted(prev => !prev);
+  };
 
   const handleTerminalInput = (e) => {
     setTerminalValue(e.target.innerText);
@@ -109,18 +137,7 @@ function App() {
       setCaretPos(sel.anchorOffset);
     } else {
       setCaretPos(e.target.innerText.length);
-    }  };
-
-  // Play swap.mp3 on link/button press (use only swap.mp3 everywhere)
-  const playSwap = () => {
-    if (phwipRef.current) {
-      phwipRef.current.volume = isMuted ? 0 : 0.08; // Much quieter swap sound, respect mute
-      phwipRef.current.currentTime = 0;
-      phwipRef.current.play();
     }
-  };  // Simple mute toggle function - works on both desktop and mobile
-  const handleMuteToggle = () => {
-    setIsMuted(prev => !prev);
   };
 
   const handleTerminalKeyDown = (e) => {
@@ -256,16 +273,13 @@ function App() {
       <button 
         className="mute-btn-fixed" 
         onClick={handleMuteToggle}
-        title={isMuted ? "Unmute audio" : "Mute audio"}
+        onTouchStart={handleMuteToggle}
         aria-label={isMuted ? "Unmute audio" : "Mute audio"}
-        role="button"
-        tabIndex={0}
       >
         {isMuted ? "🔇" : "🔊"}
-      </button>
-      <audio ref={phwipRef} src={getAssetUrl('assets/swap.mp3')} preload="auto" />
-      <audio ref={musicRef} src={getAssetUrl('assets/within.mp3')} preload="auto" loop style={{ display: 'none' }} />
-      <audio ref={audioRef} src={getAssetUrl('assets/wind.mp3')} loop autoPlay={!entered} style={{ display: 'none' }} />
+      </button><audio ref={phwipRef} src={getAssetUrl('assets/swap.mp3')} preload="auto" />
+      <audio ref={musicRef} src={getAssetUrl('assets/within.mp3')} preload="auto" loop muted style={{ display: 'none' }} />
+      <audio ref={audioRef} src={getAssetUrl('assets/wind.mp3')} loop muted autoPlay style={{ display: 'none' }} />
       <Routes>
         <Route
           path="/"

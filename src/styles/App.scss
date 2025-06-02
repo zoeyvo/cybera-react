@@ -218,7 +218,7 @@ body{
   }
 }
 
-// Fixed positioned mute button for top right corner - clean icon only
+// Simple mute button in top right corner - icon only, no background
 .mute-btn-fixed {
   position: fixed;
   top: 1rem;
@@ -228,39 +228,24 @@ body{
   color: $text-color;
   font-size: 1.5rem;
   cursor: pointer;
-  padding: 0;
-  width: auto;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 0.5rem;
   z-index: 1000;
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
-  transition: color 0.3s, transform 0.2s;
   
-  // Remove tap highlights and ensure proper touch behavior
+  // Remove all touch highlights and ensure it works on mobile
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   user-select: none;
   -webkit-user-select: none;
   
+  // Simple hover effect for desktop
   &:hover {
-    color: $link-accent;
-    transform: scale(1.1);
+    opacity: 0.8;
   }
   
+  // Simple active state for all devices
   &:active {
-    transform: scale(0.95);
-  }
-  
-  @media (max-width: 600px) {
-    font-size: $font-size-lg;
-    top: 0.75rem;
-    right: 0.75rem;
-    
-    &:active {
-      transform: scale(0.9);
-    }
+    transform: scale(0.9);
   }
 }
 
