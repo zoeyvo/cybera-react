@@ -435,18 +435,13 @@ function PageLayout({ children, playSwap }) {
     const assets = [
       'assets/navi.png',
       'assets/lain.gif',
-      'assets/lain-org.gif',
       'assets/static.gif',
-      'assets/tv_static.gif',
-      'assets/hands.gif',
-      'assets/whiteboard-frame.png',
       'assets/typewriter.ttf',
       'assets/swap.mp3',
       'assets/within.mp3',
       'assets/Zoey-Vo-Resume-2025.png',
-      'assets/Zoey-Vo-Resume-2025-w.png',
-      'assets/cursor.cur',
-      'assets/favicon.png'
+      'assets/cursor.cur'
+      // Removed 'assets/favicon.jpg' since favicon is served from root, not assets
     ];
     assets.forEach(asset => {
       const ext = asset.split('.').pop();

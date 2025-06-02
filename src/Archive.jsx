@@ -1,9 +1,18 @@
 // Archive.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Archive({ playSwap }) {
   const navigate = useNavigate();
+
+  // Ensure font is loaded to reduce browser warnings
+  useEffect(() => {
+    if (document.fonts && document.fonts.load) {
+      document.fonts.load('1rem Typewriter').catch(() => {
+        // Font loading failed, fallback will be used
+      });
+    }
+  }, []);
 
   const archiveItems = [
     { name: "bookmarks", description: "Interesting links and resources" },

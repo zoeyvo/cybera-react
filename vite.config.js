@@ -8,7 +8,9 @@ const base = process.env.BASE || './';
 export default defineConfig({
   plugins: [react()],
   base,
+  publicDir: 'public',
   build: {
     outDir: 'docs', // Output build to docs/ for GitHub Pages
+    assetsDir: 'assets'
   },
 });
