@@ -1,53 +1,27 @@
 // App.js
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate, Routes, Route, useLocation } from "react-router-dom";
-import CursorTrail from "./CursorTrail";
-import Bio from "./Bio";
-import Projects from "./Projects";
-import Resume from "./Resume";
-import Archive from "./Archive";
-import ArchiveCardGames from "./ArchiveCardGames";
-import ArchiveRecipes from "./ArchiveRecipes";
-import ArchiveMedia from "./ArchiveMedia";
-import ArchiveNotes from "./ArchiveNotes";
-import ArchiveBookmarks from "./ArchiveBookmarks";
-import CustomCursor from './CustomCursor';
-import "./App.scss";
+import { CursorTrail, CustomCursor, PageLayout } from "./components";
+import { 
+  Bio, 
+  Projects, 
+  Resume, 
+  Archive, 
+  ArchiveCardGames, 
+  ArchiveRecipes, 
+  ArchiveMedia, 
+  ArchiveNotes, 
+  ArchiveBookmarks 
+} from "./pages";
+import { useCursorEnlargeOnClick } from './hooks';
+import { TERMINAL_OPTIONS, ARCHIVE_SECTIONS, getAssetUrl } from './utils';
+import "./styles/App.scss";
 
-const TERMINAL_OPTIONS = [
-  { label: "bio", display: "bio" },
-  { label: "projects", display: "projects" },
-  { label: "resume", display: "resume" },
-  { label: "archive", display: "archive" },
-];
-
-const ARCHIVE_SECTIONS = [
-  "cardgames",
-  "recipes", 
-  "media",
-  "notes",
-  "bookmarks"
-];
-
-function useCursorEnlargeOnClick() {
-  useEffect(() => {
-    const handleClick = () => {
-      document.body.classList.add('cursor-enlarge');
-      setTimeout(() => {
-        document.body.classList.remove('cursor-enlarge');
-      }, 180); // Match animation duration in SCSS
-    };
-    window.addEventListener('mousedown', handleClick);
-    return () => window.removeEventListener('mousedown', handleClick);
-  }, []);
-}
-
-function App() {
-  const [entered, setEntered] = useState(false);
+function App() {  const [entered, setEntered] = useState(false);
   const [terminalValue, setTerminalValue] = useState("");
-  const [selected, setSelected] = useState(null);
   const [caretPos, setCaretPos] = useState(0);
   const [output, setOutput] = useState([]); // Store terminal output lines
+  const [selected, setSelected] = useState(null); // Track selected terminal option
   const inputRef = useRef(null);
   const terminalInnerRef = useRef(null); // Add ref for terminal-inner
   const navigate = useNavigate();
@@ -265,10 +239,9 @@ function App() {
 
   return (
     <>
-      <CustomCursor />
-      <audio ref={phwipRef} src={import.meta.env.BASE_URL + 'assets/swap.mp3'} preload="auto" />
-      <audio ref={musicRef} src={import.meta.env.BASE_URL + 'assets/within.mp3'} preload="auto" loop style={{ display: 'none' }} />
-      <audio ref={audioRef} src={import.meta.env.BASE_URL + 'assets/wind.mp3'} loop autoPlay={!entered} style={{ display: 'none' }} />
+      <CustomCursor />      <audio ref={phwipRef} src={getAssetUrl('assets/swap.mp3')} preload="auto" />
+      <audio ref={musicRef} src={getAssetUrl('assets/within.mp3')} preload="auto" loop style={{ display: 'none' }} />
+      <audio ref={audioRef} src={getAssetUrl('assets/wind.mp3')} loop autoPlay={!entered} style={{ display: 'none' }} />
       <Routes>
         <Route
           path="/"
@@ -281,7 +254,7 @@ function App() {
                 <div className="row1" />
                 {/* Row 2: Main content (Lain image/button or terminal) */}
                 <div className="row2">
-                  {!entered && <img className="lain-img" src={import.meta.env.BASE_URL + 'assets/lain.gif'} alt="Lain" />}
+                  {!entered && <img className="lain-img" src={getAssetUrl('assets/lain.gif')} alt="Lain" />}
                   {!entered && (
                     <button className="enter-btn gothic-text" onMouseDown={playSwap} onClick={() => setEntered(true)}>[enter]</button>
                   )}
@@ -417,80 +390,6 @@ function App() {
         <Route path="/archive/bookmarks" element={<PageLayout playSwap={playSwap}><ArchiveBookmarks /></PageLayout>} />
       </Routes>
     </>
-  );
-}
-
-// ==================================
-// CYBERIA SITE PAGE LAYOUT COMPONENT
-// ==================================
-//
-// PageLayout is a minimal wrapper for all non-landing pages.
-// - Renders the Navi header, cursor trail, header, children, and footer.
-// - Preloads all major assets (images, fonts, audio, PDF) for instant navigation.
-// - Passes playSwap to children for consistent sound effects.
-// - All layout and sizing is handled by SCSS for consistency.
-function PageLayout({ children, playSwap }) {
-  // Preload all major assets for instant navigation
-  useEffect(() => {
-    const assets = [
-      'assets/navi.png',
-      'assets/lain.gif',
-      'assets/static.gif',
-      'assets/typewriter.ttf',
-      'assets/swap.mp3',
-      'assets/within.mp3',
-      'assets/Zoey-Vo-Resume-2025.png',
-      'assets/cursor.cur'
-      // Removed 'assets/favicon.jpg' since favicon is served from root, not assets
-    ];
-    assets.forEach(asset => {
-      const ext = asset.split('.').pop();
-      if (["png", "gif", "jpg", "jpeg", "cur"].includes(ext)) {
-        const img = new window.Image();
-        img.src = import.meta.env.BASE_URL + asset;
-      } else if (["mp3", "wav", "ogg"].includes(ext)) {
-        const audio = new window.Audio();
-        audio.src = import.meta.env.BASE_URL + asset;
-      } else if (["ttf", "woff", "woff2", "otf"].includes(ext)) {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.as = 'font';
-        link.href = import.meta.env.BASE_URL + asset;
-        link.crossOrigin = 'anonymous';
-        document.head.appendChild(link);
-      }
-    });
-  }, []);
-  // Preload Navi image for instant display
-  useEffect(() => {
-    const naviImg = new window.Image();
-    naviImg.src = import.meta.env.BASE_URL + 'assets/navi.png';
-  }, []);
-  return (
-    <div className="cyberia-root">
-      {/* Navi header bar with pixel-art icon */}
-      <div className="header-navi">
-        <div className="navi-img-wrapper">
-          <img
-            className="navi-img"
-            src={import.meta.env.BASE_URL + 'assets/navi.png'}
-            alt="Navi icon"
-          />
-        </div>
-      </div>
-      <CursorTrail />
-      <header className="header"></header>
-      {children}
-      <footer className="footer">
-        <span>
-          <a href="https://github.com/zoeyvo" target="_blank" rel="noopener noreferrer" onClick={playSwap}>github.com/zoeyvo</a>
-          {" | "}
-          <a href="https://www.linkedin.com/in/zoeyvo" target="_blank" rel="noopener noreferrer" onClick={playSwap}>linkedin.com/in/zoeyvo</a>
-          {" | "}
-          <span className="footer-email" title="Email (obfuscated)">zoeyvo256<span className="at-symbol">@</span>gmail.com</span>
-        </span>
-      </footer>
-    </div>
   );
 }
 
