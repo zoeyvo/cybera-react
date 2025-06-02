@@ -11,7 +11,7 @@ import React from "react";
 const Bio = () => (
   <div className="grid-cell cell1">
     <div className="bio-content">
-      <span className="bio-title">zoey vo · she/they</span>
+      <span className="bio-title">zoey vo · 🏳️‍⚧️ · she/her</span>
       <span className="gothic-text bio-desc">
         Developer exploring systems design and scalable web applications to build
         meaningful tools that empower communities and challenge injustice.

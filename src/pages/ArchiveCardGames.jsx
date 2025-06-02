@@ -9,24 +9,23 @@ function ArchiveCardGames() {
         <span className="archive-title">~/archive/cardgames</span>
         <div className="archive-cardgames-grid">
           {/* Card Game Section 1: Tiến Lên */}
-          <div className="cardgame-section cardgame-box">
-            <div className="game-header">
-              <h3 className="game-name accent">Tiến Lên</h3>
-              <span className="game-players">4 players</span>
-            </div>
-            <hr className="cardgame-divider" />
-            <div className="game-objective mono">
-              <strong>Objective:</strong> Be the first player to play all your cards.
+          <div className="cardgame-section cardgame-box">            <div className="game-header">
+              <h3 className="game-name accent" style={{ color: '#82bc82' }}><span>Tiến Lên</span> 🇻🇳</h3>
+              <span className="game-players">4 players required</span>
+            </div><hr className="cardgame-divider" />            <div className="game-rules" style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}>
+              <strong style={{ color: '#82bc82' }}>Objective:</strong>
+              <div style={{ textAlign: 'center', marginTop: '0.25rem' }}>
+                Be the first player to play all your cards.
+              </div>
             </div>
             <hr className="cardgame-divider" />
             <div className="game-rules" style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}>
-              <strong>Rules:</strong>
-              <ol className="rules-list" style={{ textAlign: 'left', paddingLeft: '1.2em' }}>
-                <li><b>Deck:</b> Standard 52-card deck (no jokers)</li>
-                <li><b>Card Rank:</b> 3 (lowest) to 2 (highest): 3-4-5-6-7-8-9-10-J-Q-K-A-2</li>
-                <li><b>Setup:</b> 4 players, each dealt 13 cards. Player with 3♠️ starts.</li>
-                <li><b>Gameplay:</b> Turns go clockwise. On your turn, play a higher-ranking card/combination than the last play, or pass. If all pass, last player starts new round.</li>
-                <li><b>Valid Plays:</b>
+              <strong style={{ color: '#82bc82' }}>Rules:</strong>              <ol className="rules-list" style={{ textAlign: 'left', paddingLeft: '1.2em' }}>
+                <li><strong className="rule-label">Deck:</strong> Standard 52-card deck (no jokers)</li>
+                <li><strong className="rule-label">Card Rank:</strong> 3 (lowest) to 2 (highest): 3-4-5-6-7-8-9-10-J-Q-K-A-2</li>
+                <li><strong className="rule-label">Setup:</strong> 4 players, each dealt 13 cards. Player with the 3 of spades starts.</li>
+                <li><strong className="rule-label">Gameplay:</strong> Turns go clockwise. On your turn, play a higher-ranking card/combination than the last play, or pass. If all pass, last player starts new round.</li>
+                <li><strong className="rule-label">Valid Plays:</strong>
                   <ol style={{ paddingLeft: '1.2em' }}>
                     <li>Single: Any single card (e.g., 7♣)</li>
                     <li>Pair: Two cards of same rank (e.g., 7♣ 7♦)</li>
@@ -35,37 +34,34 @@ function ArchiveCardGames() {
                     <li>Pairs Sequence: 3+ consecutive pairs (e.g., 4♣4♦ 5♣5♦ 6♣6♦)</li>
                     <li>Four of a Kind: Four cards of same rank (e.g., 7♣ 7♦ 7♠ 7♥)</li>
                   </ol>
-                </li>
-                <li><b>2-Killers:</b> Four of a Kind (bomb) or Pairs Sequence of 3+ pairs can defeat a 2 (deuce)</li>
-                <li><b>Special:</b> 2s (Deuces) are strongest singles but can be beaten by 2-killers. Ending with a 2 is often a penalty ("chặt heo").</li>
-                <li><b>Winning:</b> First to play all cards wins. Others ranked by cards left.</li>
+                </li>                <li><strong className="rule-label">2-Killers:</strong> Four of a Kind or Pairs Sequence of 3+ pairs can defeat a 2 (deuce)</li>
+                <li><strong className="rule-label">Special:</strong> 2's are strongest singles but can be beaten by 2-killers. Ending with a 2 is often a penalty ("chặt heo").</li>
+                <li><strong className="rule-label">Winning:</strong> First to play all cards wins. Others ranked by cards left.</li>
               </ol>
             </div>
           </div>
           {/* Card Game Section 2: Busfahrer (Drive the Bus) */}
-          <div className="cardgame-section cardgame-box">
-            <div className="game-header">
-              <h3 className="game-name accent">Busfahrer (Drive the Bus)</h3>
-              <span className="game-players">4+ players</span>
-            </div>
-            <hr className="cardgame-divider" />
-            <div className="game-objective mono">
-              <strong>Goal:</strong> Survive the pyramid, avoid being the Busfahrer, and escape the desert with as little drinking as possible!
+          <div className="cardgame-section cardgame-box">            <div className="game-header">
+              <h3 className="game-name accent" style={{ color: '#82bc82' }}><span>Busfahrer</span> 🇩🇪</h3>
+              <span className="game-players">4+ players recommended</span>
+            </div><hr className="cardgame-divider" />            <div className="game-rules" style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}>
+              <strong style={{ color: '#82bc82' }}>Objective:</strong>
+              <div style={{ textAlign: 'center', marginTop: '0.25rem' }}>
+                Survive the pyramid, avoid being the Busfahrer, and escape the desert with as little drinking as possible!
+              </div>
             </div>
             <hr className="cardgame-divider" />
             <div className="game-rules" style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}>
-              <strong>What You Need:</strong>
+              <strong style={{ color: '#82bc82' }}>What You Need:</strong>
               <ol className="rules-list" style={{ textAlign: 'left', paddingLeft: '1.2em' }}>
                 <li>A standard deck of cards (32 or 52 cards)</li>
                 <li>Alcoholic drinks</li>
-                <li>At least 4 players recommended</li>
               </ol>
             </div>
-            <hr className="cardgame-divider" />
-            <div className="game-rules" style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}>
-              <strong>How to Play:</strong>
+            <hr className="cardgame-divider" />            <div className="game-rules" style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}>
+              <strong style={{ color: '#82bc82' }}>How to Play:</strong>
               <ol className="rules-list" style={{ textAlign: 'left', paddingLeft: '1.2em' }}>
-                <li><b>Round 1 – Guessing Round:</b> Each player gets 4 face-down cards. For each card, guess:
+                <li><strong className="round-label">Round 1 – Guessing Round:</strong> Each player gets 4 face-down cards. For each card, guess:
                   <ol style={{ paddingLeft: '1.2em' }}>
                     <li>Red or Black? (Suit color)</li>
                     <li>Higher or Lower? (vs. previous card)</li>
@@ -74,7 +70,7 @@ function ArchiveCardGames() {
                   </ol>
                   <span className="mono">Wrong guess = drink!</span>
                 </li>
-                <li><b>Round 2 – The Pyramid:</b>
+                <li><strong className="round-label">Round 2 – The Pyramid:</strong>
                   <ol style={{ paddingLeft: '1.2em' }}>
                     <li>Arrange cards in a pyramid: 1 card at the top, then 2, 3, 4, etc.</li>                    <li>Reveal cards row by row (bottom to top).</li>
                     <li>If a pyramid card matches any of your 4 cards → drink!</li>
@@ -88,20 +84,13 @@ function ArchiveCardGames() {
                       <span className="mono">Special: If the pyramid dealer (elected player) turns a card, the drinking amount for that card is doubled!</span>
                     </li>
                   </ol>
-                  <span className="mono">The player with the most matches at the end → becomes the Busfahrer (Bus Driver).</span>
-                </li>
-                <li><b>Round 3 – Drive the Bus (a.k.a. Going into the Desert):</b>
+                  <span className="mono">The player(s) with the most matches at the end → becomes the Busfahrer (Bus Driver).</span>
+                </li>                <li><strong className="round-label">Round 3 – Drive the Bus (a.k.a. Going into the Desert):</strong>
                   <ol style={{ paddingLeft: '1.2em' }}>
-                    <li>Place 16 cards face down in a diamond shape (1-2-3-4-3-2-1).</li>
-                    <li>The Busfahrer starts at the top and must reach the end of the diamond.</li>
-                    <li>At each row, pick one card to reveal:
-                      <ol style={{ paddingLeft: '1.2em' }}>
-                        <li>If the card is a J, Q, K, or A → you drink and start over at the top!</li>
-                        <li>Replace revealed cards with new ones each time.</li>
-                      </ol>
-                    </li>
-                    <li>If you reach the end without hitting a face card, you escape the desert (finish the game).</li>
-                    <li><b>If the final card at the tip is a face card, you go back to the start!</b></li>
+                    <li>The Busfahrer(s) repeat Round 1 with 4 new face-down cards.</li>
+                    <li>They must guess each card in sequence (Red/Black, Higher/Lower, Inside/Outside, Suit).</li>
+                    <li><strong>If they get ANY guess wrong at ANY stage → they drink and start over completely with 4 new cards!</strong></li>
+                    <li>This continues until they get all 4 guesses correct without making a single mistake.</li>
                   </ol>
                 </li>
               </ol>
