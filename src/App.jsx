@@ -118,7 +118,9 @@ function App() {  const [entered, setEntered] = useState(false);
       phwipRef.current.play();
     }
   };  // Toggle mute function
-  const toggleMute = () => {
+  const toggleMute = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     console.log('Mute button clicked, current state:', isMuted);
     setIsMuted(!isMuted);
   };
@@ -256,8 +258,11 @@ function App() {  const [entered, setEntered] = useState(false);
       <button 
         className="mute-btn-fixed" 
         onClick={toggleMute}
+        onTouchEnd={toggleMute}
         title={isMuted ? "Unmute audio" : "Mute audio"}
         aria-label={isMuted ? "Unmute audio" : "Mute audio"}
+        role="button"
+        tabIndex={0}
       >
         {isMuted ? "🔇" : "🔊"}
       </button>
