@@ -22,6 +22,7 @@ function App() {  const [entered, setEntered] = useState(false);
   const [caretPos, setCaretPos] = useState(0);
   const [output, setOutput] = useState([]); // Store terminal output lines
   const [selected, setSelected] = useState(null); // Track selected terminal option
+  const [isMuted, setIsMuted] = useState(false); // Track mute state
   const inputRef = useRef(null);
   const terminalInnerRef = useRef(null); // Add ref for terminal-inner
   const navigate = useNavigate();
@@ -31,16 +32,15 @@ function App() {  const [entered, setEntered] = useState(false);
   const audioRef = useRef(null);
 
   useCursorEnlargeOnClick();
-
   useEffect(() => {
     if (!entered && audioRef.current) {
-      audioRef.current.volume = 0.15; // Set wind audio to 25% volume
+      audioRef.current.volume = isMuted ? 0 : 0.15; // Set wind audio to 15% volume, respect mute
       audioRef.current.play();
     } else if (entered && audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     }
-  }, [entered]);
+  }, [entered, isMuted]);
 
   // Ensure input is always focusable and editable
   useEffect(() => {
@@ -63,20 +63,19 @@ function App() {  const [entered, setEntered] = useState(false);
       terminalInnerRef.current.scrollTop = terminalInnerRef.current.scrollHeight;
     }
   }, [output, entered]);
-
   // Play swap.mp3 on page swap (route change)
   useEffect(() => {
     if (phwipRef.current) {
-      phwipRef.current.volume = 0.05; // Much quieter swap sound
+      phwipRef.current.volume = isMuted ? 0 : 0.05; // Much quieter swap sound, respect mute
       phwipRef.current.currentTime = 0;
       phwipRef.current.play();
     }
-  }, [location.pathname]);
+  }, [location.pathname, isMuted]);
 
   // Add background music (within.mp3) looped, play/pause based on user interaction
   useEffect(() => {
     if (musicRef.current) {
-      musicRef.current.volume = 0.15; // Subtle volume
+      musicRef.current.volume = isMuted ? 0 : 0.15; // Respect mute state
       musicRef.current.loop = true;
       // Only play after user has entered (interacted)
       if (entered) {
@@ -86,7 +85,20 @@ function App() {  const [entered, setEntered] = useState(false);
         musicRef.current.currentTime = 0;
       }
     }
-  }, [entered, location.pathname]);
+  }, [entered, location.pathname, isMuted]);
+
+  // Update all audio volumes when mute state changes
+  useEffect(() => {
+    if (phwipRef.current) {
+      phwipRef.current.volume = isMuted ? 0 : 0.05;
+    }
+    if (musicRef.current) {
+      musicRef.current.volume = isMuted ? 0 : 0.15;
+    }
+    if (audioRef.current) {
+      audioRef.current.volume = isMuted ? 0 : 0.15;
+    }
+  }, [isMuted]);
 
   const handleTerminalInput = (e) => {
     setTerminalValue(e.target.innerText);
@@ -96,16 +108,20 @@ function App() {  const [entered, setEntered] = useState(false);
       setCaretPos(sel.anchorOffset);
     } else {
       setCaretPos(e.target.innerText.length);
-    }
-  };
+    }  };
 
   // Play swap.mp3 on link/button press (use only swap.mp3 everywhere)
   const playSwap = () => {
     if (phwipRef.current) {
-      phwipRef.current.volume = 0.08; // Much quieter swap sound
+      phwipRef.current.volume = isMuted ? 0 : 0.08; // Much quieter swap sound, respect mute
       phwipRef.current.currentTime = 0;
       phwipRef.current.play();
     }
+  };
+
+  // Toggle mute function
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
   };
 
   const handleTerminalKeyDown = (e) => {
@@ -236,10 +252,19 @@ function App() {  const [entered, setEntered] = useState(false);
       }, 0);
     }
   };
-
   return (
     <>
-      <CustomCursor />      <audio ref={phwipRef} src={getAssetUrl('assets/swap.mp3')} preload="auto" />
+      <CustomCursor />
+      {/* Mute button positioned at top right */}
+      <button 
+        className="mute-btn-fixed" 
+        onClick={toggleMute}
+        title={isMuted ? "Unmute audio" : "Mute audio"}
+        aria-label={isMuted ? "Unmute audio" : "Mute audio"}
+      >
+        {isMuted ? "🔇" : "🔊"}
+      </button>
+      <audio ref={phwipRef} src={getAssetUrl('assets/swap.mp3')} preload="auto" />
       <audio ref={musicRef} src={getAssetUrl('assets/within.mp3')} preload="auto" loop style={{ display: 'none' }} />
       <audio ref={audioRef} src={getAssetUrl('assets/wind.mp3')} loop autoPlay={!entered} style={{ display: 'none' }} />
       <Routes>
@@ -367,8 +392,7 @@ function App() {  const [entered, setEntered] = useState(false);
                 </div>
                 {/* Row 3: (empty or for future use) */}
                 <div className="row3" />
-              </div>
-              <footer className="footer">
+              </div>              <footer className="footer">
                 <span>
                   <a href="https://github.com/zoeyvo" target="_blank" rel="noopener noreferrer" onClick={playSwap}>github.com/zoeyvo</a>
                   {" | "}
