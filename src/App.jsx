@@ -463,7 +463,16 @@ function App() {  const [entered, setEntered] = useState(false);
                   {" | "}
                   <a href="https://www.linkedin.com/in/zoeyvo" target="_blank" rel="noopener noreferrer" onClick={playSwap}>linkedin.com/in/zoeyvo</a>
                   {" | "}
-                  <a href="mailto:zoeyvo256@gmail.com" target="_blank" rel="noopener noreferrer" onClick={playSwap}>zoeyvo256@gmail.com</a>
+                  <span className="footer-email" title="Email (obfuscated)">
+                    <a 
+                      href="https://mail.google.com/mail/?view=cm&to=zoeyvo256@gmail.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      onClick={playSwap}
+                    >
+                      zoeyvo256<span className="at-symbol">@</span>gmail.com
+                    </a>
+                  </span>
                 </span>
               </footer>
             </div>          }

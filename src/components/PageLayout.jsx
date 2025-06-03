@@ -65,7 +65,14 @@ function PageLayout({ children, playSwap }) {  // Preload all major assets for i
           <a href="https://www.linkedin.com/in/zoeyvo" target="_blank" rel="noopener noreferrer" onClick={playSwap}>linkedin.com/in/zoeyvo</a>
           {" | "}
           <span className="footer-email" title="Email (obfuscated)">
-            <a href="mailto:zoeyvo256@gmail.com" target="_blank">zoeyvo256<span className="at-symbol">@</span>gmail.com</a>
+            <a 
+              href="https://mail.google.com/mail/?view=cm&to=zoeyvo256@gmail.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              onClick={playSwap}
+            >
+              zoeyvo256<span className="at-symbol">@</span>gmail.com
+            </a>
           </span>
         </span>
       </footer>
