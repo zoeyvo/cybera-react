@@ -377,6 +377,19 @@ body{
   }
 }
 
+// Mute button icon styles
+$mute-icon-size: 18px; // 75% of 24px
+
+.mute-btn-icon {
+  width: $mute-icon-size;
+  height: $mute-icon-size;
+  vertical-align: middle;
+  display: inline-block;
+  // Colorize black PNGs to $text-color using filter
+  filter: brightness(0) saturate(100%) invert(94%) sepia(6%) saturate(300%) hue-rotate(0deg) brightness(1) contrast(1);
+  // If you switch to SVGs, use: fill: currentColor; color: $text-color;
+}
+
 // =========================
 // TYPOGRAPHY
 // =========================
@@ -507,13 +520,13 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   .terminal-inner {
     position: relative;
     z-index: 1;
-    padding: $spacing-1-2 $spacing-1-2 $spacing-md $spacing-1-2;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem; // Reduced padding
     min-height: 140px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     font-family: 'Typewriter', monospace;
-    font-size: $font-size-base; // Updated for consistency
+    font-size: $font-size-base;
     flex: 1 1 auto;
     height: 100%;
     overflow-y: auto;
@@ -823,7 +836,7 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
     min-width: 0;
     max-width: 98vw;  }  .terminal-inner {
     font-size: $font-size-xs;
-    padding: 0.7rem 0.5rem 0.7rem 0.5rem;
+    padding: 0.3rem 0.3rem 0.3rem 0.3rem; // Even less padding on mobile
     max-width: 96vw;
     box-sizing: border-box;
   }  // Bio and project description text smaller and wrapped
