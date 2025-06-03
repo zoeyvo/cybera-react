@@ -12,14 +12,14 @@ import { getAssetUrl } from '../utils/constants';
 function PageLayout({ children, playSwap }) {  // Preload all major assets for instant navigation
   useEffect(() => {
     const assets = [
-      'assets/navi.png',
-      'assets/lain.gif',
-      'assets/static.gif',
-      'assets/typewriter.ttf',
-      'assets/swap.mp3',
-      'assets/within.mp3',
-      'assets/Zoey-Vo-Resume-2025.png',
-      'assets/cursor.cur'
+      'assets/images/navi.png',
+      'assets/images/lain.gif',
+      'assets/images/static.gif',
+      'assets/fonts/typewriter.ttf',
+      'assets/audio/swap.mp3',
+      'assets/audio/within.mp3',
+      'assets/images/Zoey-Vo-Resume-2025.png',
+      'assets/cursor/cursor.cur'
     ];
     
     assets.forEach(asset => {
@@ -39,20 +39,18 @@ function PageLayout({ children, playSwap }) {  // Preload all major assets for i
         document.head.appendChild(link);
       }
     });
-  }, []);
-  // Preload Navi image for instant display
+  }, []);  // Preload Navi image for instant display
   useEffect(() => {
     const naviImg = new window.Image();
-    naviImg.src = getAssetUrl('assets/navi.png');
+    naviImg.src = getAssetUrl('assets/images/navi.png');
   }, []);
 
   return (
     <div className="cyberia-root">
       {/* Navi header bar with pixel-art icon */}
-      <div className="header-navi">
-        <div className="navi-img-wrapper">          <img
+      <div className="header-navi">        <div className="navi-img-wrapper">          <img
             className="navi-img"
-            src={getAssetUrl('assets/navi.png')}
+            src={getAssetUrl('assets/images/navi.png')}
             alt="Navi icon"
           />
         </div>

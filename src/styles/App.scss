@@ -207,7 +207,7 @@ $opacity-strong: 0.8;        // Strong opacity
 // Custom font faces for retro look
 @font-face {
   font-family: 'Typewriter';
-  src: url('/assets/typewriter.ttf') format('truetype');
+  src: url('/assets/fonts/typewriter.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap; // Improves loading performance and reduces font warnings
@@ -538,7 +538,7 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: url('/assets/static.gif') center center/cover no-repeat;
+  background: url('/assets/images/static.gif') center center/cover no-repeat;
   animation: none;
   mask-image: none;
   opacity: 50%;
@@ -768,8 +768,9 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   display: flex;
   flex-direction: column;
   height: 100%;
-  justify-content: space-evenly;
-  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
 }
 .row1 {
   flex: 1 0 0;

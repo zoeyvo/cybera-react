@@ -305,9 +305,9 @@ function App() {  const [entered, setEntered] = useState(false);
         aria-label={isMuted ? "Unmute audio" : "Mute audio"}
       >
         {isMuted ? "🔇" : "🔊"}
-      </button>      <audio ref={phwipRef} src={getAssetUrl('assets/swap.mp3')} preload="auto" />
-      <audio ref={musicRef} src={getAssetUrl('assets/within.mp3')} preload="auto" loop style={{ display: 'none' }} />
-      <audio ref={audioRef} src={getAssetUrl('assets/wind.mp3')} loop autoPlay style={{ display: 'none' }} />
+      </button>      <audio ref={phwipRef} src={getAssetUrl('assets/audio/swap.mp3')} preload="auto" />
+      <audio ref={musicRef} src={getAssetUrl('assets/audio/within.mp3')} preload="auto" loop style={{ display: 'none' }} />
+      <audio ref={audioRef} src={getAssetUrl('assets/audio/wind.mp3')} loop autoPlay style={{ display: 'none' }} />
       <Routes>
         <Route
           path="/"
@@ -320,7 +320,7 @@ function App() {  const [entered, setEntered] = useState(false);
                 <div className="row1" />
                 {/* Row 2: Main content (Lain image/button or terminal) */}
                 <div className="row2">
-                  {!entered && <img className="lain-img" src={getAssetUrl('assets/lain.gif')} alt="Lain" />}
+                  {!entered && <img className="lain-img" src={getAssetUrl('assets/images/lain.gif')} alt="Lain" />}
                   {!entered && (
                     <button className="enter-btn gothic-text" onMouseDown={playSwap} onClick={() => setEntered(true)}>[enter]</button>
                   )}

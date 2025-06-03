@@ -78,7 +78,7 @@ const CustomCursor = () => {
       className={`custom-cursor${enlarged ? ' plump' : ''}`}
       style={style}
     >
-      <img src={import.meta.env.BASE_URL + 'assets/cursor.cur'} alt="cursor" draggable="false" />
+      <img src={import.meta.env.BASE_URL + 'assets/cursor/cursor.cur'} alt="cursor" draggable="false" />
     </div>
   );
 };
