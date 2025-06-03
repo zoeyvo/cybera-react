@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zoeyvo.net/sitemap.xml
+
+User-agent: Bingbot
+Crawl-delay: 10
+
+User-agent: YandexBot
+Crawl-delay: 10
+
+User-agent: LinkedInBot
+Allow: /
