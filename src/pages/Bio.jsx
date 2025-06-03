@@ -15,9 +15,7 @@ const Bio = () => (
         <span className="bio-title-desktop">zoey vo · 🏳️‍⚧️ · she/her</span>
         <div className="bio-title-mobile">
           <span className="bio-mobile-item">zoey vo</span>
-          <span className="bio-mobile-dot">·</span>
           <span className="bio-mobile-item">🏳️‍⚧️</span>
-          <span className="bio-mobile-dot">·</span>
           <span className="bio-mobile-item">she/her</span>
         </div>
       </div>

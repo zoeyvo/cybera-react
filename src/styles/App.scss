@@ -1704,3 +1704,485 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   color: $text-color;
   font-family: $typewriter-font;
 }
+
+// =========================
+// CARD GAME STYLES
+// =========================
+
+.cardgame-box {
+  background: $bg-1;
+  border-radius: $radius-xl;
+  border: $border-thick solid $accent;
+  box-shadow: 0 0 $shadow-size-md $text-color, 0 0 $shadow-size-lg $text-color, 0 0 $shadow-size-xl $text-color, 0 0 $shadow-size-xxl $text-color;
+  margin-bottom: $spacing-lg;
+  padding: $spacing-sm $spacing-md $spacing-md $spacing-md;
+  padding-left: $spacing-sm;
+  padding-right: $spacing-sm;
+  max-width: 1200px;
+  width: 100%;
+  transition: box-shadow 0.18s, border 0.18s;
+  position: relative;
+  line-height: 1.6;
+}
+.cardgame-box:hover, .cardgame-box:focus {
+  box-shadow: 0 0 $shadow-size-lg $text-color, 0 0 $shadow-size-xl $text-color, 0 0 $shadow-size-xxl $text-color, 0 0 $shadow-size-huge $text-color;
+}
+.cardgame-divider {
+  border: none;
+  border-top: $border-thick solid $text-color;
+  margin: 1.1em 0 1.1em 0;
+  opacity: 0.8;
+}
+.archive-cardgames-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+  align-items: center;
+  width: 100%;
+}
+
+// Card game header styles
+.game-header {
+  .game-name {
+    span {
+      text-decoration: underline;
+      text-decoration-skip-ink: auto;
+      text-underline-offset: 2px;
+    }
+  }
+}
+
+// Card game rules section styling
+.game-rules {
+  // Base styling for rules sections
+  padding-left: $spacing-sm;
+  padding-right: $spacing-sm;
+  
+  strong {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+    text-underline-offset: 2px;
+    
+    // Section headings in accent color
+    &.section-heading {
+      color: $accent;
+    }
+  }
+  
+  // Style for main bullet point labels (Deck, Card Rank, etc.)
+  .rule-label {
+    color: $accent;
+  }
+  
+  // Style for round labels (Round 1, Round 2, etc.)
+  .round-label {
+    color: $accent;
+  }
+  
+  // Objective text centering
+  .objective-text {
+    text-align: center;
+    margin-top: 0.25rem;
+  }
+  
+  // Ordered lists styling
+  ol.rules-list {
+    text-align: left;
+    padding-left: 1.2em;
+    
+    // Nested ordered lists
+    ol {
+      padding-left: 1.2em;
+    }
+    
+    // Style ordered list numbers for rules with accent-colored labels
+    li:has(.rule-label)::marker,
+    li:has(.round-label)::marker {
+      color: $accent;
+    }
+  }
+}
+
+// Game header styling
+.game-header {
+  .game-name {
+    color: $accent;
+    
+    span {
+      text-decoration: underline;
+      text-decoration-skip-ink: auto;
+      text-underline-offset: 2px;
+    }
+  }
+}
+
+// Archive content styles
+.archive-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: $height-min-content;
+  text-align: center;
+  font-size: $font-size-lg;
+  font-family: 'Typewriter', monospace;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  max-width: $width-archive * 2.85; // 1200px
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 $spacing-md; // Use spacing var for padding
+}
+.archive-title {
+  font-weight: bold;
+  font-size: $font-size-xl;
+  margin-bottom: $spacing-lg * 0.8; // 1.2em
+  letter-spacing: 0.08em;
+  color: $white;
+  text-shadow: 0 0 $shadow-size-xl $accent, 0 0 $shadow-size-xxl #222;
+  font-family: $typewriter-font;
+}
+
+// Archive item spacing for notes
+.archive-item {
+  margin-bottom: $spacing-lg;
+  width: 100%;
+  max-width: $width-archive;
+}
+
+// Archive grid styles
+.archive-grid {
+  width: 100%;
+  max-width: $width-archive;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm * 1.2; // 0.6em
+  box-sizing: border-box;
+}
+
+// Archive section item
+.archive-section-item {
+  color: $accent;
+  border: $border-thin solid $accent;
+  background: rgba($accent, 0.07);
+  box-shadow: 0 0 $shadow-size-lg $glow-medium;
+  border-radius: $radius-lg;
+  margin-bottom: $spacing-lg * 0.8;
+  transition: background 0.18s, color 0.18s, border 0.18s;
+}
+.archive-section-item:hover, .archive-section-item:focus {
+  background: rgba($accent, 0.18);
+  color: $white;
+  border-color: $white;
+  box-shadow: 0 0 $shadow-size-xl $glow-medium;
+}
+.archive-section-item .archive-item-header .cmd {
+  color: $accent;
+  text-shadow: 0 0 $shadow-size-xs $accent, 0 0 $shadow-size-sm $glow-light;
+}
+
+// Terminal-style glow for media borders
+.terminal-glow-border {
+  border-radius: $radius-lg;
+  border: $border-thick solid $accent;
+  box-shadow: 0 0 4px $text-color, 0 0 6px $text-color, 0 0 8px $text-color, 0 0 12px $text-color;
+  background: $bg-1;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+// Media-specific styles
+.media-video, .media-image {
+  width: 100%;
+  max-width: $width-content;
+  margin: 0 auto 1rem auto;
+  
+  iframe {
+    width: 100%;
+    height: 315px;
+    border: none;
+    border-radius: $radius-xl; // Slightly smaller radius than container
+    display: block;
+  }
+  
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: $radius-md; // Slightly smaller radius than container
+    display: block;
+  }
+}
+
+// Ensure video container matches iframe height
+.media-video.terminal-glow-border {
+  height: 315px; // Match iframe height exactly
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Image container adjusts to content
+.media-image.terminal-glow-border {
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-caption {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: $font-size-xs;
+  color: $text-color;
+  font-family: $typewriter-font;
+}
+
+// =========================
+// CARD GAME STYLES
+// =========================
+
+.cardgame-box {
+  background: $bg-1;
+  border-radius: $radius-xl;
+  border: $border-thick solid $accent;
+  box-shadow: 0 0 $shadow-size-md $text-color, 0 0 $shadow-size-lg $text-color, 0 0 $shadow-size-xl $text-color, 0 0 $shadow-size-xxl $text-color;
+  margin-bottom: $spacing-lg;
+  padding: $spacing-sm $spacing-md $spacing-md $spacing-md;
+  padding-left: $spacing-sm;
+  padding-right: $spacing-sm;
+  max-width: 1200px;
+  width: 100%;
+  transition: box-shadow 0.18s, border 0.18s;
+  position: relative;
+  line-height: 1.6;
+}
+.cardgame-box:hover, .cardgame-box:focus {
+  box-shadow: 0 0 $shadow-size-lg $text-color, 0 0 $shadow-size-xl $text-color, 0 0 $shadow-size-xxl $text-color, 0 0 $shadow-size-huge $text-color;
+}
+.cardgame-divider {
+  border: none;
+  border-top: $border-thick solid $text-color;
+  margin: 1.1em 0 1.1em 0;
+  opacity: 0.8;
+}
+.archive-cardgames-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+  align-items: center;
+  width: 100%;
+}
+
+// Card game header styles
+.game-header {
+  .game-name {
+    span {
+      text-decoration: underline;
+      text-decoration-skip-ink: auto;
+      text-underline-offset: 2px;
+    }
+  }
+}
+
+// Card game rules section styling
+.game-rules {
+  // Base styling for rules sections
+  padding-left: $spacing-sm;
+  padding-right: $spacing-sm;
+  
+  strong {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+    text-underline-offset: 2px;
+    
+    // Section headings in accent color
+    &.section-heading {
+      color: $accent;
+    }
+  }
+  
+  // Style for main bullet point labels (Deck, Card Rank, etc.)
+  .rule-label {
+    color: $accent;
+  }
+  
+  // Style for round labels (Round 1, Round 2, etc.)
+  .round-label {
+    color: $accent;
+  }
+  
+  // Objective text centering
+  .objective-text {
+    text-align: center;
+    margin-top: 0.25rem;
+  }
+  
+  // Ordered lists styling
+  ol.rules-list {
+    text-align: left;
+    padding-left: 1.2em;
+    
+    // Nested ordered lists
+    ol {
+      padding-left: 1.2em;
+    }
+    
+    // Style ordered list numbers for rules with accent-colored labels
+    li:has(.rule-label)::marker,
+    li:has(.round-label)::marker {
+      color: $accent;
+    }
+  }
+}
+
+// Game header styling
+.game-header {
+  .game-name {
+    color: $accent;
+    
+    span {
+      text-decoration: underline;
+      text-decoration-skip-ink: auto;
+      text-underline-offset: 2px;
+    }
+  }
+}
+
+// Archive content styles
+.archive-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: $height-min-content;
+  text-align: center;
+  font-size: $font-size-lg;
+  font-family: 'Typewriter', monospace;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  max-width: $width-archive * 2.85; // 1200px
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 $spacing-md; // Use spacing var for padding
+}
+.archive-title {
+  font-weight: bold;
+  font-size: $font-size-xl;
+  margin-bottom: $spacing-lg * 0.8; // 1.2em
+  letter-spacing: 0.08em;
+  color: $white;
+  text-shadow: 0 0 $shadow-size-xl $accent, 0 0 $shadow-size-xxl #222;
+  font-family: $typewriter-font;
+}
+
+// Archive item spacing for notes
+.archive-item {
+  margin-bottom: $spacing-lg;
+  width: 100%;
+  max-width: $width-archive;
+}
+
+// Archive grid styles
+.archive-grid {
+  width: 100%;
+  max-width: $width-archive;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm * 1.2; // 0.6em
+  box-sizing: border-box;
+}
+
+// Archive section item
+.archive-section-item {
+  color: $accent;
+  border: $border-thin solid $accent;
+  background: rgba($accent, 0.07);
+  box-shadow: 0 0 $shadow-size-lg $glow-medium;
+  border-radius: $radius-lg;
+  margin-bottom: $spacing-lg * 0.8;
+  transition: background 0.18s, color 0.18s, border 0.18s;
+}
+.archive-section-item:hover, .archive-section-item:focus {
+  background: rgba($accent, 0.18);
+  color: $white;
+  border-color: $white;
+  box-shadow: 0 0 $shadow-size-xl $glow-medium;
+}
+.archive-section-item .archive-item-header .cmd {
+  color: $accent;
+  text-shadow: 0 0 $shadow-size-xs $accent, 0 0 $shadow-size-sm $glow-light;
+}
+
+// Terminal-style glow for media borders
+.terminal-glow-border {
+  border-radius: $radius-lg;
+  border: $border-thick solid $accent;
+  box-shadow: 0 0 4px $text-color, 0 0 6px $text-color, 0 0 8px $text-color, 0 0 12px $text-color;
+  background: $bg-1;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+// Media-specific styles
+.media-video, .media-image {
+  width: 100%;
+  max-width: $width-content;
+  margin: 0 auto 1rem auto;
+  
+  iframe {
+    width: 100%;
+    height: 315px;
+    border: none;
+    border-radius: $radius-xl; // Slightly smaller radius than container
+    display: block;
+  }
+  
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: $radius-md; // Slightly smaller radius than container
+    display: block;
+  }
+}
+
+// Ensure video container matches iframe height
+.media-video.terminal-glow-border {
+  height: 315px; // Match iframe height exactly
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Image container adjusts to content
+.media-image.terminal-glow-border {
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-caption {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: $font-size-xs;
+  color: $text-color;
+  font-family: $typewriter-font;
+}
+
+// =========================
+// UTILITY CLASSES
+// =========================
+
+.font-size-lg {
+  font-size: $font-size-lg !important;
+}
+.font-size-base {
+  font-size: $font-size-base !important;
+}
+.font-size-xs {
+  font-size: $font-size-xs !important;
+}

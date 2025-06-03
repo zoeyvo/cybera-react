@@ -29,7 +29,7 @@ function Root({ playSwap }) {
   return (
     <div className="grid-cell cell1">
       <div className="archive-content">
-        <span className="archive-title">~/</span>
+        <span className="archive-title">~./</span>
         <div className="archive-grid">
           {rootItems.map((item) => (
             <div 

@@ -9,18 +9,22 @@ function ArchiveCardGames() {
         <span className="archive-title">~/archive/cardgames</span>
         <div className="archive-cardgames-grid">
           {/* Card Game Section 1: Tiến Lên */}
-          <div className="cardgame-section cardgame-box">            <div className="game-header">
+          <div className="cardgame-section cardgame-box">
+            <div className="game-header">
               <h3 className="game-name accent"><span>Tiến Lên</span> 🇻🇳</h3>
-              <span className="game-players">4 players required</span>
-            </div><hr className="cardgame-divider" />            <div className="game-rules">
+              <span className="game-players font-size-lg">4 players required</span>
+            </div>
+            <hr className="cardgame-divider" />
+            <div className="game-rules">
               <strong className="section-heading">Objective:</strong>
-              <div className="objective-text">
+              <div className="objective-text font-size-base">
                 Be the first player to play all your cards.
               </div>
             </div>
             <hr className="cardgame-divider" />
             <div className="game-rules">
-              <strong className="section-heading">Rules:</strong>              <ol className="rules-list">
+              <strong className="section-heading">Rules:</strong>
+              <ol className="rules-list font-size-base">
                 <li><strong className="rule-label">Deck:</strong> Standard 52-card deck (no jokers)</li>
                 <li><strong className="rule-label">Card Rank:</strong> 3 (lowest) to 2 (highest): 3-4-5-6-7-8-9-10-J-Q-K-A-2</li>
                 <li><strong className="rule-label">Setup:</strong> 4 players, each dealt 13 cards. Player with the 3 of spades starts.</li>
@@ -40,26 +44,31 @@ function ArchiveCardGames() {
             </div>
           </div>
           {/* Card Game Section 2: Busfahrer (Drive the Bus) */}
-          <div className="cardgame-section cardgame-box">            <div className="game-header">
+          <div className="cardgame-section cardgame-box">
+            <div className="game-header">
               <h3 className="game-name accent"><span>Busfahrer</span> 🇩🇪</h3>
-              <span className="game-players">4+ players recommended</span>
-            </div><hr className="cardgame-divider" />            <div className="game-rules">
+              <span className="game-players font-size-lg">4+ players recommended</span>
+            </div>
+            <hr className="cardgame-divider" />
+            <div className="game-rules">
               <strong className="section-heading">Objective:</strong>
-              <div className="objective-text">
+              <div className="objective-text font-size-base">
                 Survive the pyramid, avoid being the Busfahrer, and escape the desert with as little drinking as possible!
               </div>
             </div>
             <hr className="cardgame-divider" />
             <div className="game-rules">
               <strong className="section-heading">What You Need:</strong>
-              <ol className="rules-list">
+              <ol className="rules-list font-size-base">
                 <li>A standard deck of cards (32 or 52 cards)</li>
                 <li>Alcoholic drinks</li>
               </ol>
             </div>
-            <hr className="cardgame-divider" />            <div className="game-rules">
+            <hr className="cardgame-divider" />
+            <div className="game-rules">
               <strong className="section-heading">How to Play:</strong>
-              <ol className="rules-list">                <li><strong className="round-label">Round 1 – Guessing Round:</strong> Each player gets 4 face-down cards. For each card, guess:
+              <ol className="rules-list font-size-base">
+                <li><strong className="round-label">Round 1 – Guessing Round:</strong> Each player gets 4 face-down cards. For each card, guess:
                   <ol>
                     <li>Red or Black? (Suit color)</li>
                     <li>Higher or Lower? (vs. previous card)</li>
