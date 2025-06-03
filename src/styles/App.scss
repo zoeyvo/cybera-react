@@ -71,6 +71,7 @@ $spacing-2-2: 2.2rem;        // 35.2px - Footer min-height
 // Layout variables
 $width-full: 100vw;          // Full viewport width
 $width-content: 720px;       // Max content width
+$width-archive: 420px;       // Archive and bio content width
 $height-full: 100vh;         // Full viewport height
 $height-terminal: 320px;     // Terminal height
 $height-min-content: 60vh;   // Minimum content height
@@ -244,6 +245,7 @@ body{
   max-width: $width-content;
   margin: 0 auto;
   box-sizing: border-box;
+  overflow-x: hidden; // Prevent horizontal overflow
 }
 // Center content for landing/terminal
 .landing .grid-cell,
@@ -295,8 +297,8 @@ body{
 }
 .header-navi img {
   width: 20vw; // Responsive width
-  min-width: 40px;
-  max-width: 120px;
+  min-width: $spacing-10px * 4; // 40px
+  max-width: $spacing-10px * 12; // 120px
   height: auto;
 }
 
@@ -873,11 +875,31 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   
   .terminal-cursor {
     font-size: $font-size-xs !important;
-  }
-  // Terminal buttons
+  }  // Terminal buttons
   .terminal-btn {
     font-size: $font-size-xs !important;
     padding: 0.15em 0.8em !important;
+  }
+  
+  // Archive responsive styles
+  .archive-content {
+    padding: 0 $spacing-sm;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  .archive-grid {
+    max-width: 100%;
+    padding: 0 $spacing-sm;
+    box-sizing: border-box;
+  }
+    .archive-section-item {
+    margin-bottom: $spacing-md;
+  }
+  
+  // Reduce grid-cell padding on mobile
+  .grid-cell, .page-cell {
+    padding: $spacing-sm; // Reduce from default 15px to smaller spacing
   }
 }
 
@@ -892,11 +914,10 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   justify-content: center;
   min-height: auto;
   text-align: center;
-  font-size: $font-size-lg;
-  font-family: 'Typewriter', monospace;
+  font-size: $font-size-lg;  font-family: 'Typewriter', monospace;
   letter-spacing: 0.04em;
   line-height: 1.6;
-  max-width: 520px;
+  max-width: $width-archive;
   margin: 0 auto;
   padding: 1.5rem 0;
 }
@@ -1080,24 +1101,71 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   text-shadow: 0 0 1px $accent, 0 0 4px #222;
 }
 
+.archive-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: $height-min-content;
+  text-align: center;
+  font-size: $font-size-lg;
+  font-family: $typewriter-font;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  max-width: $width-archive * 2.85; // 1200px
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 $spacing-md; // Use spacing var for padding
+}
+
+.archive-title {
+  font-weight: bold;
+  font-size: $font-size-xl;
+  margin-bottom: $spacing-lg * 0.8; // 1.2em
+  letter-spacing: 0.08em;
+  color: $white;
+  text-shadow: 0 0 $shadow-size-xl $accent, 0 0 $shadow-size-xxl #222;
+  font-family: $typewriter-font;
+}
+
+// Archive item spacing for notes
+.archive-item {
+  margin-bottom: $spacing-lg;
+  width: 100%;
+  max-width: $width-archive;
+}
+
+// Archive grid styles
+.archive-grid {
+  width: 100%;
+  max-width: $width-archive;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm * 1.2; // 0.6em
+  box-sizing: border-box;
+}
+
+// Archive section item
 .archive-section-item {
   color: $accent;
-  border: 1px solid $accent;
-  background: rgba(130,188,130,0.07); // $accent with alpha
-  box-shadow: 0 0 8px $glow-medium;
+  border: $border-thin solid $accent;
+  background: rgba($accent, 0.07);
+  box-shadow: 0 0 $shadow-size-lg $glow-medium;
   border-radius: $radius-lg;
-  margin-bottom: 1.2em;
+  margin-bottom: $spacing-lg * 0.8;
   transition: background 0.18s, color 0.18s, border 0.18s;
 }
 .archive-section-item:hover, .archive-section-item:focus {
-  background: rgba(130,188,130,0.18);
+  background: rgba($accent, 0.18);
   color: $white;
   border-color: $white;
-  box-shadow: 0 0 16px $glow-medium;
+  box-shadow: 0 0 $shadow-size-xl $glow-medium;
 }
 .archive-section-item .archive-item-header .cmd {
   color: $accent;
-  text-shadow: 0 0 2px $accent, 0 0 4px $glow-light;
+  text-shadow: 0 0 $shadow-size-xs $accent, 0 0 $shadow-size-sm $glow-light;
 }
 
 // Terminal-style glow for media borders
@@ -1279,64 +1347,347 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   font-family: 'Typewriter', monospace;
   letter-spacing: 0.04em;
   line-height: 1.6;
-  max-width: 1200px;
+  max-width: $width-archive * 2.85; // 1200px
+  width: 100%;
   margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 $spacing-md; // Use spacing var for padding
 }
 .archive-title {
   font-weight: bold;
   font-size: $font-size-xl;
-  margin-bottom: 1.2em;
+  margin-bottom: $spacing-lg * 0.8; // 1.2em
   letter-spacing: 0.08em;
   color: $white;
-  text-shadow: 0 0 6px $accent, 0 0 12px #222;
-  font-family: $typewriter-font; // Updated to use typewriter font
+  text-shadow: 0 0 $shadow-size-xl $accent, 0 0 $shadow-size-xxl #222;
+  font-family: $typewriter-font;
 }
 
 // Archive item spacing for notes
 .archive-item {
-  margin-bottom: 1.5em;
+  margin-bottom: $spacing-lg;
   width: 100%;
-  max-width: 600px;
-}
-
-// Note-specific styles
-.note-header {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5em;
-}
-
-.note-content {
-  color: $white;
-  font-family: $typewriter-font;
-  font-size: $font-size-base;
-  letter-spacing: 0.05em;
-  text-shadow: 0 0 2px $text-color;
-}
-
-.note-date {
-  color: #999;
-  font-size: $font-size-xs;
-  font-family: $typewriter-font;
-  letter-spacing: 0.05em;
-}
-
-.note-tags {
-  margin-top: $spacing-sm;
-  font-size: $font-size-xs;
-  color: #666;
-  font-family: $typewriter-font;
-  letter-spacing: 0.05em;
+  max-width: $width-archive;
 }
 
 // Archive grid styles
 .archive-grid {
-  min-width: 320px;
-  max-width: 520px;
   width: 100%;
+  max-width: $width-archive;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 0.6em;
+  gap: $spacing-sm * 1.2; // 0.6em
+  box-sizing: border-box;
+}
+
+// Archive section item
+.archive-section-item {
+  color: $accent;
+  border: $border-thin solid $accent;
+  background: rgba($accent, 0.07);
+  box-shadow: 0 0 $shadow-size-lg $glow-medium;
+  border-radius: $radius-lg;
+  margin-bottom: $spacing-lg * 0.8;
+  transition: background 0.18s, color 0.18s, border 0.18s;
+}
+.archive-section-item:hover, .archive-section-item:focus {
+  background: rgba($accent, 0.18);
+  color: $white;
+  border-color: $white;
+  box-shadow: 0 0 $shadow-size-xl $glow-medium;
+}
+.archive-section-item .archive-item-header .cmd {
+  color: $accent;
+  text-shadow: 0 0 $shadow-size-xs $accent, 0 0 $shadow-size-sm $glow-light;
+}
+
+// Terminal-style glow for media borders
+.terminal-glow-border {
+  border-radius: $radius-lg;
+  border: $border-thick solid $accent;
+  box-shadow: 0 0 4px $text-color, 0 0 6px $text-color, 0 0 8px $text-color, 0 0 12px $text-color;
+  background: $bg-1;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+// Media-specific styles
+.media-video, .media-image {
+  width: 100%;
+  max-width: $width-content;
+  margin: 0 auto 1rem auto;
+  
+  iframe {
+    width: 100%;
+    height: 315px;
+    border: none;
+    border-radius: $radius-xl; // Slightly smaller radius than container
+    display: block;
+  }
+  
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: $radius-md; // Slightly smaller radius than container
+    display: block;
+  }
+}
+
+// Ensure video container matches iframe height
+.media-video.terminal-glow-border {
+  height: 315px; // Match iframe height exactly
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Image container adjusts to content
+.media-image.terminal-glow-border {
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-caption {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: $font-size-xs;
+  color: $text-color;
+  font-family: $typewriter-font;
+}
+
+// =========================
+// CARD GAME STYLES
+// =========================
+
+.cardgame-box {
+  background: $bg-1;
+  border-radius: $radius-xl;
+  border: $border-thick solid $accent;
+  box-shadow: 0 0 $shadow-size-md $text-color, 0 0 $shadow-size-lg $text-color, 0 0 $shadow-size-xl $text-color, 0 0 $shadow-size-xxl $text-color;
+  margin-bottom: $spacing-lg;
+  padding: $spacing-sm $spacing-md $spacing-md $spacing-md;
+  padding-left: $spacing-sm;
+  padding-right: $spacing-sm;
+  max-width: 1200px;
+  width: 100%;
+  transition: box-shadow 0.18s, border 0.18s;
+  position: relative;
+  line-height: 1.6;
+}
+.cardgame-box:hover, .cardgame-box:focus {
+  box-shadow: 0 0 $shadow-size-lg $text-color, 0 0 $shadow-size-xl $text-color, 0 0 $shadow-size-xxl $text-color, 0 0 $shadow-size-huge $text-color;
+}
+.cardgame-divider {
+  border: none;
+  border-top: $border-thick solid $text-color;
+  margin: 1.1em 0 1.1em 0;
+  opacity: 0.8;
+}
+.archive-cardgames-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+  align-items: center;
+  width: 100%;
+}
+
+// Card game header styles
+.game-header {
+  .game-name {
+    span {
+      text-decoration: underline;
+      text-decoration-skip-ink: auto;
+      text-underline-offset: 2px;
+    }
+  }
+}
+
+// Card game rules section styling
+.game-rules {
+  // Base styling for rules sections
+  padding-left: $spacing-sm;
+  padding-right: $spacing-sm;
+  
+  strong {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+    text-underline-offset: 2px;
+    
+    // Section headings in accent color
+    &.section-heading {
+      color: $accent;
+    }
+  }
+  
+  // Style for main bullet point labels (Deck, Card Rank, etc.)
+  .rule-label {
+    color: $accent;
+  }
+  
+  // Style for round labels (Round 1, Round 2, etc.)
+  .round-label {
+    color: $accent;
+  }
+  
+  // Objective text centering
+  .objective-text {
+    text-align: center;
+    margin-top: 0.25rem;
+  }
+  
+  // Ordered lists styling
+  ol.rules-list {
+    text-align: left;
+    padding-left: 1.2em;
+    
+    // Nested ordered lists
+    ol {
+      padding-left: 1.2em;
+    }
+    
+    // Style ordered list numbers for rules with accent-colored labels
+    li:has(.rule-label)::marker,
+    li:has(.round-label)::marker {
+      color: $accent;
+    }
+  }
+}
+
+// Game header styling
+.game-header {
+  .game-name {
+    color: $accent;
+    
+    span {
+      text-decoration: underline;
+      text-decoration-skip-ink: auto;
+      text-underline-offset: 2px;
+    }
+  }
+}
+
+// Archive content styles
+.archive-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: $height-min-content;
+  text-align: center;
+  font-size: $font-size-lg;
+  font-family: 'Typewriter', monospace;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  max-width: $width-archive * 2.85; // 1200px
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 $spacing-md; // Use spacing var for padding
+}
+.archive-title {
+  font-weight: bold;
+  font-size: $font-size-xl;
+  margin-bottom: $spacing-lg * 0.8; // 1.2em
+  letter-spacing: 0.08em;
+  color: $white;
+  text-shadow: 0 0 $shadow-size-xl $accent, 0 0 $shadow-size-xxl #222;
+  font-family: $typewriter-font;
+}
+
+// Archive item spacing for notes
+.archive-item {
+  margin-bottom: $spacing-lg;
+  width: 100%;
+  max-width: $width-archive;
+}
+
+// Archive grid styles
+.archive-grid {
+  width: 100%;
+  max-width: $width-archive;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm * 1.2; // 0.6em
+  box-sizing: border-box;
+}
+
+// Archive section item
+.archive-section-item {
+  color: $accent;
+  border: $border-thin solid $accent;
+  background: rgba($accent, 0.07);
+  box-shadow: 0 0 $shadow-size-lg $glow-medium;
+  border-radius: $radius-lg;
+  margin-bottom: $spacing-lg * 0.8;
+  transition: background 0.18s, color 0.18s, border 0.18s;
+}
+.archive-section-item:hover, .archive-section-item:focus {
+  background: rgba($accent, 0.18);
+  color: $white;
+  border-color: $white;
+  box-shadow: 0 0 $shadow-size-xl $glow-medium;
+}
+.archive-section-item .archive-item-header .cmd {
+  color: $accent;
+  text-shadow: 0 0 $shadow-size-xs $accent, 0 0 $shadow-size-sm $glow-light;
+}
+
+// Terminal-style glow for media borders
+.terminal-glow-border {
+  border-radius: $radius-lg;
+  border: $border-thick solid $accent;
+  box-shadow: 0 0 4px $text-color, 0 0 6px $text-color, 0 0 8px $text-color, 0 0 12px $text-color;
+  background: $bg-1;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+// Media-specific styles
+.media-video, .media-image {
+  width: 100%;
+  max-width: $width-content;
+  margin: 0 auto 1rem auto;
+  
+  iframe {
+    width: 100%;
+    height: 315px;
+    border: none;
+    border-radius: $radius-xl; // Slightly smaller radius than container
+    display: block;
+  }
+  
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: $radius-md; // Slightly smaller radius than container
+    display: block;
+  }
+}
+
+// Ensure video container matches iframe height
+.media-video.terminal-glow-border {
+  height: 315px; // Match iframe height exactly
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Image container adjusts to content
+.media-image.terminal-glow-border {
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-caption {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: $font-size-xs;
+  color: $text-color;
+  font-family: $typewriter-font;
 }

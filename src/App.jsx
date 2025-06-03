@@ -313,7 +313,19 @@ function App() {  const [entered, setEntered] = useState(false);
         onTouchEnd={handleTouchEnd}
         aria-label={isMuted ? "Unmute audio" : "Mute audio"}
       >
-        {isMuted ? "🔇" : "🔊"}
+        {isMuted ? (
+          <img
+            src="/assets/images/mute.png"
+            alt="Muted"
+            style={{ width: 24, height: 24, verticalAlign: 'middle', filter: 'drop-shadow(0 0 2px #AEC8A4)' }}
+          />
+        ) : (
+          <img
+            src={getAssetUrl('assets/images/volume.png')}
+            alt="Volume on"
+            style={{ width: 24, height: 24, verticalAlign: 'middle', filter: 'drop-shadow(0 0 2px #AEC8A4)' }}
+          />
+        )}
       </button>      <audio ref={phwipRef} src={getAssetUrl('assets/audio/swap.mp3')} preload="auto" />
       <audio ref={musicRef} src={getAssetUrl('assets/audio/within.mp3')} preload="auto" loop style={{ display: 'none' }} />
       <audio ref={audioRef} src={getAssetUrl('assets/audio/wind.mp3')} loop autoPlay style={{ display: 'none' }} />
