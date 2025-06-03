@@ -11,7 +11,7 @@ import React from "react";
 const Bio = () => (
   <div className="grid-cell cell1">
     <div className="bio-content">
-      <div className="bio-title">
+      <div className="archive-title">
         <span className="bio-title-desktop">zoey vo · 🏳️‍⚧️ · she/her</span>
         <div className="bio-title-mobile">
           <span className="bio-mobile-item">zoey vo</span>

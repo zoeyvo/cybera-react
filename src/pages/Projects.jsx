@@ -10,7 +10,7 @@ import React from "react";
 
 const Projects = () => (
   <div className="grid-cell cell1">    <div className="bio-content">
-      <span className="bio-title">
+      <span className="archive-title">
         Expert Mapping Interface
       </span>
       <span className="gothic-text bio-desc">
@@ -24,7 +24,7 @@ const Projects = () => (
         <a className="project-link" href="https://github.com/zoeyvo/expert-mapping-interface" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
       </div>
     </div>    <div className="bio-content">
-      <span className="bio-title">
+      <span className="archive-title">
         Asteroid Avoidance
       </span>      <span className="gothic-text bio-desc">
         Embedded survival arcade game featuring accelerometer controls, dynamic difficulty scaling, and cloud high score tracking.
