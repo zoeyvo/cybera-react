@@ -768,6 +768,8 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   display: flex;
   flex-direction: column;
   height: 100%;
+  justify-content: space-evenly;
+  gap: 2rem;
 }
 .row1 {
   flex: 1 0 0;
@@ -870,7 +872,7 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: $height-min-content;
+  min-height: auto;
   text-align: center;
   font-size: $font-size-lg;
   font-family: 'Typewriter', monospace;
@@ -878,6 +880,7 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   line-height: 1.6;
   max-width: 520px;
   margin: 0 auto;
+  padding: 1.5rem 0;
 }
 .bio-title {
   font-weight: bold;
@@ -948,6 +951,14 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   color: $text-color;  text-decoration: underline;
   font-family: 'Typewriter', monospace;
   font-size: $font-size-xs;
+}
+
+.bio-tech {
+  color: $text-color;
+  font-family: 'Typewriter', monospace;
+  font-size: $font-size-xs;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 // =========================
