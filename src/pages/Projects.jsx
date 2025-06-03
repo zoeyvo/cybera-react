@@ -11,7 +11,7 @@ import React from "react";
 const Projects = () => (
   <div className="grid-cell cell1">    <div className="bio-content">
       <span className="bio-title">
-        Expert Mapping Interface (E.M.I)
+        Expert Mapping Interface
       </span>
       <span className="gothic-text bio-desc">
         Web application developed for the UC Davis Library to visualize global research.

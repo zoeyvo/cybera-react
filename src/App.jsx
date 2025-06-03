@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate, Routes, Route, useLocation } from "react-router-dom";
 import { CursorTrail, CustomCursor, PageLayout } from "./components";
 import { 
+  Root,
   Bio, 
   Projects, 
   Resume, 
@@ -198,6 +199,7 @@ function App() {  const [entered, setEntered] = useState(false);
             output: [
               'ls',
               'ls archive',
+              'cat .',
               'cat [section]',
               'cat archive/[section]',
               'help',
@@ -206,10 +208,17 @@ function App() {  const [entered, setEntered] = useState(false);
           }
         ]);
         setTerminalValue("");
+        setSelected(null);        setTimeout(() => {
+          if (inputRef.current) inputRef.current.innerText = "";
+        }, 0);      } else if (val === "cat .") {
+        setOutput((prev) => [...prev, { type: 'cmd', value: 'cat .' }]);
+        setTerminalValue("");
         setSelected(null);
         setTimeout(() => {
           if (inputRef.current) inputRef.current.innerText = "";
-        }, 0);      } else if (["cat bio", "cat projects", "cat resume", "cat archive"].includes(val)) {
+          navigate('/root');
+        }, 0);
+      } else if (["cat bio", "cat projects", "cat resume", "cat archive"].includes(val)) {
         const route = val.replace("cat ", "");
         setOutput((prev) => [...prev, { type: 'cmd', value: val }]);
         setTerminalValue("");
@@ -351,14 +360,13 @@ function App() {  const [entered, setEntered] = useState(false);
                               <span className="terminal-input-history">
                                 <span className="cmd">{line.value}</span>
                               </span>
-                            </div>
-                            {/* Only render output line for ls, help, and error commands, or for cat usage error */}
+                            </div>                            {/* Only render output line for ls, help, and specific commands */}
                             {line.output && (
-                              (line.value === 'ls' || line.value === 'ls archive' || line.value === 'help' || line.value.startsWith('command not found:') || line.output.toString().includes('is not a command') || line.output.toString().includes('not found')) ? (
+                              (line.value === 'ls' || line.value === 'ls archive' || line.value === 'help') ? (
                                 <div className="terminal-row">
                                   <span className="terminal-user" style={{visibility:'hidden'}}><span className="footer-email">zoey<span className="at-symbol">@</span>wired</span></span>
                                   <span className="terminal-prompt flicker" style={{visibility:'hidden'}}>&gt;</span>
-                                  <span className={line.value === 'ls' || line.value === 'ls archive' ? 'ls-list' : line.value === 'help' ? 'help-list' : 'error'}>
+                                  <span className={line.value === 'ls' || line.value === 'ls archive' ? 'ls-list' : 'help-list'}>
                                     {/* Highlight commands in output */}
                                     {Array.isArray(line.output)
                                       ? (line.value === 'ls' || line.value === 'ls archive') ? (
@@ -376,14 +384,13 @@ function App() {  const [entered, setEntered] = useState(false);
                                             )
                                           )
                                         )
-                                      : typeof line.output === 'string' && (line.output.includes('ls') || line.output.includes('help') || line.output.includes('clear') || line.output.includes('cat') || line.output.includes('archive')) ? (
+                                      : typeof line.output === 'string' && (line.output.includes('ls') || line.output.includes('help') || line.output.includes('clear') || l.includes('cat') || line.output.includes('archive')) ? (
                                           <span dangerouslySetInnerHTML={{__html: line.output.replace(/(ls|help|clear|cat \[?\w*\/?\w*\]?|archive)/g, '<span class="cmd-accent">$1</span>')}} />
                                         ) : (
                                           line.output
                                         )}
                                   </span>
-                                </div>
-                              ) : line.value === 'cat' ? (
+                                </div>                              ) : (line.value === 'cat' || line.value.startsWith('command not found:') || line.output.toString().includes('is not a command') || line.output.toString().includes('not found')) ? (
                                 <div className="terminal-row">
                                   <span className="terminal-user" style={{visibility:'hidden'}}><span className="footer-email">zoey<span className="at-symbol">@</span>wired</span></span>
                                   <span className="terminal-prompt flicker" style={{visibility:'hidden'}}>&gt;</span>
@@ -441,9 +448,10 @@ function App() {  const [entered, setEntered] = useState(false);
                   <span className="footer-email" title="Email (obfuscated)">zoeyvo256<span className="at-symbol">@</span>gmail.com</span>
                 </span>
               </footer>
-            </div>
-          }
-        />        <Route path="/bio" element={<PageLayout playSwap={playSwap}><Bio /></PageLayout>} />
+            </div>          }
+        />
+        <Route path="/root" element={<PageLayout playSwap={playSwap}><Root playSwap={playSwap} /></PageLayout>} />
+        <Route path="/bio" element={<PageLayout playSwap={playSwap}><Bio /></PageLayout>} />
         <Route path="/projects" element={<PageLayout playSwap={playSwap}><Projects /></PageLayout>} />
         <Route path="/resume" element={<PageLayout playSwap={playSwap}><Resume /></PageLayout>} />
         <Route path="/archive" element={<PageLayout playSwap={playSwap}><Archive playSwap={playSwap} /></PageLayout>} />

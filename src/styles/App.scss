@@ -550,7 +550,7 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   align-items: flex-start;
   font-size: $font-size-base; // Updated for consistency
   font-family: 'Typewriter', monospace;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.2rem;
   width: 100%;
   cursor: text;
   max-width: 100%;
@@ -720,8 +720,8 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
 // Terminal ls command output styling
 .ls-items {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 2rem;
+  flex-direction: column;
+  gap: 0.2rem;
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
@@ -738,7 +738,24 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   flex: 0 0 auto;
   min-width: fit-content;
   text-shadow: 0 0 1px $accent;
+    // Clickable item styling for cat . command
+  &.clickable-item {
+    cursor: pointer;
+    transition: color 0.15s, text-shadow 0.15s, transform 0.15s;
+    
+    &:hover, &:focus {
+      color: $white;
+      text-shadow: 0 0 4px $accent, 0 0 8px $accent;
+      transform: scale(1.05);
+    }
+    
+    &:active {
+      transform: scale(0.98);
+    }
+  }
 }
+
+
 
 // =========================
 // DESKTOP BG
@@ -899,6 +916,43 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   color: $white;
   // Removed text-shadow for no glow
   text-shadow: none;
+}
+
+// Bio title responsive layout
+.bio-title-desktop {
+  display: inline;
+}
+
+.bio-title-mobile {
+  display: none;
+}
+
+// Mobile bio title layout - columnar format with dots
+@media (max-width: 600px) {
+  .bio-title-desktop {
+    display: none;
+  }
+  
+  .bio-title-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3em;
+    font-weight: bold;
+    font-size: $font-size-xl;
+    letter-spacing: 0.08em;
+    color: $white;
+    text-shadow: 0 0 6px $text-color;
+  }
+  
+  .bio-mobile-item {
+    text-align: center;
+  }
+  
+  .bio-mobile-dot {
+    font-size: 0.8em;
+    opacity: 0.8;
+  }
 }
 
 // =========================

@@ -1,4 +1,5 @@
 // Page exports for easier imports
+export { default as Root } from './Root';
 export { default as Bio } from './Bio';
 export { default as Projects } from './Projects';
 export { default as Resume } from './Resume';
