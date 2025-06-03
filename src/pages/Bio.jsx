@@ -11,14 +11,14 @@ import React from "react";
 const Bio = () => (
   <div className="grid-cell cell1">
     <div className="bio-content">
-      <div className="archive-title">
+      <h1 className="archive-title bio-title">
         <span className="bio-title-desktop">zoey vo · 🏳️‍⚧️ · she/her</span>
         <div className="bio-title-mobile">
           <span className="bio-mobile-item">zoey vo</span>
           <span className="bio-mobile-item">🏳️‍⚧️</span>
           <span className="bio-mobile-item">she/her</span>
         </div>
-      </div>
+      </h1>
       <span className="gothic-text bio-desc">
         Developer exploring systems design and scalable web applications to build
         meaningful tools that empower communities and challenge injustice.

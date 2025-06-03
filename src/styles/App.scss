@@ -934,15 +934,13 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   margin: 0 auto;
   padding: 1.5rem 0;
 }
+// Bio title styling (inherits from archive-title for consistency)
 .bio-title {
-  font-weight: bold;
-  font-size: $font-size-xl;
+  // Let archive-title handle the main styling
+  // Only override margin for bio-specific spacing
   margin-bottom: 0.5em;
-  letter-spacing: 0.08em;
-  color: $white;
-  // Removed text-shadow for no glow
-  text-shadow: 0 0 6px $text-color;
 }
+
 .bio-desc {
   font-size: $font-size-base;
   margin-top: 1.2em;
@@ -972,11 +970,7 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
     flex-direction: column;
     align-items: center;
     gap: 0.3em;
-    font-weight: bold;
-    font-size: $font-size-xl;
-    letter-spacing: 0.08em;
-    color: $white;
-    text-shadow: 0 0 6px $text-color;
+    // Remove font styling here since archive-title will handle it
   }
   
   .bio-mobile-item {
