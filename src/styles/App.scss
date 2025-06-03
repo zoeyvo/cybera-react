@@ -520,7 +520,7 @@ $terminal-btn-bg-active: $accent;        // Use accent for active button backgro
   .terminal-inner {
     position: relative;
     z-index: 1;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem; // Reduced padding
+    padding: 0.5rem 0.5rem 0.5rem 0.7rem; // Reduced padding
     min-height: 140px;
     display: flex;
     flex-direction: column;
