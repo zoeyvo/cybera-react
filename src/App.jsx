@@ -33,8 +33,16 @@ function App() {  const [entered, setEntered] = useState(false);
   const phwipRef = useRef(null);
   const musicRef = useRef(null);
   const audioRef = useRef(null);
-
   useCursorEnlargeOnClick();
+  
+  // Handle GitHub Pages SPA routing redirect
+  useEffect(() => {
+    const redirect = sessionStorage.getItem('redirect');
+    if (redirect) {
+      sessionStorage.removeItem('redirect');
+      navigate('/' + redirect, { replace: true });
+    }
+  }, [navigate]);
   
   // Set up audio volumes and mute state
   useEffect(() => {

@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; url=/" />    <script>
-      // SPA redirect for Vite/React with BrowserRouter
-      // Redirects all 404s to the root and let React Router handle the routing
+    <script>
+      // GitHub Pages SPA redirect hack
+      // This script takes the current pathname and redirects to the root
+      // with the pathname as a query parameter for the main app to handle
+      const pathname = window.location.pathname.slice(1);
+      const search = window.location.search;
+      
+      if (pathname) {
+        // Store the intended path and redirect to root
+        sessionStorage.setItem('redirect', pathname + search);
+      }
+      
       window.location.replace('/');
     </script>
   </head>
