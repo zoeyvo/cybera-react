@@ -1,4 +1,4 @@
-# Cyberia Portfolio Site
+# Zoey Vo Portfolio
 
 A minimal, accessible, retro-cybercore portfolio site built with React + Vite, featuring a Serial Experiments Lain-inspired aesthetic.
 

@@ -1,19 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; url=/cyberia/" />
-    <script>
-      // GitHub Pages SPA redirect for Vite/React
-      // Redirects all 404s to the root with hash for client-side routing
-      var l = window.location;
-      var path = l.pathname.replace(/^\/cyberia/, '');
-      var search = l.search || '';
-      var hash = l.hash || '';
-      if (path && path !== '/') {
-        window.location.replace('/cyberia/#' + path + search + hash);
-      } else {
-        window.location.replace('/cyberia/' + search + hash);
-      }
+    <meta http-equiv="refresh" content="0; url=/" />    <script>
+      // SPA redirect for Vite/React with BrowserRouter
+      // Redirects all 404s to the root and let React Router handle the routing
+      window.location.replace('/');
     </script>
   </head>
   <body></body>
